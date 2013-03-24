@@ -3,4 +3,40 @@
 	src: url(<%= asset_path('Lato-Reg.ttf') %>) format("woff");
 }
 
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Lato-Regular", helvetica, arial, sans-serif;
+	font-size: 12px;
+}
+
+.navigation_bar {
+	margin: 0 5%;
+	padding: 20px;
+	border-bottom: 1px solid #d6d6d6;
+}
+
+.menu {
+	float: right;
+}
+
+.menu_item a {
+	color: #ABABAB;
+	text-decoration: none;
+}
+
+.menu_item a:hover {
+	color: #554343;
+}
+	
+.menu_item li {
+	list-style-type: none;
+	display: inline;
+	padding-left: 25px;
+}
+	
+.active a {
+  color: #554343;
+}
+
 require_tree
