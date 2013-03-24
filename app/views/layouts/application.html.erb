@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mind Finder</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navigation_bar bar">
+		<%= link_to image_tag("logo.png"), index_path %>
+		<div class="menu">
+			<ul class="menu_item">
+				<li class="active">
+					<%= link_to "HOME", index_path %>
+				</li>
+				<li>
+					<a href="#">PORTFOLIO</a>
+				</li>
+				<li>
+					<a href="#">PAGES</a>
+				</li>
+				<li>
+					<a href="#">BLOG</a>
+				</li>
+				<li>
+					<a href="#">CONTACT</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<%= yield %>
+
+</body>
+</html>
