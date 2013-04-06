@@ -1,42 +1,37 @@
-require_tree
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
 
 @font-face {
 	font-family: "Lato-Regular";
-	src: url(<%= asset_path('Lato-Reg.ttf') %>) format("woff");
+	src: url('<%= asset_path 'Lato-Reg.ttf' %>') format("truetype");
+}
+
+@font-face {
+	font-family: "Lato-Bold";
+	src: url('<%= asset_path 'Lato-Bol.ttf' %>') format("truetype");
+}
+
+@font-face {
+	font-family: "Lato-Light";
+	src: url('<%= asset_path 'Lato-Lig.ttf' %>') format("truetype");
 }
 
 * {
 	margin: 0px;
 	padding: 0px;
-	font-family: "Lato-Regular", helvetica, arial, sans-serif;
-	font-size: 12px;
+	font-family: Lato-Regular;
 }
 
-.navigation_bar {
-	margin: 0 5%;
-	padding: 20px;
-	border-bottom: 1px solid #d6d6d6;
-}
-
-.menu {
-	float: right;
-}
-
-.menu_item a {
-	color: #ABABAB;
-	text-decoration: none;
-}
-
-.menu_item a:hover {
-	color: #554343;
-}
-	
-.menu_item li {
-	list-style-type: none;
-	display: inline;
-	padding-left: 25px;
-}
-	
-.active a {
-  color: #554343;
-}
+require application_scss.css
+require home.css

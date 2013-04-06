@@ -1,1 +1,22 @@
-1
+<div class="tabbed_area">
+  <form id="sign_in_form">
+    <p class="title_text">Login to create are Tests!</p>
+    <p class="context_text">Sign in please.</p>
+    
+    <p><input type="email" placeholder="Email Address" autofocus /></p>
+    <p><input type="password" placeholder="Password" /></p>
+    <p><input type="submit" value="Login" /></p>
+    
+    <span id="sign_up" onclick="formSwitch('sign_up_form')">Need to Register?</span> <i>&mdash;</i> <a>Forgot your password?</a>
+  </form>
+  
+  <form id="sign_up_form">
+    <p class="title_text">Join Tests for Free Today!</p>
+    <p class="context_text">Completely free to sign up.</p>
+    
+    <p><input type="email" placeholder="Email Address" /></p>
+    <p><input type="submit" value="Register" /></p>
+    
+    <p class="context_text">or <span id="sign_in" onclick="formSwitch('sign_in_form')">Login</span></p>
+  </form>
+</div>

@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mind_finder_development
+  database: mind-finder_development
   pool: 5
-  username: kris
-  password: 
+  username: root
+  password: pass
   socket: /var/run/mysqld/mysqld.sock
 
 # Warning: The database defined as "test" will be erased and
@@ -25,7 +25,7 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mind_finder_test
+  database: mind-finder_test
   pool: 5
   username: root
   password: pass
@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: mind_finder_production
+  database: mind-finder_production
   pool: 5
   username: root
   password: pass
