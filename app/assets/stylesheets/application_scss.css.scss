@@ -1,8 +1,6 @@
-$mi_ha: #554343;
-
 #user_line {
   font-size: 14px;
-	color: $mi_ha;
+	color: #554343;
 	float: right;
 	margin: 20px 6.5% 0 0;
 	
@@ -39,7 +37,7 @@ $mi_ha: #554343;
 		    letter-spacing: 2px;
 		
 		    &:hover {
-			    color: $mi_ha;
+			    color: #554343;
 		    }
 	    }
 	
@@ -51,7 +49,7 @@ $mi_ha: #554343;
 	
 	    .active {
 		    a {
-			    color: $mi_ha;
+			    color: #554343;
 		    }
 	    }
     }
