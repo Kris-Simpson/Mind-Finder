@@ -1,5 +1,35 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  title_home: "Home"
+  title_portfolio: "Portfolio"
+  title_pages: "Pages"
+  title_blog: "Blog"
+  title_contact: "Contact"
+  
+  alert_email_or_pass_invalid: "Email or password is invalid"
+  alert_email_cant_be_blank: "Email can't be blank"
+  alert_email_has_been_taken: "Email has already been taken"
+  alert_pass_cant_be_blank: "Password can't be blank"
+  alert_pass_doesnt_match_confirm: "Password doesn't match confirmation"
+  alert_pass_must_have_at_least: "Password must have at least %{count} words"
+  alert_pass_must_have_at_most: "Password must have at most %{count} words"
+  
+  notice_signup_success: "Thanks for signing up! Please check your email, we sent you a message. "
+  
+  field_email: "Email Address"
+  field_password: "Password"
+  field_password_confirm: "Confirm Password"
+  
+  login_form_title: "Login to start Creating Tests!"
+  login_form_context: "Sign in please, it is safe :)"
+  login_form_submit: "Login"
+  login_form_signup_link: "Need to Register?"
+  login_form_forgot_pass: "Forgot your password?"
+  
+  signup_form_title: "Enjoy Online Tests Today!"
+  signup_form_context: "Registration is Free and not take much of your time."
+  signup_form_submit: "Sign up"
+  signup_form_login_link: "Login"
+  signup_form_or: "or"
+  
+  logged_in_title: "Logged in as "
+  logged_in_log_out_link: "Log out"

@@ -1,2 +1,35 @@
 uk:
-  hello: "Привіт Світ"
+  title_home: "Головна"
+  title_portfolio: "Портфоліо"
+  title_pages: "Сторінки"
+  title_blog: "Блог"
+  title_contact: "Про нас"
+  
+  alert_email_or_pass_invalid: "Email або пароль не правильні"
+  alert_email_cant_be_blank: "Поле 'Email' не може бути пустим"
+  alert_email_has_been_taken: "Такий Email вже зареєстровано в нашій базі"
+  alert_pass_cant_be_blank: "Поле 'Пароль' не може бути пустим"
+  alert_pass_doesnt_match_confirm: "Введені паролі не співпадають"
+  alert_pass_must_have_at_least: "Пароль повинен містити як мінімум %{count} символів"
+  alert_pass_must_have_at_most: "Пароль повинен містити максимум %{count} символів"
+  
+  notice_signup_success: "Дякуємо за реєстрацію! Будь-ласка перевірти ваш email, ми надіслали вам повідомлення."
+  
+  field_email: "Email"
+  field_password: "Пароль"
+  field_password_confirm: "Повторіть пароль"
+  
+  login_form_title: "Ввійдіть щоб створити декілька Тестів!"
+  login_form_context: "Ввійдіть будь-ласка, це безпечно :)"
+  login_form_submit: "Ввійти"
+  login_form_signup_link: "Потрібна реєстрація?"
+  login_form_forgot_pass: "Забули свій пароль?"
+  
+  signup_form_title: "Спробуйте Онлайн Тести вже Сьогодні!"
+  signup_form_context: "Реєстрація безкоштовна і не займе багато часу."
+  signup_form_submit: "Зареєструватися"
+  signup_form_login_link: "Ввійти"
+  signup_form_or: "або"
+  
+  logged_in_title: "Ви ввійшли як "
+  logged_in_log_out_link: "Вийти"

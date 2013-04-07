@@ -1,2 +1,35 @@
 ru:
-  hello: "Привет Мир"
+  title_home: "Главная"
+  title_portfolio: "Портфолио"
+  title_pages: "Страницы"
+  title_blog: "Блог"
+  title_contact: "Связь с нами"
+  
+  alert_email_or_pass_invalid: "Email или пароль неверны"
+  alert_email_cant_be_blank: "Поле Email не может быть пустым"
+  alert_email_has_been_taken: "Такой Email уже присутствует в нашей базе"
+  alert_pass_cant_be_blank: "Поле Пароль не может быть пустым"
+  alert_pass_doesnt_match_confirm: "Пароли не совпадают"
+  alert_pass_must_have_at_least: "Пароль должен имень как минимум %{count} символов"
+  alert_pass_must_have_at_most: "Пароль должен имень максимум %{count} символов"
+  
+  notice_signup_success: "Спасибо за регистрацию! Пожалуйста проверьте ваш email, мы отправили вам сообщение. "
+  
+  field_email: "Email"
+  field_password: "Пароль"
+  field_password_confirm: "Повторите пароль"
+  
+  login_form_title: "Войдите чтобы создать пару Тестов!"
+  login_form_context: "Войдите пожалуйста, это безопасно :)"
+  login_form_submit: "Войти"
+  login_form_signup_link: "Нужна регистрация?"
+  login_form_forgot_pass: "Забыли пароль?"
+  
+  signup_form_title: "Попробуйте Онлайн Тесты уже Сегодня!"
+  signup_form_context: "Регистрация бесплатна и не займет много времени."
+  signup_form_submit: "Зарегистрироваться"
+  signup_form_login_link: "Войти"
+  signup_form_or: "или"
+  
+  logged_in_title: "Вы вошли как "
+  logged_in_log_out_link: "Выйти"
