@@ -7,7 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="navigation_bar bar">
+<header>
+	<div id="navigation_bar">
 		<%= link_to image_tag("logo.png"), index_path %>
 		<div class="menu">
 			<ul class="menu_item">
@@ -38,5 +39,6 @@
 	<% end %>
 
 	<%= yield %>
+</header>
 </body>
 </html>
