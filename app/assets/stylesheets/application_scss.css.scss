@@ -1,5 +1,27 @@
 $mi_ha: #554343;
 
+#user_line {
+  font-size: 14px;
+	color: $mi_ha;
+	float: right;
+	margin: 20px 6.5% 0 0;
+	
+	span {
+	  font-family: Ubuntu-Bold;
+	}
+	
+	a {
+	  float: right;
+	  color: #0096FF;
+	  text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+	}
+}
+
 #navigation_bar {
 	margin: 0 5%;
 	padding: 20px;
@@ -34,26 +56,4 @@ $mi_ha: #554343;
 	    }
     }
   }
-}
-
-#user_line {
-  font-size: 14px;
-	color: $mi_ha;
-	float: right;
-	margin: 20px 6.5% 0 0;
-	
-	span {
-	  font-family: Ubuntu-Bold;
-	}
-	
-	a {
-	  float: right;
-	  color: #0096FF;
-	  text-decoration: none;
-    
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-	}
 }
