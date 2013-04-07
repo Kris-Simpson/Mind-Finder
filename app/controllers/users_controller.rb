@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      UserMailer.welcome_email(@user).deliver
+      
       redirect_to root_url, :notice => t(:notice_signup_success)
     else
       render "index"

@@ -1,6 +1,5 @@
 #trap {
-  font-size: 14px;
-  color: #554343;
+  color: #554343;     /* trap for hosting heroku.com. not use in the app. */
 }
 
 #user_line {
@@ -39,7 +38,7 @@
 		    color: #ABABAB;
 		    text-decoration: none;
 		    text-transform: uppercase;
-		    letter-spacing: 2px;
+		    letter-spacing: 1px;
 		
 		    &:hover {
 			    color: #554343;
