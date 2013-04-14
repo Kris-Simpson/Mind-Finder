@@ -14,8 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 
-function formSwitch(form)
-{
+function formSwitch(form) {
   document.getElementById('sign_in_form').style.display = 'none';
   document.getElementById('sign_up_form').style.display = 'none';
   document.getElementById(form).style.display = 'block';

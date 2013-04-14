@@ -5,48 +5,52 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  
+  
 </head>
 <body>
-<header>
-	<div id="navigation_bar">
-		<%= link_to image_tag("logo.png"), index_path %>
-		<div class="menu">
-			<ul class="menu_item">
-				<li class="active">
-					<%= link_to t(:title_home), index_path %>
-				</li>
-				<li>
-					<a href="#"><%=t :title_portfolio %></a>
-				</li>
-				<li>
-					<a href="#"><%=t :title_pages %></a>
-				</li>
-				<li>
-					<a href="#"><%=t :title_blog %></a>
-				</li>
-				<li>
-					<a href="#"><%=t :title_contact %></a>
-				</li>
-				<li>
-					<select>
-					  <option>Enlish</option>
-					  <option>Russian</option>
-					  <option>Ukrainian</option>
-					</select>
-				</li>
+  <header>
+	  <div id="navigation_bar">
+		  <%= link_to image_tag("logo.png"), index_path %>
+		  
+			<ul class="menu">
+				<li class="active"><%= link_to t(:title_home), index_path %></li>
+				<li><a href="#"><%=t :title_portfolio %></a></li>
+				<li><a href="#"><%=t :title_pages %></a></li>
+				<li><a href="#"><%=t :title_blog %></a></li>
+				<li><a href="#"><%=t :title_contact %></a></li>
+				
+				<div class="select_lang">
+				  <li>
+						<div id="selectbox">
+						  <div class="select">
+						    <div class="text"><%= get_full_locale %></div>
+						    <i class="arrow"></i>
+						  </div>
+						  <div class="dropdown">
+						    <ul>
+						      <%= link_to raw("<li>English</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'en' } unless I18n.locale == :en %>
+						      <%= link_to raw("<li>Русский</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'ru' } unless I18n.locale == :ru %>
+						      <%= link_to raw("<li>Українська</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'uk' } unless I18n.locale == :uk %>
+						    </ul>
+						  </div>
+						</div>			      
+			    </li>
+			  </div>
 			</ul>
-		</div>
-	</div>
-
-	<% if current_user %>
-	  <div id="user_line">
-	    <%=t :logged_in_title %> <span><%= current_user.email %></span><br />
-	    <%= link_to t(:logged_in_log_out_link), logout_path %>
+			
+			
 	  </div>
-	<% end %>
-</header>
+
+	  <% if current_user %>
+	    <div id="user_line">
+	      <%=t :logged_in_title %> <span><%= current_user.email %></span><br />
+	      <%= link_to t(:logged_in_log_out_link), logout_path %>
+	    </div>
+	  <% end %>
+  </header>
 
 	<%= yield %>
-	
+
 </body>
 </html>

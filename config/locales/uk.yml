@@ -19,13 +19,13 @@ uk:
   field_password: "Пароль"
   field_password_confirm: "Повторіть пароль"
   
-  login_form_title: "Ввійдіть щоб створити декілька Тестів!"
+  login_form_title: "Авторизуйтеся на сайті!"
   login_form_context: "Ввійдіть будь-ласка, це безпечно :)"
   login_form_submit: "Ввійти"
   login_form_signup_link: "Потрібна реєстрація?"
   login_form_forgot_pass: "Забули свій пароль?"
   
-  signup_form_title: "Спробуйте Онлайн Тести вже Сьогодні!"
+  signup_form_title: "Спробуйте їх вже Сьогодні!"
   signup_form_context: "Реєстрація безкоштовна і не займе багато часу."
   signup_form_submit: "Зареєструватися"
   signup_form_login_link: "Ввійти"

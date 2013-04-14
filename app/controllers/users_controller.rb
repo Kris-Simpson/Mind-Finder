@@ -7,10 +7,15 @@ class UsersController < ApplicationController
   def new
   end
 
+  def u
+  end
+
   def create
     @user = User.new(params[:user])
+    @user.locale = I18n.locale
+
     if @user.save
- #     UserMailer.welcome_email(@user).deliver
+      UserMailer.welcome_email(@user).deliver
       
       redirect_to root_url, :notice => t(:notice_signup_success)
     else
@@ -18,6 +23,20 @@ class UsersController < ApplicationController
     end
   end
   
+  def change_locale
+    locale = params[:locale]
+    raise 'unsupported locale' unless ['ru', 'en', 'uk' ].include?(locale)
+
+    if current_user
+      current_user.locale = locale
+      current_user.save
+    end
+
+    I18n.locale = locale
+
+    redirect_to :index
+  end
+
   private
   
   def user_new

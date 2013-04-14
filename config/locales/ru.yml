@@ -19,13 +19,13 @@ ru:
   field_password: "Пароль"
   field_password_confirm: "Повторите пароль"
   
-  login_form_title: "Войдите чтобы создать пару Тестов!"
+  login_form_title: "Авторизируйтесь на сайте!"
   login_form_context: "Войдите пожалуйста, это безопасно :)"
   login_form_submit: "Войти"
   login_form_signup_link: "Нужна регистрация?"
   login_form_forgot_pass: "Забыли пароль?"
   
-  signup_form_title: "Попробуйте Онлайн Тесты уже Сегодня!"
+  signup_form_title: "Попробуйте их уже Сегодня!"
   signup_form_context: "Регистрация бесплатна и не займет много времени."
   signup_form_submit: "Зарегистрироваться"
   signup_form_login_link: "Войти"

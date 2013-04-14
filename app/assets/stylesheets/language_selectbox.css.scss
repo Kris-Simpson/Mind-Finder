@@ -1,0 +1,58 @@
+#selectbox {
+  display: inline-block;
+  position: relative;
+	cursor: pointer;
+	vertical-align: middle;
+	
+	.select {
+    position: relative;
+	  width: 80px;
+	  padding-right: 5px;
+	  color: #ABABAB;
+	  font-size: 12px;
+	  text-transform: uppercase;
+	  
+	  &:hover {
+      color: #37464F;
+      
+      .arrow {
+	      opacity: 1;
+	      filter: alpha(opacity=100);
+      }
+    }
+  }
+
+  .arrow {
+	  position: absolute;
+	  top: 6px;
+	  right: 0;
+	  border-left: 5px solid transparent;
+	  border-right: 5px solid transparent;
+	  border-top: 5px solid #37464F;
+	  opacity: 0.3;
+	  filter: alpha(opacity=30);
+  }
+  
+  .dropdown {
+    position: absolute;
+    display: none;
+	  top: 38px;
+	  left: -25px;
+	  width: 150px;
+	  background: #37464F;
+
+    a {
+      display: block;
+      padding: 15px 0;    
+
+      li {
+        color: #fff;
+        font-size: 10px;
+      }
+
+      &:hover {
+        background: #006596;
+      }
+    }
+  }
+}
