@@ -79,7 +79,7 @@ MindFinder::Application.configure do
     domain: "mind-finder.herokuapp.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: mind.finder.app@gmail.com,
-    password: djdouble
+    user_name: "mind.finder.app@gmail.com",
+    password: "djdouble"
   }
 end
