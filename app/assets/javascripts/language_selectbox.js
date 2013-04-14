@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var selectBox = $("#selectbox");
+  var selectBox = $(".selectbox");
   var divSelect = selectBox.find('div.select');
   var divText = selectBox.find('div.text');
   var dropdown = selectBox.find('div.dropdown');
@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   /* .select click */
   divSelect.click(function() {
-    $('div#selectbox').css({zIndex: 1}).removeClass('focused');
+    $('div.selectbox').css({zIndex: 1}).removeClass('focused');
     selectBox.css({zIndex: 2});
 
     if (dropdown.is(':hidden')) {
@@ -29,5 +29,11 @@ $(document).ready(function() {
   /* .dropdown mouseleave */
   dropdown.mouseleave(function() {
     dropdown.fadeOut(200);
+  });
+
+  $(document).on('click', function(e) {
+    if (!$(e.target).parents().hasClass('selectbox')) {
+      dropdown.fadeOut(200);
+    }
   });
 });

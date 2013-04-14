@@ -1,9 +1,8 @@
-#selectbox {
+.selectbox {
   display: inline-block;
   position: relative;
 	cursor: pointer;
-	vertical-align: middle;
-	
+
 	.select {
     position: relative;
 	  width: 80px;
@@ -40,6 +39,10 @@
 	  left: -25px;
 	  width: 150px;
 	  background: #37464F;
+
+    @media all and (-webkit-min-device-pixel-ratio:0) {
+      top: 36px;
+    }
 
     a {
       display: block;

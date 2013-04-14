@@ -62,6 +62,10 @@ $dark_brown: #37464F;
 	    float: right;
 	    margin-left: 25px;
 	    border-left: 1px solid #d6d6d6;
+
+	    @media all and (-webkit-min-device-pixel-ratio:0) {
+		    margin-top: -20px;
+		  }
 	  }
   }
 }
