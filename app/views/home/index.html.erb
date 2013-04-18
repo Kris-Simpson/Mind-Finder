@@ -1,4 +1,136 @@
-<% unless current_user %>
+<style>
+  #slides {
+    display: none
+  }
+
+  .container {
+    position: absolute;
+    margin-left: 5%;
+  }
+
+  #slides .slidesjs-navigation {
+    margin-top:5px;
+  }
+
+  a.slidesjs-next,
+  a.slidesjs-previous {
+    background-image: url('<%= asset_path "slide-show_images/btns-next-prev.png" %>');
+    background-repeat: no-repeat;
+    display:block;
+    width:12px;
+    height:18px;
+    overflow: hidden;
+    text-indent: -9999px;
+    float: left;
+    margin-right:5px;
+  }
+
+  a.slidesjs-next {
+    margin-right:10px;
+    background-position: -12px 0;
+  }
+
+  a:hover.slidesjs-next {
+    background-position: -12px -18px;
+  }
+
+  a.slidesjs-previous {
+    background-position: 0 0;
+  }
+
+  a:hover.slidesjs-previous {
+    background-position: 0 -18px;
+  }
+
+  .slidesjs-pagination {
+    margin: 7px 0 0;
+    float: right;
+    list-style: none;
+  }
+
+  .slidesjs-pagination li {
+    float: left;
+    margin: 0 1px;
+  }
+
+  .slidesjs-pagination li a {
+    display: block;
+    width: 13px;
+    height: 0;
+    padding-top: 13px;
+    background-image: url('<%= asset_path "slide-show_images/pagination.png" %>');
+    background-position: 0 0;
+    float: left;
+    overflow: hidden;
+  }
+
+  .slidesjs-pagination li a.active,
+  .slidesjs-pagination li a:hover.active {
+    background-position: 0 -13px
+  }
+
+  .slidesjs-pagination li a:hover {
+    background-position: 0 -26px
+  }
+
+  /* For tablets & smart phones */
+  @media (max-width: 767px) {
+    body {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .container {
+      width: auto;
+    }
+  }
+
+  /* For smartphones */
+  @media (max-width: 480px) {
+    .container {
+      width: auto
+    }
+  }
+
+  /* For smaller displays like laptops */
+  @media (min-width: 768px) and (max-width: 979px) {
+    .container {
+      width: 724px
+    }
+  }
+
+  /* For larger displays */
+  @media (min-width: 1200px) {
+    .container {
+      width: 700px
+    }
+  }
+</style>
+
+<script>
+  $(function(){
+    $("#slides").slidesjs({
+      play: {
+        active: false,
+        effect: "fade",
+        interval: 5000,
+        auto: true,
+        swap: true,
+        pauseOnHover: true,
+        restartDelay: 2500
+      }
+    });
+  });
+</script>
+
+<div class="content">
+  <div class="container">
+    <div id="slides">
+      <%= image_tag "slide-show_images/example-slide-1.jpg" %>
+      <%= image_tag "slide-show_images/example-slide-2.jpg" %>
+      <%= image_tag "slide-show_images/example-slide-3.jpg" %>
+      <%= image_tag "slide-show_images/example-slide-4.jpg" %>
+    </div>
+  </div>
 
   <div class="tabbed_area">
 
@@ -15,5 +147,4 @@
         <%= flash[:notice] %>
     </div>
   </div>
-  
-<% end %>
+</div>

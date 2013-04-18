@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     
     if user && user.authenticate(params[:password])
       cookies.permanent[:auth_token] = user.auth_token
-      redirect_to :workpath
+      redirect_to :profile
     else
       redirect_to root_url, :alert => t(:alert_email_or_pass_invalid)
     end  

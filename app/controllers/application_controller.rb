@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_current_user
     current_uri = request.env['PATH_INFO']
-    redirect_to :workpath if current_user && current_uri == "/index"
+    redirect_to :profile if current_user && current_uri == "/index"
   end
   
 private

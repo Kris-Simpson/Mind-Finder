@@ -1,3 +1,129 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$input: #808080;
+
+.content {
+  margin: 20px 5%;
+}
+
+.tabbed_area {
+  float: right;
+  margin-right: 7%;
+  margin-top: 195px;
+  width: 350px;
+
+  p {
+    margin-bottom: 10px;
+  }
+  
+  #sign_up_form { display: none; }
+  
+  .title_text {
+    font: {
+      size: 24px;
+      family: Ubuntu-Bold;
+    }
+    
+    color: #333;
+  }
+
+  .context_text {
+    font-size: 14px;
+    color: #808080;
+  }
+
+  span {
+    color: #0096FF;
+    font: {
+      family: Ubuntu-Bold;
+      size: 16px;
+    }
+    
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  
+  i {
+    color: #333;
+    margin: 0 7px;
+  }
+  
+  a {
+    @extend span;
+    
+    font: {
+      family: Ubuntu-Regular;
+      size: 14px;
+    }
+  }
+
+  input {
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+  }
+  
+  input[type="submit"] {
+    color: white;
+    text-transform: uppercase;
+    font-family: Ubuntu-Bold;
+    padding: 4px;
+    background-color: #008FD5;
+    border: 0;
+    
+    &:hover {
+      background-color: #006596;
+      cursor: pointer;
+    }
+  }
+
+  input[type="email"], input[type="password"] {
+    width: 98%;
+    margin-bottom: -5px;
+    padding: 5px 2px;
+    font-family: Ubuntu-Regular;
+    color: #333;
+    border: 1px solid #ccc;
+    -webkit-transition: all 0.20s ease-in-out;
+    -moz-transition: all 0.20s ease-in-out;
+    -ms-transition: all 0.20s ease-in-out;
+    -o-transition: all 0.20s ease-in-out;
+    
+    &:hover {
+      border: 1px solid #aaa;
+    }
+    
+    &:focus {
+      border: 1px solid #00ACFF;
+      -webkit-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+      -moz-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+      box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+    }
+  }
+  
+  .alert {
+    margin-top: 7px;
+    padding-top: 6px;
+    color: #333;
+    
+    span {
+      color: #b10c0c;
+      cursor: default;
+      
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  
+  .notice {
+    font-family: Ubuntu-Bold;
+    color: #00A200;
+  }
+  
+  .warning {
+    @extend .notice;
+    
+    color: #fbc010;
+  }
+}
