@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_locale
+  before_filter :set_locale, :redirect_current_user
  
   def set_locale
     if current_user
@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   def default_url_options(options={})
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { :locale => I18n.locale }
+  end
+
+  def redirect_current_user
+    current_uri = request.env['PATH_INFO']
+    redirect_to :workpath if current_user && current_uri == "/index"
   end
   
 private
