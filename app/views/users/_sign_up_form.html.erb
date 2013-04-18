@@ -1,0 +1,26 @@
+<div id="sign_up_form">
+  <p class="title_text"><%=t :signup_form_title %></p>
+  <p class="context_text"><%=t :signup_form_context %></p>
+      
+  <%= form_for(@user) do |f| %>
+
+    <% content_for :errors do %>
+      <% if @user.errors.any? %>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><span><%= msg %></span></li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+
+    <p><%= f.email_field :email, :placeholder => t(:field_email) %></p>
+    <p><%= f.password_field :password, :placeholder => t(:field_password) %></p>
+    <p><%= f.password_field :password_confirmation, :placeholder => t(:field_password_confirm) %></p>
+
+    <p><%= f.submit :value => t(:signup_form_submit) %></p>
+
+  <% end %>
+
+  <p class="context_text"><%=t :signup_form_or %> <span id="sign_in" onclick="formSwitch('sign_in_form')"><%=t :signup_form_login_link %></span></p>
+</div>

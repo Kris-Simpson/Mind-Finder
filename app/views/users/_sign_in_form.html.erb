@@ -1,0 +1,13 @@
+<div id="sign_in_form">
+  <p class="title_text"><%=t :login_form_title %></p>
+  <p class="context_text"><%=t :login_form_context %></p>
+        
+  <%= form_tag sessions_path do %>
+    <p><%= email_field_tag :email, params[:email], :placeholder => t(:field_email), :autofocus => true %></p>
+    <p><%= password_field_tag :password, params[:password], :placeholder => t(:field_password) %></p>
+        
+    <p><%= submit_tag t(:login_form_submit) %></p>
+  <% end %>
+         
+  <span id="sign_up" onclick="formSwitch('sign_up_form')"><%=t :login_form_signup_link %></span> <i>&mdash;</i> <a><%=t :login_form_forgot_pass %></a>
+</div>

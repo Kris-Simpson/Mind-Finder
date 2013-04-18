@@ -25,18 +25,16 @@ private
   end
 
   def get_full_locale
-    locale_full = ""
+    locale_full = [ "English", "Русский", "Українська" ]
     
     case I18n.locale
       when :en
-        locale_full = "English"
+        return locale_full[0]
       when :ru
-        locale_full = "Русский"
+        return locale_full[1]
       when :uk
-        locale_full = "Українська"
+        return locale_full[2]
       end
-
-    locale_full
   end
   
   helper_method :current_user, :get_full_locale

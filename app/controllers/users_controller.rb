@@ -1,13 +1,7 @@
 class UsersController < ApplicationController
   before_filter :user_new, :only => [:new, :index]
 
-  def index
-  end
-
   def new
-  end
-
-  def u
   end
 
   def create
@@ -19,22 +13,8 @@ class UsersController < ApplicationController
       
       redirect_to root_url, :notice => t(:notice_signup_success)
     else
-      render "index"
+      render "home/index"
     end
-  end
-  
-  def change_locale
-    locale = params[:locale]
-    raise 'unsupported locale' unless ['ru', 'en', 'uk' ].include?(locale)
-
-    if current_user
-      current_user.locale = locale
-      current_user.save
-    end
-
-    I18n.locale = locale
-
-    redirect_to :index
   end
 
   private

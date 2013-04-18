@@ -29,9 +29,9 @@
 						  </div>
 						  <div class="dropdown">
 						    <ul>
-						      <%= link_to raw("<li>English</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'en' } unless I18n.locale == :en %>
-						      <%= link_to raw("<li>Русский</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'ru' } unless I18n.locale == :ru %>
-						      <%= link_to raw("<li>Українська</li>"), { :controller => 'users', :action => 'change_locale', :locale => 'uk' } unless I18n.locale == :uk %>
+						      <%= link_to raw("<li>English</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'en' } unless I18n.locale == :en %>
+						      <%= link_to raw("<li>Русский</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'ru' } unless I18n.locale == :ru %>
+						      <%= link_to raw("<li>Українська</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'uk' } unless I18n.locale == :uk %>
 						    </ul>
 						  </div>
 						</div>			      

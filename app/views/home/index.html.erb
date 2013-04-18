@@ -1,0 +1,19 @@
+<% unless current_user %>
+
+  <div class="tabbed_area">
+
+    <%= render :partial => "users/sign_in_form" %>
+    
+    <%= render :partial => "users/sign_up_form" %>
+    
+    <div class="alert">
+      <span><%= flash[:alert] %></span>
+      
+      <%= yield :errors %>
+    </div>
+    <div class="notice">
+        <%= flash[:notice] %>
+    </div>
+  </div>
+  
+<% end %>
