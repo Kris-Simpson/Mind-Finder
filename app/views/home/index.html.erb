@@ -115,14 +115,17 @@
         interval: 5000,
         auto: true,
         swap: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         restartDelay: 2500
+      },
+      pagination: {
+        active: true,
+        effect: "fade"
       }
     });
   });
 </script>
 
-<div class="content">
   <div class="container">
     <div id="slides">
       <%= image_tag "slide-show_images/example-slide-1.jpg" %>
@@ -147,4 +150,3 @@
         <%= flash[:notice] %>
     </div>
   </div>
-</div>

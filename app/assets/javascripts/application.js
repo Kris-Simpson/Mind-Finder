@@ -20,4 +20,8 @@ function formSwitch(form) {
   document.getElementById(form).style.display = 'block';
 }
 
+$(function(){
+  $('#rooms').tree();
+});
+
 require_tree

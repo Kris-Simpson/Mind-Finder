@@ -19,8 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_current_user
-    current_uri = request.env['PATH_INFO']
-    redirect_to :profile if current_user && current_uri == "/index"
+    redirect_to :rooms if current_user && (current_uri == "/index" || current_uri == "/")
   end
   
 private
@@ -41,7 +40,11 @@ private
         return locale_full[2]
       end
   end
+
+  def current_uri
+    @current_uri = request.env['PATH_INFO']
+  end
   
-  helper_method :current_user, :get_full_locale
+  helper_method :current_user, :get_full_locale, :current_uri
   
 end

@@ -11,21 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414202423) do
+ActiveRecord::Schema.define(:version => 20130419153510) do
+
+  create_table "rooms", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "description", :null => false
+    t.string   "user_id",     :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
-    t.string   "password_digest"
+    t.string   "email",                    :null => false
+    t.string   "password_digest",          :null => false
     t.string   "last_ip"
     t.boolean  "is_admin"
-    t.string   "email_confirmation_token"
-    t.string   "reset_password_token"
+    t.string   "email_confirmation_token", :null => false
+    t.string   "reset_password_token",     :null => false
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
-    t.string   "locale"
-    t.string   "auth_token"
+    t.string   "locale",                   :null => false
+    t.string   "auth_token",               :null => false
   end
 
 end

@@ -1,0 +1,138 @@
+#trap {
+  color: #554343;     /* trap for hosting heroku.com. not use in the app. */
+}
+
+$dark_brown: #37464F;
+
+#navigation_bar {
+	width: 90%;
+	left: 5%;
+	top: 0;
+	position: fixed;
+	padding: 20px 0;
+	border-bottom: 1px solid #d6d6d6;
+	background-color: white;
+	z-index: 10000;
+
+	img {
+		margin-left: 20px;
+	}
+	
+	.menu {
+	  float: right;
+	  margin-right: 20px;
+	  
+	  a {
+		  font-size: 12px;
+		  color: #ABABAB;
+		  text-decoration: none;
+		  text-transform: uppercase;
+		  letter-spacing: 1px;
+			
+		  &:hover {
+		    color: $dark_brown;
+		  }
+		}
+	
+	  li {
+	    display: inline;
+	    padding-left: 25px;
+	  }
+	
+	  .active {
+	    a {
+		    color: $dark_brown;
+	    }
+	  }
+	  
+	  .select_lang {
+	    float: right;
+	    margin-left: 25px;
+	    border-left: 1px solid #d6d6d6;
+
+	   /* @media all and (-webkit-min-device-pixel-ratio:0) {
+		    margin-top: -20px;
+		  }*/
+	  }
+  }
+}
+
+$breadcrumbs_height: 14px;
+$breadcrumbs_pad_bottom: 10px;
+
+.content {
+  margin: 72px 5% 20px 5%;
+  height: 1000px;
+
+  .left_menu {
+  	border-right: 1px dashed #d6d6d6;
+  	font-size: $breadcrumbs_height;
+  	height: 100%;
+  	float: left;
+  	margin-top: $breadcrumbs_height + $breadcrumbs_pad_bottom + 14;
+  	padding: $breadcrumbs_pad_bottom - 4 6px 0 5px;
+  }
+
+  .headline {
+  	.headline_title {
+	  	float: left;
+	  	margin-left: 75px;
+	  	color: $dark_brown;
+  	}
+
+  	.breadcrumbs {
+  		font-size: $breadcrumbs_height;
+  		padding-bottom: $breadcrumbs_pad_bottom;
+  		margin-bottom: 10px;
+			border-bottom: 1px dashed #d6d6d6;
+
+			ul li {
+				display: inline;
+
+				a {
+					color: #0096FF;
+					text-decoration: none;
+			    
+			    &:hover {
+			    	color: #0571BE;
+			      text-decoration: underline;
+			      cursor: pointer;
+			    }
+			  }
+
+				span {
+					color: #d6d6d6;
+				}
+
+				&.active {
+					color: #939393;
+				}
+			}
+  	}
+
+	  #user_line {
+		  font-size: 14px;
+			color: $dark_brown;
+			float: right;
+
+			span {
+			  font-family: Ubuntu-Bold;
+			}
+			
+			a {
+			  float: right;
+			  color: #0096FF;
+			  text-decoration: none;
+		    
+		    &:hover {
+		      text-decoration: underline;
+		      cursor: pointer;
+		    }
+			}
+		}
+	}
+
+	.middle_content {
+		margin-top: 55px;
+	}
+}

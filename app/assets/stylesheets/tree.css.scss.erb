@@ -1,0 +1,29 @@
+.tree,.tree ul,.tree li { list-style:none; }
+
+.tree ul { margin-left: 10px; }
+
+.tree li a {
+  color: #37464F;
+  padding: .1em 7px .1em 25px;
+  display:block;
+  text-decoration:none;
+  border: 1px dashed #fff;
+  background:url('<%= asset_path "tree_images/test.png" %>') 5px 50% no-repeat;
+}
+
+.tree li a.tree-parent { background: url('<%= asset_path "tree_images/room-open.png" %>') 5px 50% no-repeat; }
+
+.tree li a.tree-parent-collapsed { background:url('<%= asset_path "tree_images/room.png" %>') 5px 50% no-repeat; }
+
+.tree li a:hover,.tree li a.tree-parent:hover,.tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active {
+  color: #fff;
+  background-color: #008FD5;
+  border: 1px dashed #008FD5;
+}
+
+.tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active {
+  background-color: #006596;
+  border: 1px dashed #006596;
+}
+
+.tree ul.tree-group-collapsed { display:none; }

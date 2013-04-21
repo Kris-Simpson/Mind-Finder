@@ -14,7 +14,13 @@
 		  <%= link_to image_tag("logo.png"), index_path %>
 		  
 			<ul class="menu">
-				<li class="active"><%= link_to t(:title_home), index_path %></li>
+				<li class="active">
+					<% if current_user %>
+						<%= link_to t(:title_home), rooms_path %>
+					<% else %>
+						<%= link_to t(:title_home), index_path %>
+					<% end %>
+				</li>
 				<li><a href="#"><%=t :title_portfolio %></a></li>
 				<li><a href="#"><%=t :title_pages %></a></li>
 				<li><a href="#"><%=t :title_blog %></a></li>
@@ -41,16 +47,43 @@
 			
 			
 	  </div>
-
-	  <% if current_user %>
-	    <div id="user_line">
-	      <%=t :logged_in_title %> <span><%= current_user.email %></span><br />
-	      <%= link_to t(:logged_in_log_out_link), logout_path %>
-	    </div>
-	  <% end %>
   </header>
 
-	<%= yield %>
+  <div class="content">
+  	<% unless current_uri == "/index" || current_uri == "/" %>
 
+  	<div class="left_menu">
+  		<%= yield :left_menu %>
+  	</div>
+  	
+  	<div class="headline">
+  		<div class="breadcrumbs">
+  			<%= yield :breadcrumbs %>
+  		</div>
+
+  		<div class="headline_title">
+  			<%= yield :headline_title %>
+  		</div>
+
+  		<% if current_user %>
+
+			<div id="user_line">
+			  <%=t :logged_in_title %> <span><%= current_user.email %></span><br />
+			  <%= link_to t(:logged_in_log_out_link), logout_path %>
+			</div>
+
+			<% end %>
+  	</div>
+
+  	<% end %>
+  	
+  	<div class="middle_content">
+  		<%= yield %>
+  	</div>
+  </div>
+
+	<footer>
+		<!-- #TODO: footer -->
+	</footer>
 </body>
 </html>

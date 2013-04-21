@@ -1,0 +1,87 @@
+<% content_for :headline_title do %>
+  <h1>My rooms</h1>
+<% end %>
+
+<% content_for :breadcrumbs do %>
+  <ul>
+    <li>
+      <a href="#">Rooms</a>
+      <span>/</span> 
+    </li>
+    <li>
+      <a href="#">Room in room</a>
+      <span>/</span> 
+    </li>
+    <li class="active">We are here</li>
+  </ul>
+<% end %>
+
+<% content_for :left_menu do %>
+  <ul id="rooms">
+    <li><a href="documents">Room 1</a>
+      <ul>
+        <li><a href="#">Room 1</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+            <li><a href="#">Test 3</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Room 2</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Room 3</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Room 4</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="movies">Room 2</a>
+      <ul>
+        <li><a href="#">Test 1</a></li>
+        <li><a href="#">Test 2</a></li>
+      </ul>
+    </li>
+    <li><a href="music">Room 3</a>
+      <ul>
+        <li><a href="#">Test 1</a></li>
+        <li><a href="#">Test 2</a></li>
+      </ul>
+    </li>
+    <li><a href="photos">Room 4</a>
+      <ul>
+        <li><a href="#">Test 1</a></li>
+        <li><a href="#">Test 2</a></li>
+        <li><a href="#">Test 3</a></li>
+        <li><a href="#">Test 4</a></li>
+        <li><a href="#">Test 5</a></li>
+      </ul>
+    </li>
+  </ul>
+<% end %>
+
+  <table>
+  <% @rooms.each do |room| %>
+    <tr>
+      <td><%= room.name %></td>
+      <td><%= link_to 'Show', room %></td>
+      <td><%= link_to 'Edit', edit_room_path(room) %></td>
+      <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+  <%= link_to 'New Room', new_room_path %>

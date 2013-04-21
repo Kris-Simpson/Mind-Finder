@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :locale
 
+  has_many :rooms
+  
+  validates_associated :rooms
+
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :password, :length => {
     :in => 6..20,
