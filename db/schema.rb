@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130419153510) do
 
   create_table "rooms", :force => true do |t|
     t.string   "name",        :null => false
-    t.string   "description", :null => false
+    t.string   "description"
     t.string   "user_id",     :null => false
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(:version => 20130419153510) do
     t.string   "password_digest",          :null => false
     t.string   "last_ip"
     t.boolean  "is_admin"
-    t.string   "email_confirmation_token", :null => false
-    t.string   "reset_password_token",     :null => false
+    t.string   "email_confirmation_token"
+    t.string   "reset_password_token"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
     t.string   "locale",                   :null => false

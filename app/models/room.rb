@@ -7,12 +7,12 @@ class Room < ActiveRecord::Base
   belongs_to :user
 
   validates :name, :presence => true, :length => {
-    :in => 3..10,
+    :in => 3...10,
     :too_short => "must have at least %{count} words",
     :too_long  => "must have at most %{count} words"
   }
   validates :description, :length => {
-    :in => 15..100,
+    :in => 0...100,
     :too_short => "must have at least %{count} words",
     :too_long  => "must have at most %{count} words"
   }
