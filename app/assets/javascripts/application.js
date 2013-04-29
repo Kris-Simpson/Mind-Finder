@@ -24,4 +24,20 @@ $(function(){
   $('#rooms').tree();
 });
 
-require_tree
+$(function(){
+  $("#slides").slidesjs({
+    play: {
+      active: false,
+      effect: "fade",
+      interval: 5000,
+      auto: true,
+      swap: true,
+      pauseOnHover: false,
+      restartDelay: 2500
+    },
+    pagination: {
+      active: true,
+      effect: "fade"
+    }
+  });
+});

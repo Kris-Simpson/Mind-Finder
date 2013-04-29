@@ -18,48 +18,56 @@
 
 <% content_for :left_menu do %>
   <ul id="rooms">
-    <li><a href="documents">Room 1</a>
+    <% if get_rooms == 0 %>
+      Empty
+    <% else %>
+      <%= get_rooms %>
+    <% end %>
+
+    <br />
+
+    <li><a>Room 1</a>
       <ul>
-        <li><a href="#">Room 1</a>
+        <li><a>Room 1</a>
           <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-            <li><a href="#">Test 3</a></li>
+            <li><a>Test 1</a></li>
+            <li><a>Test 2</a></li>
+            <li><a>Test 3</a></li>
           </ul>
         </li>
-        <li><a href="#">Room 2</a>
+        <li><a>Room 2</a>
           <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
+            <li><a>Test 1</a></li>
+            <li><a>Test 2</a></li>
           </ul>
         </li>
-        <li><a href="#">Room 3</a>
+        <li><a>Room 3</a>
           <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
+            <li><a>Test 1</a></li>
+            <li><a>Test 2</a></li>
           </ul>
         </li>
-        <li><a href="#">Room 4</a>
+        <li><a>Room 4</a>
           <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
+            <li><a>Test 1</a></li>
+            <li><a>Test 2</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="movies">Room 2</a>
+    <li><a href="#">Room 2</a>
       <ul>
         <li><a href="#">Test 1</a></li>
         <li><a href="#">Test 2</a></li>
       </ul>
     </li>
-    <li><a href="music">Room 3</a>
+    <li><a href="#">Room 3</a>
       <ul>
         <li><a href="#">Test 1</a></li>
         <li><a href="#">Test 2</a></li>
       </ul>
     </li>
-    <li><a href="photos">Room 4</a>
+    <li><a href="#">Room 4</a>
       <ul>
         <li><a href="#">Test 1</a></li>
         <li><a href="#">Test 2</a></li>
@@ -71,17 +79,13 @@
   </ul>
 <% end %>
 
-<table>
-<% @rooms.each do |room| %>
-  <tr>
-    <td><%= room.name %></td>
-    <td><%= link_to 'Show', room %></td>
-    <td><%= link_to 'Edit', edit_room_path(room) %></td>
-    <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div id="created_rooms">
+  <%= render @rooms %>
+</div>
 
   <br />
 
-  <%= link_to 'New Room', new_room_path %>
+  <%= link_to 'New Room', new_room_path, id: "new_room_link", remote: true %>
+
+<div class="json_vars">
+</div>

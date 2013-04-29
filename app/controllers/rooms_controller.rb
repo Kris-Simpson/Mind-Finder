@@ -14,11 +14,6 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @room }
-    end
   end
 
   def edit
@@ -26,17 +21,11 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(params[:room])
-    @room.user_id = current_user.id
+    @room = current_user.rooms.build(params[:room])
 
     respond_to do |format|
-      if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
-        format.json { render json: @room, status: :created, location: @room }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to rooms_url }
+      format.js
     end
   end
 
@@ -63,4 +52,32 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def get_rooms
+    rooms = []
+    parent_rooms = []
+    children_rooms = []
+
+    current_user.rooms.each { |room|
+      if room.parent.nil?
+        parent_rooms << room
+      elsif !room.parent.nil?
+        children_rooms << room
+      end
+    }
+
+    parent_rooms.each { |room|
+      
+    }
+
+    return children_rooms.length + parent_rooms.length
+  end
+
+  def get_tests
+    @tests = nil
+  end
+
+  helper_method :get_rooms, :get_tests
 end

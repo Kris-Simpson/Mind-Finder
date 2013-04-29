@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :locale
 
   has_many :rooms
+  has_many :tests
   
-  validates_associated :rooms
+  validates_associated :rooms, :tests
 
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :password, :length => {

@@ -1,0 +1,33 @@
+/* Author: Kris Simpson; */
+/* ##################### */
+/* Colors: blue; */
+/* Sizes: big; */
+
+.button {
+  width: 100%;
+  text-transform: uppercase;
+  font-family: Ubuntu-Bold;
+  padding: 4px;
+  border: 0;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+/* Colors */
+
+.blue {
+  background-color: #008FD5;
+  color: white;
+
+  &:hover {
+    background-color: #006596;
+  }
+}
+
+/* Sizes */
+
+.big {
+  font-size: 18px;
+}

@@ -1,0 +1,4 @@
+<%= form_for room do |f| %>
+  <%= room.name %>
+  <%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

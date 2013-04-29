@@ -53,27 +53,9 @@ $input: #808080;
     }
   }
 
-  input {
-    width: 100%;
+  input[type="email"], input[type="password"] {
     height: auto;
     font-size: 18px;
-  }
-  
-  input[type="submit"] {
-    color: white;
-    text-transform: uppercase;
-    font-family: Ubuntu-Bold;
-    padding: 4px;
-    background-color: #008FD5;
-    border: 0;
-    
-    &:hover {
-      background-color: #006596;
-      cursor: pointer;
-    }
-  }
-
-  input[type="email"], input[type="password"] {
     width: 98%;
     margin-bottom: -5px;
     padding: 5px 2px;
