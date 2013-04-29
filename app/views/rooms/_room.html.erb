@@ -1,4 +1,5 @@
-<%= form_for room do |f| %>
-  <%= room.name %>
-  <%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<div id="room_<%= room.id %>">
+  <%= link_to room.name, room %>
+  <%= link_to 'Edit', edit_room_path(room), remote: true %>
+  <%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+</div>

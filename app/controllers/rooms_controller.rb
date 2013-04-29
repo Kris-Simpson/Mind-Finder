@@ -17,11 +17,7 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = Room.find(params[:id])
-  end
-
-  def create
-    @room = current_user.rooms.build(params[:room])
+    @room = current_user.rooms.find(params[:id])
 
     respond_to do |format|
       format.html { redirect_to rooms_url }
@@ -29,27 +25,41 @@ class RoomsController < ApplicationController
     end
   end
 
+  def create
+    @room = current_user.rooms.create(params[:room])
+
+    respond_to do |format|
+      if @room.save
+        format.html { redirect_to rooms_url }
+        format.js
+      else
+        format.html
+        format.js { render json: { errors: @room.errors.full_messages } }
+      end
+    end
+  end
+
   def update
-    @room = Room.find(params[:id])
+    @room = current_user.rooms.find(params[:id])
 
     respond_to do |format|
       if @room.update_attributes(params[:room])
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
-        format.json { head :no_content }
+        format.html { redirect_to rooms_url }
+        format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
+        format.js { render json: @room.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @room = Room.find(params[:id])
+    @room = current_user.rooms.find(params[:id])
     @room.destroy
 
     respond_to do |format|
       format.html { redirect_to rooms_url }
-      format.json { head :no_content }
+      format.js
     end
   end
 
