@@ -1,4 +1,14 @@
 en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              length:
+                too_short: "must have at least %{count} words"
+                too_long: "must have at most %{count} words"
+
   title_home: "Home"
   title_portfolio: "Portfolio"
   title_pages: "Pages"

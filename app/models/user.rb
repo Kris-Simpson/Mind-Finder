@@ -12,9 +12,7 @@ class User < ActiveRecord::Base
 
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :password, :length => {
-    :in => 6..20,
-    :too_short => "must have at least %{count} words",
-    :too_long  => "must have at most %{count} words"
+    :in => 6..20
   }
 
   def generate_token(column)

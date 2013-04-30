@@ -11,11 +11,11 @@
 <body>
   <header>
 	  <div id="navigation_bar">
-		  <%= link_to image_tag("logo.png"), current_user ? tests_path : index_path %>
+		  <%= link_to image_tag("logo.png"), current_user ? rooms_path : index_path %>
 		  
 			<ul class="menu">
 				<li class="active">
-				<%= link_to t(:title_home), current_user ? tests_path : index_path %>
+				<%= link_to t(:title_home), current_user ? rooms_path : index_path %>
         
 				</li>
 				<li><a href="#"><%=t :title_portfolio %></a></li>
@@ -50,7 +50,58 @@
   	<% unless current_uri == "/index" || current_uri == "/" %>
 
   	<div class="left_menu">
-  		<%= yield :left_menu %>
+  		<ul id="rooms">
+        <li><a>Room 1</a>
+          <ul>
+            <li><a>Room 1</a>
+              <ul>
+                <li><a>Test 1</a></li>
+                <li><a>Test 2</a></li>
+                <li><a>Test 3</a></li>
+              </ul>
+            </li>
+            <li><a>Room 2</a>
+              <ul>
+                <li><a>Test 1</a></li>
+                <li><a>Test 2</a></li>
+              </ul>
+            </li>
+            <li><a>Room 3</a>
+              <ul>
+                <li><a>Test 1</a></li>
+                <li><a>Test 2</a></li>
+              </ul>
+            </li>
+            <li><a>Room 4</a>
+              <ul>
+                <li><a>Test 1</a></li>
+                <li><a>Test 2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#">Room 2</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Room 3</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Room 4</a>
+          <ul>
+            <li><a href="#">Test 1</a></li>
+            <li><a href="#">Test 2</a></li>
+            <li><a href="#">Test 3</a></li>
+            <li><a href="#">Test 4</a></li>
+            <li><a href="#">Test 5</a></li>
+          </ul>
+        </li>
+      </ul>
   	</div>
   	
   	<div class="headline">
@@ -59,7 +110,7 @@
   		</div>
 
   		<div class="headline_title">
-  			<%= yield :headline_title %>
+  			<h1><%= yield :headline_title %></h1>
   		</div>
 
   		<% if current_user %>

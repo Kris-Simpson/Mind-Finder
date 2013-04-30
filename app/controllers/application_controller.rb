@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_locale, :redirect_current_user
+  before_filter :set_locale
  
   def set_locale
     if current_user
@@ -16,10 +16,6 @@ class ApplicationController < ActionController::Base
   def default_url_options(options={})
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { :locale => I18n.locale }
-  end
-
-  def redirect_current_user
-    redirect_to :rooms if current_user && (current_uri == "/index" || current_uri == "/")
   end
   
 private

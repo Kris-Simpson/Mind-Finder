@@ -1,0 +1,16 @@
+<div id="show_room_block">
+  <script>
+    $(function() {
+      $("#show_room_block a.cancel_link").click(function() {
+        $("#show_room_block").remove();
+        $("#room_<%= @room.id %>").show();
+      });
+    });
+  </script>
+
+  <p id="notice"><%= notice %></p>
+
+  <%= @room.name %><br />
+
+  <a class="cancel_link">Cancel</a>
+</div>

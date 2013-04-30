@@ -1,0 +1,3 @@
+$("#edit_room_<%= @room.id %>").remove();
+$("#room_<%= @room.id %>").remove();
+$("#created_rooms").append("<%= j render @room %>");

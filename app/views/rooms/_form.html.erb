@@ -1,4 +1,17 @@
 <%= form_for(@room, remote: true) do |f| %>
+  <script>
+    $(function() {
+      $("#edit_room_<%= @room.id %> a.cancel_link").click(function() {
+        $("#edit_room_<%= @room.id %>").remove();
+        $("#room_<%= @room.id %>").show();
+      });
+
+      $("#new_room a.cancel_link").click(function() {
+        $("#new_room").remove();
+        $("#new_room_link").show();
+      });
+    });
+  </script>
 
   <%= f.label :name %>: <%= f.text_field :name %><br />
   <%= f.label :description %>: <%= f.text_field :description %><br />
@@ -6,5 +19,6 @@
 
   <div class="actions">
     <%= f.submit %>
+    <a class="cancel_link">Cancel</a>
   </div>
 <% end %>
