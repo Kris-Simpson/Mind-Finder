@@ -4,11 +4,11 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @room = current_user.rooms.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @room }
+      format.html
+      format.js
     end
   end
 
