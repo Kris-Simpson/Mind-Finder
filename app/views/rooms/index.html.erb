@@ -1,17 +1,7 @@
 <% content_for :headline_title do %>My rooms<% end %>
 
 <% content_for :breadcrumbs do %>
-  <ul>
-    <li>
-      <a href="#">Rooms</a>
-      <span>/</span> 
-    </li>
-    <li>
-      <a href="#">Room in room</a>
-      <span>/</span> 
-    </li>
-    <li class="active">We are here</li>
-  </ul>
+  <%= breadcrumbs.render %>
 <% end %>
 
 <div id="created_rooms">

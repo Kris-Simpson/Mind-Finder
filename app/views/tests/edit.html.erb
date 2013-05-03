@@ -1,6 +1,8 @@
-<h1>Editing test</h1>
+<% content_for :headline_title do %>
+  Editing test
+<% end %>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @test %> |
-<%= link_to 'Back', tests_path %>
+<%= link_to 'Cancel', tests_path %>

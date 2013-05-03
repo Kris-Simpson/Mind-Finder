@@ -8,5 +8,4 @@ class Answer < ActiveRecord::Base
     :too_short => "Answer must have at least %{count} words",
     :too_long  => "Answer must have at most %{count} words"
   }
-  validates :question_id, :presence => true, :numericality => { :only_integer => true }
 end

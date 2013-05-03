@@ -10,7 +10,13 @@
 
   <p id="notice"><%= notice %></p>
 
-  <%= @room.name %><br />
+  <% if @room.tests.empty? %>
+    Empty
+  <% else %>
+    <% @room.tests.each do |test| %>
+      <%= test.name %><br />
+    <% end %>
+  <% end %>
 
   <a class="cancel_link">Cancel</a>
 </div>

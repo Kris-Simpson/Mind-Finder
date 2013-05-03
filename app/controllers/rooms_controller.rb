@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   def index
     @rooms = current_user.rooms
+    breadcrumbs.add 'Rooms', rooms_path
   end
 
   def show
@@ -29,7 +30,7 @@ class RoomsController < ApplicationController
     @room = current_user.rooms.create(params[:room])
 
     respond_to do |format|
-      if @room.save
+      if @room.valid?
         format.html { redirect_to rooms_url }
         format.js
       else

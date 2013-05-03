@@ -15,7 +15,10 @@
 
   <%= f.label :name %>: <%= f.text_field :name %><br />
   <%= f.label :description %>: <%= f.text_field :description %><br />
-  <%= f.label :parent %>: <%= f.text_field :parent %>
+
+  <% unless @room.is_main %>
+    <%= f.label :parent_id %>: <%= f.select(:parent_id, options_from_collection_for_select(Room.all, :id, :name)) %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>
