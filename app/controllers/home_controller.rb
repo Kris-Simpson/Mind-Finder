@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    redirect_to :rooms if current_user
+    redirect_to :tests if current_user
     @user = User.new
   end
 

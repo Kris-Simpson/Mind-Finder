@@ -65,7 +65,6 @@ $breadcrumbs_pad_bottom: 10px;
 .content {
   margin: 72px 5% 20px 5%;
   height: 1000px;
-  border: 1px solid #000;
 
   .left_menu {
   	border-right: 1px dashed #d6d6d6;
@@ -79,13 +78,6 @@ $breadcrumbs_pad_bottom: 10px;
   }
 
   .headline {
-  	.headline_title {
-	  	float: left;
-	  	margin-left: 55px;
-	  	color: $dark_brown;
-	  	border: 1px solid #000;
-  	}
-
   	.breadcrumbs {
   		font-size: $breadcrumbs_height;
   		padding-bottom: $breadcrumbs_pad_bottom;
@@ -117,32 +109,48 @@ $breadcrumbs_pad_bottom: 10px;
 			}
   	}
 
-	  #user_line {
-		  font-size: 14px;
-			color: $dark_brown;
-			float: right;
-			border: 1px solid #000;
+  	.strip {
+  	//	float: left;
+  	//	border: 1px solid #000;
 
-			span {
-			  font-family: Ubuntu-Bold;
-			}
-			
-			a {
-			  float: right;
-			  color: #0096FF;
-			  text-decoration: none;
-		    
-		    &:hover {
-		      text-decoration: underline;
-		      cursor: pointer;
-		    }
+	  	.headline_title {
+		  	float: left;
+		  	margin-left: 55px;
+		  	color: $dark_brown;
+		  	border: 1px solid #000;
+
+		  	span {
+		  		color: grey;
+		  	}
+	  	}
+
+		  #user_line {
+			  font-size: 14px;
+				color: $dark_brown;
+				float: right;
+				border: 1px solid #000;
+
+				span {
+				  font-family: Ubuntu-Bold;
+				}
+				
+				a {
+				  float: right;
+				  color: #0096FF;
+				  text-decoration: none;
+			    
+			    &:hover {
+			      text-decoration: underline;
+			      cursor: pointer;
+			    }
+				}
 			}
 		}
 	}
 
 	.middle_content {
 		margin-top: 55px;
-	//	float: left;
+		float: left;
 		border: 1px solid #000;
 	}
 }
