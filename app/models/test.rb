@@ -1,11 +1,12 @@
 class Test < ActiveRecord::Base
-  attr_accessible :user_id, :description, :name
+  attr_accessible :room_id, :description, :name, :questions_attributes
 
-  belongs_to :user
+  belongs_to :room
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
-  validates :user_id, :presence => true, :numericality => { :only_integer => true }
+  accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
+
   validates :name, :presence => true, :length => {
     :in => 3...25,
     :too_short => "Test name must have at least %{count} words",

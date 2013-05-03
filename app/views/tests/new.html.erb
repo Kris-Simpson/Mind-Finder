@@ -1,5 +1,7 @@
-<h1>New test</h1>
+<% content_for :headline_title do %>
+  New test
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', tests_path %>
+<%= link_to 'Cancel', tests_path %>

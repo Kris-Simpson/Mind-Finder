@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :locale
 
   has_many :rooms
-  has_many :tests
+  has_many :tests, through: :rooms
   
   validates_associated :rooms, :tests
 

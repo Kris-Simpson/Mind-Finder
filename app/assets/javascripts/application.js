@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery_nested_form
 
 function formSwitch(form) {
   document.getElementById('sign_in_form').style.display = 'none';

@@ -1,3 +1,7 @@
+<% content_for :headline_title do %>
+  Test: <span><%= @test.name %></span>
+<% end %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,6 +14,25 @@
   <%= @test.description %>
 </p>
 
+<p>
+  <b>Room:</b>
+  <%= @test.room_id %>
+</p>
 
-<%= link_to 'Edit', edit_test_path(@test) %> |
+<ol>
+<% for question in @test.questions %>
+  <li>
+    Question: <%=h question.question %>
+    <ul>
+    <% for answer in question.answers %>
+      <li>Answer:  <%=h answer.answer %></li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+</ol>
+
+
+  <%= link_to 'Edit', edit_test_path(@test) %> | 
+
 <%= link_to 'Back', tests_path %>
