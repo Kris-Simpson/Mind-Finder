@@ -1,4 +1,14 @@
-<p class="fields">
+<script>
+  $(document).on('nested:fieldRemoved', function(event){
+    var field = event.field;
+
+    var answers = $(".answer_fields");
+    
+    alert(answers.length);
+  });
+</script>
+
+<p class="answer_fields">
   <%= f.label :answer %>
   <%= f.text_field :answer %>
   <%= f.check_box :is_right_answer %>

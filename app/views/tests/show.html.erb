@@ -1,5 +1,5 @@
 <% content_for :headline_title do %>
-  Test: <span><%= @test.name %></span>
+  Passing the test: <span><%= @test.name %></span>
 <% end %>
 
 <p id="notice"><%= notice %></p>
@@ -31,5 +31,21 @@
   </li>
 <% end %>
 </ol>
+
+<script>
+  $("#question_<%= @test.questions.first.id %>").click(function() {
+    alert("Yay!");
+  });
+</script>
+
+<div>
+  <% increment = 0 %>
+  <% for question in @test.questions %>
+    <%= button_tag "Question #{increment += 1}", type: "button", id: "question_#{question.id}" %><br />
+  <% end %>
+</div>
+
+<div class="question_name">
+</div>
 
 <%= link_to 'Back', tests_path %>

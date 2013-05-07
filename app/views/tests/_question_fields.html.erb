@@ -1,6 +1,28 @@
+<script>
+  $(function() {
+    $(".question_type_select").change(function() {
+      var answers = $(".answer_fields");
+      if(this.value == "2" && answers.length >= 2) {
+        $(".add_answer_link").hide();
+        var i = 0;
+        answers.each(function() {
+          if(i >= 2) {
+            $(this).remove();
+          }
+          i++;
+        });
+      }
+      else {
+        $(".add_answer_link").show();
+      }
+    });
+  });
+</script>
+
+
 <div class="fields">
   <p>
-    <%= f.label :question_type %>: <%= f.select(:question_type_id, options_from_collection_for_select(QuestionType.all, :id, :name)) %><br />
+    <%= f.label :question_type %>: <%= f.select(:question_type_id, options_from_collection_for_select(QuestionType.all, :id, :name), { }, { class: "question_type_select" }) %><br />
     <%= f.label :question %>
     <%= f.link_to_remove "remove" %><br />
     <%= f.text_area :question, rows: 3%>
@@ -9,5 +31,6 @@
   <%= f.fields_for :answers do |builder| %>
     <%= render "answer_fields", f: builder %>
   <% end %>
-  <p><%= f.link_to_add "Add Answer", :answers %></p>
+
+  <p><%= f.link_to_add "Add Answer", :answers, class: "add_answer_link" %></p>
 </div>
