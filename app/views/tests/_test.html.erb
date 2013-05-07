@@ -1,5 +1,8 @@
-<div class="test_block" id="test_<%= test.id %>">
-  <%= link_to test.name, test, class: "test_name" %>
-  <%= link_to 'Edit', edit_test_path(test), class: "edit_test_link" %>
-  <%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure you want to delete this test?' }, class: "destroy_test_link", remote: true %>
+<div class="block" id="test_<%= test.id %>">
+  <%= link_to "#{test.name}", test, class: "name" %>
+
+  <div>
+    <%= link_to 'Edit', edit_test_path(test), class: "edit_link" %>
+    <%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure you want to delete this test?' }, class: "destroy_link", remote: true %>
+  </div>
 </div>

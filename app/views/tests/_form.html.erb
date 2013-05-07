@@ -1,15 +1,12 @@
 <%= nested_form_for @test do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label :name %>: <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label :description %>: <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :room_id %><br />
-    <%= f.select(:room_id, options_from_collection_for_select(Room.all, :id, :name)) %>
+    <%= f.label :room_id %>: <%= f.select(:room_id, options_from_collection_for_select(Room.all, :id, :name)) %>
   </div>
 
   <%= f.fields_for :questions do |builder| %>

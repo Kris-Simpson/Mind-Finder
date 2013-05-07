@@ -15,8 +15,6 @@ class TestsController < ApplicationController
 
   def new
     @test = Test.new
-    question = @test.questions.build
-    2.times { question.answers.build }
   end
 
   # GET /tests/1/edit

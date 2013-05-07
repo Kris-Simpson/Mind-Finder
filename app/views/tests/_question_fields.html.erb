@@ -1,5 +1,6 @@
 <div class="fields">
   <p>
+    <%= f.label :question_type %>: <%= f.select(:question_type_id, options_from_collection_for_select(QuestionType.all, :id, :name)) %><br />
     <%= f.label :question %>
     <%= f.link_to_remove "remove" %><br />
     <%= f.text_area :question, rows: 3%>

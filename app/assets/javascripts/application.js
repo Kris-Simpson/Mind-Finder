@@ -21,6 +21,35 @@ function formSwitch(form) {
   document.getElementById(form).style.display = 'block';
 }
 
+$(function() {
+  $("div .destroy_link").hover(
+    function() {
+      $(this).parent().animate({ "margin-right" : "-5px" }, 200);
+    },
+    function() {
+      $(this).parent().animate({ "margin-right" : "0px" }, 200);
+    }
+  );
+
+  $("div .edit_link").hover(
+    function() {
+      $(this).parent().animate({ "margin-right" : "5px" }, 200);
+    },
+    function() {
+      $(this).parent().animate({ "margin-right" : "0px" }, 200);
+    }
+  );
+
+  $("#content .block .name").hover(
+    function() {
+      $(this).animate({ "opacity" : "0.8" }, 200);
+    },
+    function() {
+      $(this).animate({ "opacity" : "1" }, 200);
+    }
+  );
+});
+
 $(function(){
   $('#rooms').tree();
 });
