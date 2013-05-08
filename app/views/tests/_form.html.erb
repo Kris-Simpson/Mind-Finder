@@ -1,3 +1,25 @@
+<script>
+  $(document).on('nested:fieldAdded:questions', function(event){
+    var field = event.field;
+    var count = 0;
+    var questions = $(".question_fields");
+
+    questions.each(function(){
+      for(var i = 0; i < 200; i ++) {
+        $(this).removeClass("question_" + i);
+      }
+
+      $(this).addClass("question_" + count);
+      count ++;
+    });
+  });
+
+  $(document).on('nested:fieldRemoved:questions', function(event){
+    var field = event.field;
+    field.remove();
+  });
+</script>
+
 <%= nested_form_for @test do |f| %>
   <div class="field">
     <%= f.label :name %>: <%= f.text_field :name %>

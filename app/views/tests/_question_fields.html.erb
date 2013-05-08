@@ -1,26 +1,43 @@
 <script>
   $(function() {
     $(".question_type_select").change(function() {
-      var answers = $(".answer_fields");
-      if(this.value == "2" && answers.length >= 2) {
-        $(".add_answer_link").hide();
+      var index = $(this).parents(".question_fields").attr('class');
+      index = index.substring(index.length - 1);
+      var parent = $(this).parents(".question_" + index);
+      var answers = parent.find(".answer_fields");
+      var add_answer_link = parent.find(".add_answer_link");
+
+      if(this.value == "2") {
         var i = 0;
         answers.each(function() {
-          if(i >= 2) {
-            $(this).remove();
-          }
-          i++;
+          $(this).remove();
         });
+        add_answer_link.click();
+        add_answer_link.click();
+
+        answers = parent.find(".answer_fields");
+        answers.find('input[type=text]').first().val('Yes');
+        answers.find('input[type=text]').last().val('No');
+
+        answers.each(function() {
+          $(this).find(".remove_nested_fields").remove();
+          $(this).find("input[type=text]").attr('readonly', true);
+        });
+
+        add_answer_link.hide();
       }
       else {
-        $(".add_answer_link").show();
+        answers.each(function() {
+          $(this).remove();
+        });
+        add_answer_link.show();
       }
     });
   });
 </script>
 
 
-<div class="fields">
+<div class="question_fields">
   <p>
     <%= f.label :question_type %>: <%= f.select(:question_type_id, options_from_collection_for_select(QuestionType.all, :id, :name), { }, { class: "question_type_select" }) %><br />
     <%= f.label :question %>

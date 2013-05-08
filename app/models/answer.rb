@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   belongs_to :question
 
   validates :answer, :presence => true, :length => {
-    :in => 3..50,
+    :in => 2..50,
     :too_short => "Answer must have at least %{count} words",
     :too_long  => "Answer must have at most %{count} words"
   }
