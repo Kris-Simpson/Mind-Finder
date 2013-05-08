@@ -1,7 +1,7 @@
 <% content_for :headline_title do %>My rooms<% end %>
 
 <% content_for :breadcrumbs do %>
-  <%= breadcrumbs.render %>
+<!--   <%= breadcrumbs.render %> -->
 <% end %>
 
 <div id="created_rooms">
@@ -10,4 +10,4 @@
 
 <br />
 
-<%= link_to 'New Room', new_room_path, id: "new_room_link", remote: true %>
+<%= link_to raw('<input class="blue medium" type="button" value="New Room">'), new_room_path, id: "new_room_link", class: 'button-link', remote: true %>

@@ -4,12 +4,18 @@
 
 <% content_for :breadcrumbs do %>
  <!--  <%= breadcrumbs.render %> -->
+  <li><a>Some room</a> <span>/</span></li>
+  <li class="active">Tests</li>
 <% end %>
 
 <div id="created_tests">
-  <%= render(@tests) %>
+  <% if @tests.any? %>
+    <%= render(@tests) %>
+  <% else %>
+    <p id="no-tests">There is no tests</p>
+  <% end %>
 </div>
 
 <br />
 
-<%= link_to 'New Test', new_test_path, id: "new_test_link" %>
+<%= link_to raw('<input class="blue medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>

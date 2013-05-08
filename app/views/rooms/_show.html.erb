@@ -1,7 +1,7 @@
 <div id="show_room_block">
   <script>
     $(function() {
-      $("#show_room_block a.cancel_link").click(function() {
+      $("#show_room_block a#cancel_link").click(function() {
         $("#show_room_block").remove();
         $("#room_<%= @room.id %>").show();
       });
@@ -14,9 +14,9 @@
     Empty
   <% else %>
     <% @room.tests.each do |test| %>
-      <%= test.name %><br />
+      <%= link_to test.name, test %><br />
     <% end %>
   <% end %>
 
-  <a class="cancel_link">Cancel</a>
+  <a id="cancel_link" class="link link-blue">Cancel</a>
 </div>

@@ -40,7 +40,11 @@ private
   def current_uri
     @current_uri = request.env['PATH_INFO']
   end
+
+  def question_type(type_id)
+    type_id
+  end
   
-  helper_method :current_user, :get_full_locale, :current_uri
+  helper_method :current_user, :get_full_locale, :current_uri, :question_type
   
 end

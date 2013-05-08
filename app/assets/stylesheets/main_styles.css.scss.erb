@@ -3,10 +3,11 @@
 }
 
 $dark_brown: #37464F;
+$navigation_bar_width: 60px;
 
 #navigation_bar {
 	width: 90%;
-	height: 60px;
+	height: $navigation_bar_width;
 	left: 5%;
 	top: 0;
 	position: fixed;
@@ -59,76 +60,71 @@ $dark_brown: #37464F;
   }
 }
 
-$breadcrumbs_height: 14px;
-$breadcrumbs_pad_bottom: 10px;
+$left_width: 150px;
 
-.content {
-  margin: 72px 5% 20px 5%;
-  height: 1000px;
+#middle {
+	margin: $navigation_bar_width 5% 0 5%;
+	
+	#breadcrumbs {
+		font-size: 14px;
+		padding: 10px 0;
+		padding-left: $left_width;
+ 		margin-bottom: 10px;
+		border-bottom: 1px solid #d6d6d6;
 
-  .left_menu {
-  	border-right: 1px dashed #d6d6d6;
-  	font-size: $breadcrumbs_height;
-  	height: 100%;
-  	float: left;
-  	margin-top: $breadcrumbs_height + $breadcrumbs_pad_bottom + 14;
-  	margin-right: 20px;
-  	padding: $breadcrumbs_pad_bottom - 4 6px 0 5px;
-  	border: 1px solid #000;
-  }
+		ul li {
+			display: inline;
 
-  .headline {
-  	.breadcrumbs {
-  		font-size: $breadcrumbs_height;
-  		padding-bottom: $breadcrumbs_pad_bottom;
-  		margin-bottom: 10px;
-			border-bottom: 1px dashed #d6d6d6;
-			border: 1px solid #000;
-
-			ul li {
-				display: inline;
-
-				a {
-					color: #0096FF;
-					text-decoration: none;
+			a {
+				color: #0096FF;
+				text-decoration: none;
 			    
-			    &:hover {
-			    	color: #0571BE;
-			      text-decoration: underline;
-			      cursor: pointer;
-			    }
-			  }
+		    &:hover {
+		    	color: #0571BE;
+		      text-decoration: underline;
+		      cursor: pointer;
+		    }
+		  }
 
-				span {
-					color: #d6d6d6;
-				}
+			span {
+				color: #d6d6d6;
+			}
 
-				&.active {
-					color: #939393;
-				}
+			&.active {
+				color: #939393;
 			}
   	}
+	}
 
-  	.strip {
-  	//	float: left;
-  	//	border: 1px solid #000;
+  #left {
+    overflow: auto;
+  	font-size: 14px;
+    width: $left_width;
+  	float: left;
+  }
 
-	  	.headline_title {
-		  	float: left;
+  #right {
+  	overflow: hidden;
+
+	  #headline {
+	    overflow: hidden;
+	    border-left: 1px dashed #d6d6d6;
+	  	
+	  	#title {
+	  		float: left;
+	  		font-size: 20px;
 		  	margin-left: 55px;
 		  	color: $dark_brown;
-		  	border: 1px solid #000;
 
 		  	span {
 		  		color: grey;
 		  	}
-	  	}
+		  }
 
-		  #user_line {
-			  font-size: 14px;
+		  #current_user {
+		  	font-size: 14px;
 				color: $dark_brown;
 				float: right;
-				border: 1px solid #000;
 
 				span {
 				  font-family: Ubuntu-Bold;
@@ -136,21 +132,50 @@ $breadcrumbs_pad_bottom: 10px;
 				
 				a {
 				  float: right;
-				  color: #0096FF;
-				  text-decoration: none;
-			    
-			    &:hover {
-			      text-decoration: underline;
-			      cursor: pointer;
-			    }
 				}
-			}
+		  }
 		}
-	}
 
-	.middle_content {
-		margin-top: 55px;
-		float: left;
-		border: 1px solid #000;
+	  #content {
+	  	padding: 10px 0 0 15px;
+	  	border-left: 1px dashed #d6d6d6;
+
+	  	.block {
+	  		padding: 5px;
+	  		padding-top: 10px;
+	  		border-bottom: 1px dashed #d6d6d6;
+
+	  		&:hover {
+	  			border-bottom-style: solid;
+	  			background-color: #fafafa;
+	  		}
+
+	  		a {
+	  			color: $dark_brown;
+	  			text-decoration: none;
+	  		}
+
+	  		div {
+	  			float: right;
+	  			text-transform: uppercase;
+	  			letter-spacing: 1px;
+	  			font-size: 14px;
+	  		//	margin-right: 10px;
+	  		}
+
+	  		.name {
+	  			font-size: 18px;
+	  		}
+
+	  		.edit_link {
+	  			
+	  		}
+
+	  		.destroy_link {
+	  			margin-left: 5px;
+	  			color: #980808;
+	  		}
+	  	}
+	  }
 	}
 }
