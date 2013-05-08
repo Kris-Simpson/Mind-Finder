@@ -12,6 +12,6 @@ class HomeController < ApplicationController
 
     I18n.locale = locale
 
-    redirect_to :index
+    redirect_to :back
   end
 end

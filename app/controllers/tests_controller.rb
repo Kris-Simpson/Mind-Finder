@@ -15,8 +15,6 @@ class TestsController < ApplicationController
 
   def new
     @test = Test.new
-    question = @test.questions.build
-    2.times { question.answers.build }
   end
 
   # GET /tests/1/edit
@@ -31,7 +29,7 @@ class TestsController < ApplicationController
 
     respond_to do |format|
       if @test.valid?
-        format.html { redirect_to @test, notice: 'Test was successfully created.' }
+        format.html { redirect_to tests_path, notice: 'Test was successfully created.' }
         format.json { render json: @test, status: :created, location: @test }
       else
         raise @test.errors.inspect

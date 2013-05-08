@@ -8,7 +8,7 @@ class Test < ActiveRecord::Base
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
 
   validates :name, :presence => true, :length => {
-    :in => 3...25,
+    :in => 3..25,
     :too_short => "Test name must have at least %{count} words",
     :too_long  => "Test name must have at most %{count} words"
   }

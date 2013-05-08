@@ -18,7 +18,7 @@
 				<%= link_to t(:title_home), current_user ? tests_path : index_path %>
         
 				</li>
-				<li><a href="#"><%=t :title_portfolio %></a></li>
+				<li><%= link_to "Rooms", rooms_path %></li>
 				<li><a href="#"><%=t :title_pages %></a></li>
 				<li><a href="#"><%=t :title_blog %></a></li>
 				<li><a href="#"><%=t :title_contact %></a></li>
@@ -41,15 +41,23 @@
 			    </li>
 			  </div>
 			</ul>
-			
-			
 	  </div>
   </header>
 
-  <div class="content">
-  	<% unless current_uri == "/index" || current_uri == "/" %>
+  <div id="middle">
+  	<% if params[:controller] == "home" && params[:action] == "index" %>
 
-  	<div class="left_menu">
+    <div id="content">
+      <%= yield %>
+    </div>
+
+    <% else %>
+
+    <div id="breadcrumbs">
+      <ul><%= yield :breadcrumbs %></ul>
+    </div>
+
+  	<div id="left">
   		<ul id="rooms">
         <li><a>Room 1</a>
           <ul>
@@ -104,32 +112,26 @@
       </ul>
   	</div>
   	
-  	<div class="headline">
-  		<div class="breadcrumbs">
-  			<%= yield :breadcrumbs %>
-  		</div>
-
-      <div class="strip">
-    		<div class="headline_title">
+  	<div id="right">
+      <div id="headline">
+    		<div id="title">
     			<h1><%= yield :headline_title %></h1>
     		</div>
 
     		<% if current_user %>
-
-  			<div id="user_line">
+  			<div id="current_user">
   			  <%=t :logged_in_title %> <span><%= current_user.email %></span><br />
-  			  <%= link_to t(:logged_in_log_out_link), logout_path %>
+  			  <%= link_to t(:logged_in_log_out_link), logout_path, class: "link link-blue" %>
   			</div>
-
   			<% end %>
+      </div>
+
+      <div id="content">
+        <%= yield %>
       </div>
   	</div>
 
-  	<% end %>
-  	
-  	<div class="middle_content">
-  		<%= yield %>
-  	</div>
+    <% end %>
   </div>
 
 	<footer>

@@ -1,16 +1,37 @@
 /* Author: Kris Simpson; */
 /* ##################### */
+/* Button types: button, button-link; */
 /* Colors: blue; */
 /* Sizes: big; */
 
+/* Buttons */
+
 .button {
-  width: 100%;
   text-transform: uppercase;
+  font-size: 18px;
+  text-align: center;
   font-family: Ubuntu-Bold;
   padding: 4px;
   border: 0;
   
   &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-link {
+  text-decoration: none;
+
+  input {
+    @extend .button;
+  }
+}
+
+.link {
+  text-decoration: none;
+          
+  &:hover {
+    text-decoration: underline;
     cursor: pointer;
   }
 }
@@ -26,8 +47,16 @@
   }
 }
 
+.link-blue {
+  color: #008FD5;
+}
+
 /* Sizes */
 
 .big {
-  font-size: 18px;
+  width: 100%;
+}
+
+.medium {
+  width: 250px;
 }
