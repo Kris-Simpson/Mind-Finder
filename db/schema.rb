@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130502111455) do
+ActiveRecord::Schema.define(:version => 20130503190517) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -21,11 +21,27 @@ ActiveRecord::Schema.define(:version => 20130502111455) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "passed_tests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "test_id"
+    t.integer  "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "question_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "questions", :force => true do |t|
     t.string   "question"
     t.integer  "test_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "question_type_id"
   end
 
   create_table "rooms", :force => true do |t|
@@ -41,11 +57,14 @@ ActiveRecord::Schema.define(:version => 20130502111455) do
   create_table "tests", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.boolean  "passed"
-    t.integer  "rating"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "room_id"
+    t.integer  "max_shewn_questions"
+    t.integer  "min_shewn_questions"
+    t.integer  "max_shewn_answers"
+    t.integer  "min_shewn_answers"
+    t.integer  "time_for_passing"
   end
 
   create_table "users", :force => true do |t|
