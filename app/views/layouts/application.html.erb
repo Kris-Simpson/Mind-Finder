@@ -45,7 +45,7 @@
   </header>
 
   <div id="middle">
-  	<% if current_uri == "/index" || current_uri == "/" %>
+  	<% if params[:controller] == "home" && params[:action] == "index" %>
 
     <div id="content">
       <%= yield %>
