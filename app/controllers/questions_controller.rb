@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-  # GET /questions
-  # GET /questions.json
+  QUESTION_TYPES = [ ['Multiple choise', 1], ['Single choise', 2] ]
+
   def index
     @questions = Question.all
 
@@ -10,8 +10,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # GET /questions/1
-  # GET /questions/1.json
   def show
     @question = Question.find(params[:id])
 
@@ -21,24 +19,19 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # GET /questions/new
-  # GET /questions/new.json
   def new
     @question = Question.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @question }
     end
   end
 
-  # GET /questions/1/edit
   def edit
     @question = Question.find(params[:id])
   end
 
-  # POST /questions
-  # POST /questions.json
   def create
     @question = Question.new(params[:question])
 
@@ -53,8 +46,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # PUT /questions/1
-  # PUT /questions/1.json
   def update
     @question = Question.find(params[:id])
 
@@ -69,8 +60,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # DELETE /questions/1
-  # DELETE /questions/1.json
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
@@ -80,6 +69,4 @@ class QuestionsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
 end

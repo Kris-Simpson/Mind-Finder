@@ -4,8 +4,6 @@ class CreateTests < ActiveRecord::Migration
       t.integer :author
       t.string  :name
       t.string  :description
-      t.boolean :passed
-      t.integer :rating
 
       t.timestamps
     end

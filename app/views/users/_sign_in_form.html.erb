@@ -3,10 +3,10 @@
   <p class="context_text"><%=t :login_form_context %></p>
         
   <%= form_tag sessions_path do %>
-    <p><%= email_field_tag :email, params[:email], :placeholder => t(:field_email), :autofocus => true %></p>
-    <p><%= password_field_tag :password, params[:password], :placeholder => t(:field_password) %></p>
-        
-    <p><%= submit_tag t(:login_form_submit), :class => "button blue big" %></p>
+    <p><%= email_field_tag :email, params[:email], placeholder: t(:field_email), autofocus: true, class: "i-blue i-large" %></p>
+    <p><%= password_field_tag :password, params[:password], placeholder: t(:field_password), class: 'i-blue i-large' %></p>
+
+    <p><%= submit_tag t(:login_form_submit), class: "button b-blue b-big" %></p>
   <% end %>
          
   <span id="sign_up" onclick="formSwitch('sign_up_form')"><%=t :login_form_signup_link %></span> <i>&mdash;</i> <a><%=t :login_form_forgot_pass %></a>

@@ -52,32 +52,6 @@ $input: #808080;
       size: 14px;
     }
   }
-
-  input[type="email"], input[type="password"] {
-    height: auto;
-    font-size: 18px;
-    width: 98%;
-    margin-bottom: -5px;
-    padding: 5px 2px;
-    font-family: Ubuntu-Regular;
-    color: #333;
-    border: 1px solid #ccc;
-    -webkit-transition: all 0.20s ease-in-out;
-    -moz-transition: all 0.20s ease-in-out;
-    -ms-transition: all 0.20s ease-in-out;
-    -o-transition: all 0.20s ease-in-out;
-    
-    &:hover {
-      border: 1px solid #aaa;
-    }
-    
-    &:focus {
-      border: 1px solid #00ACFF;
-      -webkit-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
-      -moz-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
-      box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
-    }
-  }
   
   .alert {
     margin-top: 7px;

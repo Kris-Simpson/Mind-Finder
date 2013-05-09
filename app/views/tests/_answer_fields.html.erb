@@ -1,33 +1,8 @@
-<script>
-  $(document).on('nested:fieldRemoved:answers', function(event){
-    var field = event.field;
-    var index = $(field).parents(".question_fields").attr('class');
-    index = index.substring(index.length - 1);
-    var parent = $(field).parents(".question_" + index);
-    var answers = parent.find(".answer_fields");
-    
-    if(answers.length < 3)
-      parent.find(".add_answer_link").show();
-
-    field.remove();
-  });
-
-  $(document).on('nested:fieldAdded:answers', function(event){
-    var field = event.field;
-    var index = $(field).parents(".question_fields").attr('class');
-    index = index.substring(index.length - 1);
-
-    var value = $(field).parents(".question_" + index).find(".question_type_select option:selected").val();
-    var answers = $(field).parents(".question_" + index).find(".answer_fields");
-    if(value == "2" && answers.length == 2)
-      $(field).parents(".question_" + index).find(".add_answer_link").hide();
-  });
-</script>
-
 <p class="answer_fields">
   <%= f.label :answer %>
   <%= f.text_field :answer %>
-  <%= f.check_box :is_right_answer %>
+  <%= f.radio_button :is_right_answer, :is_right_answer, class: 'answer_radio' %>
+  <%= f.check_box :is_right_answer, class: 'answer_checkbox' %>
   <%= f.label :is_right_answer, "Right answer" %>
   <%= f.link_to_remove "remove" %>
 </p>
