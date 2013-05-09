@@ -14,11 +14,11 @@
       <% end %>
     <% end %>
 
-    <p><%= f.email_field :email, :placeholder => t(:field_email) %></p>
-    <p><%= f.password_field :password, :placeholder => t(:field_password) %></p>
-    <p><%= f.password_field :password_confirmation, :placeholder => t(:field_password_confirm) %></p>
+    <p><%= f.email_field :email, placeholder: t(:field_email), class: 'i-blue i-large' %></p>
+    <p><%= f.password_field :password, placeholder: t(:field_password), class: 'i-blue i-large' %></p>
+    <p><%= f.password_field :password_confirmation, placeholder: t(:field_password_confirm), class: 'i-blue i-large' %></p>
 
-    <p><%= f.submit :value => t(:signup_form_submit), :class => "button blue big" %></p>
+    <p><%= f.submit :value => t(:signup_form_submit), class: "button b-blue b-big" %></p>
 
   <% end %>
 

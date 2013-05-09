@@ -9,13 +9,9 @@
 <% end %>
 
 <div id="created_tests">
-  <% if @tests.any? %>
-    <%= render(@tests) %>
-  <% else %>
-    <p id="no-tests">There is no tests</p>
-  <% end %>
+  <%= render(@tests) %>
 </div>
 
 <br />
 
-<%= link_to raw('<input class="blue medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>
+<%= link_to raw('<input class="b-blue b-medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>

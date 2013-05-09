@@ -1,0 +1,46 @@
+/* Author: Kris Simpson; */
+/* ##################### */
+/* Colors: i-blue; */
+/* Sizes: i-large; */
+
+input[type="email"], input[type="password"], input[type='text'] {
+  height: auto;
+  font-family: Ubuntu-Regular;
+  -webkit-transition: all 0.20s ease-in-out;
+  -moz-transition: all 0.20s ease-in-out;
+  -ms-transition: all 0.20s ease-in-out;
+  -o-transition: all 0.20s ease-in-out;
+}
+
+/* Colors */
+
+.i-blue {
+  color: #333;
+  border: 1px solid #ccc;
+
+  &:hover {
+    border: 1px solid #aaa;
+  }
+
+  &:focus {
+    border: 1px solid #00ACFF;
+    -webkit-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+    -moz-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+    box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+  }
+}
+
+/* Sizes */
+
+.i-large {
+  width: 98%;
+  font-size: 18px;
+  margin-bottom: -5px;
+  padding: 5px 2px;
+}
+
+.i-medium {
+  width: 250px;
+  font-size: 14px;
+  padding: 3px 1px;
+}
