@@ -1,8 +1,8 @@
 /* Author: Kris Simpson; */
 /* ##################### */
-/* Button types: button, button-link; */
-/* Colors: blue; */
-/* Sizes: big; */
+/* Button types: button, button-link, link; */
+/* Colors: b-blue, b-link-blue; */
+/* Sizes: b-big; */
 
 /* Buttons */
 
@@ -38,7 +38,7 @@
 
 /* Colors */
 
-.blue {
+.b-blue {
   background-color: #008FD5;
   color: white;
 
@@ -47,16 +47,16 @@
   }
 }
 
-.link-blue {
+.b-link-blue {
   color: #008FD5;
 }
 
 /* Sizes */
 
-.big {
+.b-big {
   width: 100%;
 }
 
-.medium {
+.b-medium {
   width: 250px;
 }
