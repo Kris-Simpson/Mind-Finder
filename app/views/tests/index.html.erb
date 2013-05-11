@@ -3,13 +3,13 @@
 <% end %>
 
 <% content_for :breadcrumbs do %>
- <!--  <%= breadcrumbs.render %> -->
-  <li><a>Some room</a> <span>/</span></li>
   <li class="active">Tests</li>
 <% end %>
 
 <div id="created_tests">
   <%= render(@tests) %>
+
+  <span class='empty-blocks'><%= raw('There are no tests') unless @tests.any? %></span>
 </div>
 
 <br />

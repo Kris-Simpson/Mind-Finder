@@ -1,3 +1,7 @@
-$("#new_room").remove();
-$("#new_room_link").show();
-$("#created_rooms").append("<%= j render @room %>");
+<% if @room.valid? %>
+  $("#new_room").remove();
+  $("#new_room_link").show();
+  $("#created_rooms").append("<%= j render @room %>");
+<% else %>
+  $('#new_room').replaceWith("<%= j render('form') %>")
+<% end %>

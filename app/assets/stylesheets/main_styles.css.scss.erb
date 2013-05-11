@@ -148,6 +148,10 @@ $left_width: 150px;
 	  		&:hover {
 	  			border-bottom-style: solid;
 	  			background-color: #fafafa;
+
+	  			div#actions {
+	  				border-left-style: solid;
+	  			}
 	  		}
 
 	  		a {
@@ -162,12 +166,43 @@ $left_width: 150px;
 	  			font-size: 14px;
 	  		}
 
+	  		div#actions {
+	  			border-left: 1px dashed #d6d6d6;
+	  			padding-left: 15px;
+	  		}
+
+	  		div#information {
+	  			color: $dark_brown;
+	  			opacity: 0.7;
+
+	  			span {
+	  				margin-right: 30px;
+
+	  				&:last-child {
+	  					margin-right: 15px;
+	  				}
+	  			}
+
+	  			.good {
+	  				color: #008FD5;
+	  			}
+
+	  			.bad {
+	  				color: #980808;
+	  			}
+
+	  			.path {
+	  				color: #191919;
+	  				margin-right: 0;
+	  			}
+	  		}
+
 	  		.name {
 	  			font-size: 18px;
 	  		}
 
 	  		.edit_link {
-	  			
+
 	  		}
 
 	  		.destroy_link {

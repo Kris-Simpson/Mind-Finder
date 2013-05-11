@@ -9,6 +9,8 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :is_admin
       t.string :email_confirmation_token
       t.string :reset_password_token
+      t.string :locale
+      t.string :auth_token
 
       t.timestamps
     end

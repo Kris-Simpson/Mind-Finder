@@ -59,56 +59,20 @@
 
   	<div id="left">
   		<ul id="rooms">
-        <li><a>Room 1</a>
-          <ul>
-            <li><a>Room 1</a>
+        There are no rooms or tests
+        <% Room.roots.each do |page| %>
+          <% if page.children.present? %>
+            <li><%= link_to page.name %>
               <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-                <li><a>Test 3</a></li>
+                <% page.children.each do |subpage| %>
+                  <li><%= link_to subpage.name, subpage %></li>
+                <% end %>
               </ul>
             </li>
-            <li><a>Room 2</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-            <li><a>Room 3</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-            <li><a>Room 4</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Room 2</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Room 3</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Room 4</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-            <li><a href="#">Test 3</a></li>
-            <li><a href="#">Test 4</a></li>
-            <li><a href="#">Test 5</a></li>
-          </ul>
-        </li>
+          <% else %>
+            <li><%= link_to page.name, page %></li>
+          <% end %>
+        <% end %>
       </ul>
   	</div>
   	

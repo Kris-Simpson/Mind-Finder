@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     logger.debug "default_url_options is passed options: #{options.inspect}\n"
     { :locale => I18n.locale }
   end
+
+  def redirect_user
+    redirect_to root_url if !current_user && params[:controller] != 'home'
+  end
   
 private
   

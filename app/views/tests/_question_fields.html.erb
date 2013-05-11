@@ -1,4 +1,4 @@
-<div class="question_fields">
+<div class="question_fields" style='border: 2px solid #000;'>
   <p>
     <%= f.label :question_type %>: <%= f.select(:question_type_id, options_for_select(QuestionsController::QUESTION_TYPES), { }, { class: "question_type_select" }) %><br />
     <%= f.label :question %>
@@ -11,4 +11,7 @@
   <% end %>
 
   <p><%= f.link_to_add "Add Answer", :answers, class: "add_answer_link" %></p>
+
+  <div class='field'><%= f.label :min_shewn_answers %>: <%= f.text_field :min_shewn_answers %></div>
+  <div class='field'><%= f.label :max_shewn_answers %>: <%= f.text_field :max_shewn_answers %></div>
 </div>
