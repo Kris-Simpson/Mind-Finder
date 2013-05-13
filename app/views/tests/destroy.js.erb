@@ -1,1 +1,6 @@
 $("#test_<%= @test.id %>").remove();
+
+var tests = $('.block');
+if(tests.length == 0) {
+  $('div#created_tests .empty-blocks').append('There are no tests');
+}

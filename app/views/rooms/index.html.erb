@@ -1,11 +1,13 @@
 <% content_for :headline_title do %>My rooms<% end %>
 
 <% content_for :breadcrumbs do %>
-<!--   <%= breadcrumbs.render %> -->
+  <li class='active'>Rooms</li>
 <% end %>
 
 <div id="created_rooms">
   <%= render @rooms %>
+
+  <span class='empty-blocks'><%= raw('There are no rooms') unless @rooms.any? %></span>
 </div>
 
 <br />

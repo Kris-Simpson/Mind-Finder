@@ -1,5 +1,5 @@
 class Test < ActiveRecord::Base
-  attr_accessible :room_id, :description, :name, :questions_attributes
+  attr_accessible :room_id, :description, :name, :questions_attributes, :min_shewn_questions, :max_shewn_questions, :time_for_passing, :allowed
 
   belongs_to :room
 
@@ -8,13 +8,11 @@ class Test < ActiveRecord::Base
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
 
   validates :name, :presence => true, :length => {
-    :in => 3..25,
-    :too_short => "Test name must have at least %{count} words",
-    :too_long  => "Test name must have at most %{count} words"
+    :in => 3..25
   }
   validates :description, :length => {
-    :in => 0...100,
-    :too_short => "Test description must have at least %{count} words",
-    :too_long  => "Test description must have at most %{count} words"
+    :in => 0...100
   }
+  validates :min_shewn_questions, numericality: { only_integer: true }, allow_nil: true
+  validates :max_shewn_questions, numericality: { only_integer: true }, allow_nil: true
 end

@@ -13,15 +13,18 @@
     });
   </script>
 
-  <%= f.label :name %>: <%= f.text_field :name, class: 'i-blue i-medium' %><br />
-  <%= f.label :description %>: <%= f.text_field :description, class: 'i-blue i-medium' %><br />
+  <%= f.label :name %>: <%= f.text_field :name, class: 'i-blue i-medium' %> <%= @room.errors[:name].first %><br />
+  <%= f.label :description %>: <%= f.text_field :description, class: 'i-blue i-medium' %> <%= @room.errors[:description].first %><br />
 
   <% unless @room.is_main %>
-    <%= f.label :parent_id %>: <%= f.select(:parent_id, options_from_collection_for_select(Room.all, :id, :name)) %>
+    <%= f.label :parent_id %>: <%= f.collection_select :parent_id, Room.order(:name), :id, :name, include_blank: true %>
+    <%= @room.errors[:parent_id].first %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit class: "button b-blue b-medium" %>
+    <%= f.submit class: 'button b-blue b-medium' %>
     <a id="cancel_link" class="link b-link-blue">Cancel</a>
   </div>
+
+  <div class='messages'></div>
 <% end %>

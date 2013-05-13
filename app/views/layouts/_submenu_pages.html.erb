@@ -1,0 +1,22 @@
+<ul id="rooms">
+  <% unless Room.roots.any? %>
+    There are no rooms or tests
+  <% end %>
+
+  <% Room.roots.each do |root_page| %>
+    <% if root_page.children.present? %>
+      <li><%= link_to root_page.name %>
+        <ul>
+          <% root_page.children.each do |page| %>
+            <li>
+              <%= link_to_unless_current page.name, page %>
+              <%= page.children if page.children.present? %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    <% else %>
+      <li><%= link_to root_page.name, root_page %></li>
+    <% end %>
+  <% end %>
+</ul>
