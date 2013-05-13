@@ -58,23 +58,19 @@
     </div>
 
   	<div id="left">
-  		<ul id="rooms">
+      <% unless Room.roots.present? %>
         There are no rooms or tests
-        <% Room.roots.each do |page| %>
-          <% if page.children.present? %>
-            <li><%= link_to page.name %>
-              <ul>
-                <% page.children.each do |subpage| %>
-                  <li><%= link_to subpage.name, subpage %></li>
-                <% end %>
-              </ul>
-            </li>
-          <% else %>
-            <li><%= link_to page.name, page %></li>
-          <% end %>
+      <% end %>
+
+      <ul id='rooms'>
+        <% Room.roots.each do |root| %>
+          <li>
+            <%= link_to_unless_current root.name, root %>
+            <%= render 'submenu_pages', pages: root.children if root.children.present? %>
+          </li>
         <% end %>
       </ul>
-  	</div>
+    </div>
   	
   	<div id="right">
       <div id="headline">

@@ -24,7 +24,7 @@ class TestsController < ApplicationController
   # POST /tests
   # POST /tests.json
   def create
-    @test = current_user.rooms.first.tests.build(params[:test])
+    @test = current_user.rooms.find(params[:test][:room_id]).tests.build(params[:test])
 
     @test.allowed = @test.questions.any? ? true : false
     @test.save

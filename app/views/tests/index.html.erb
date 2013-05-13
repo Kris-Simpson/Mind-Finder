@@ -14,4 +14,8 @@
 
 <br />
 
-<%= link_to raw('<input class="b-blue b-medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>
+<% if Room.all.any? %>
+  <%= link_to raw('<input class="b-blue b-medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>
+<% else %>
+  <%= link_to raw('<input class="b-white b-medium" type="button" value="New Test" disabled>'), new_test_path, class: 'button-link' %>
+<% end %>

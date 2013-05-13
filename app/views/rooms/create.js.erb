@@ -2,6 +2,11 @@
   $("#new_room").remove();
   $("#new_room_link").show();
   $("#created_rooms").append("<%= j render @room %>");
+
+  var rooms = $('.block');
+  if(rooms.length > 0) {
+    $('div#created_rooms .empty-blocks').empty();
+  }
 <% else %>
   $('#new_room').replaceWith("<%= j render('form') %>")
 <% end %>
