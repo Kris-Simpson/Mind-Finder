@@ -1,51 +1,64 @@
-<% content_for :headline_title do %>
-  Passing the test: <span><%= @test.name %></span>
-<% end %>
+<% content_for :breadcrumbs do %>
+  <% room = Room.find(@test.room_id) %>
 
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @test.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @test.description %>
-</p>
-
-<p>
-  <b>Room:</b>
-  <%= @test.room_id %>
-</p>
-
-<ol>
-<% for question in @test.questions %>
-  <li>
-    Question: <%=h question.question %>
-    <ul>
-    <% for answer in question.answers %>
-      <li>Answer:  <%=h answer.answer %></li>
-    <% end %>
-    </ul>
-  </li>
-<% end %>
-</ol>
-
-<script>
-  $("#question_<%= @test.questions.first.id %>").click(function() {
-    alert("Yay!");
-  });
-</script>
-
-<div>
-  <% increment = 0 %>
-  <% for question in @test.questions %>
-    <%= button_tag "Question #{increment += 1}", type: "button", id: "question_#{question.id}" %><br />
+  <% room.ancestors.each do |page| %>
+    <li><%= link_to page.name, page %> <span>/</span><li>
   <% end %>
-</div>
+  <li><%= link_to room.name, room %> <span>/</span></li> <li class='active'><%= @test.name %></li>
+<% end %>
 
-<div class="question_name">
-</div>
+<% if @test.questions.any? %>
 
-<%= link_to 'Back', tests_path %>
+  <% content_for :headline_title do %>
+    Passing the test: <span><%= @test.name %></span>
+  <% end %>
+
+  <p>
+    <b>Name:</b>
+    <%= @test.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @test.description %>
+  </p>
+
+  <p>
+    <b>Room:</b>
+    <%= @test.room_id %>
+  </p>
+
+  <ol>
+  <% for question in @test.questions %>
+    <li>
+      Question: <%=h question.question %>
+      <ul>
+      <% for answer in question.answers %>
+        <li>Answer:  <%=h answer.answer %></li>
+      <% end %>
+      </ul>
+    </li>
+  <% end %>
+  </ol>
+
+  <div>
+    <% increment = 0 %>
+    <% for question in @test.questions %>
+      <%= button_tag "Question #{increment += 1}", type: "button", id: "question_#{question.id}" %><br />
+    <% end %>
+  </div>
+
+  <div class="question_name">
+  </div>
+
+<% else %>
+
+  <% content_for :headline_title do %>
+    The test can not be
+  <% end %>
+
+  Sorry but test can not be passed because there are no questions<br />
+
+<% end %>
+
+<%= link_to 'Back', :back %>

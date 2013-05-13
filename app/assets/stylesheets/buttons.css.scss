@@ -47,6 +47,12 @@
   }
 }
 
+.b-white {
+  &:hover {
+    background-color: #F0F0F0;
+  }
+}
+
 .b-link-blue {
   color: #008FD5;
 }

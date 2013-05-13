@@ -58,59 +58,19 @@
     </div>
 
   	<div id="left">
-  		<ul id="rooms">
-        <li><a>Room 1</a>
-          <ul>
-            <li><a>Room 1</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-                <li><a>Test 3</a></li>
-              </ul>
-            </li>
-            <li><a>Room 2</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-            <li><a>Room 3</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-            <li><a>Room 4</a>
-              <ul>
-                <li><a>Test 1</a></li>
-                <li><a>Test 2</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="#">Room 2</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Room 3</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Room 4</a>
-          <ul>
-            <li><a href="#">Test 1</a></li>
-            <li><a href="#">Test 2</a></li>
-            <li><a href="#">Test 3</a></li>
-            <li><a href="#">Test 4</a></li>
-            <li><a href="#">Test 5</a></li>
-          </ul>
-        </li>
+      <% unless Room.roots.present? %>
+        There are no rooms or tests
+      <% end %>
+
+      <ul id='rooms'>
+        <% Room.roots.each do |root| %>
+          <li>
+            <%= link_to_unless_current root.name, root %>
+            <%= render 'submenu_pages', pages: root.children if root.children.present? %>
+          </li>
+        <% end %>
       </ul>
-  	</div>
+    </div>
   	
   	<div id="right">
       <div id="headline">

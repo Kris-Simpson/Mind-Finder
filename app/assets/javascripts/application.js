@@ -53,11 +53,24 @@ $(function() {
     var index = $(this).parents(".question_fields").attr('class');
     index = index.substring(index.length - 1);
     var parent = $(this).parents(".question_" + index);
+    var value = parent.find(".question_type_select option:selected").val();
     var answers = parent.find(".answer_fields");
+    var add_link = parent.find('.add_answer_link');
 
     answers.remove();
-    parent.find('.add_answer_link').click();
-    parent.find('.add_answer_link').click();
+
+    if(value == 1) {
+      add_link.click();
+      add_link.click();
+      add_link.click();
+
+      answers = parent.find(".answer_fields");
+      answers.first().find('.answer_checkbox').prop('checked', true);
+      answers.first().find('.answer_checkbox').prop('disabled', true);
+    } else {
+      add_link.click();
+      add_link.click();
+    }
     parent.find('.answer_fields').find('.remove_nested_fields').hide();
   });
 
@@ -67,23 +80,27 @@ $(function() {
     index = index.substring(index.length - 1);
     var parent = $(field).parents(".question_" + index);
     var value = parent.find(".question_type_select option:selected").val();
-    var answers = parent.find(".answer_fields");
+    var answers = parent.find(".answer_fields:visible");
+    var checkboxes_checked = answers.find('.answer_checkbox:checked');
+    var checkboxes_not_checked = answers.find('.answer_checkbox:not(:checked)');
 
-    if(answers.length == 3)
+    if(value == 1 && answers.length == 3) {
+      answers.find('.remove_nested_fields').hide();
+
+      if(checkboxes_checked.length == 1)
+        checkboxes_checked.prop('disabled', true);
+      else if(checkboxes_checked.length == 2)
+        checkboxes_not_checked.prop('disabled', true);
+      else if(checkboxes_checked.length == 3) {
+        checkboxes_checked.last().prop('checked', false).prop('disabled', true);
+      }
+    } else if(value == 2 && answers.length == 2)
       answers.find('.remove_nested_fields').hide();
 
     if(value == 2 && field.find('.answer_radio').is(':checked')) {
-      field.remove();
-      parent.find(".answer_radio").first().prop('checked', true);
+      parent.find(".answer_radio:visible").first().prop('checked', true);
       return;
     }
-
-    if(answers.length == 2) {
-      answers.find('.answer_checkbox').click();
-      answers.find('.answer_checkbox').attr('disabled', true);
-    }
-
-    field.remove();
   });
 
   $(document).on('nested:fieldAdded:answers', function(event){
@@ -94,6 +111,7 @@ $(function() {
     var value = parent.find(".question_type_select option:selected").val();
     var answers = parent.find(".answer_fields");
     var checkboxes = answers.find('.answer_checkbox');
+    var checkboxes_checked = answers.find('.answer_checkbox:checked');
     var radios = answers.find('.answer_radio');
     var radio_checked = answers.find('.answer_radio:checked');
 
@@ -102,6 +120,8 @@ $(function() {
     if(value == 1) {
       checkboxes.show();
       radios.hide();
+      if(checkboxes_checked.length > 1)
+        checkboxes.prop('disabled', false);
     } else {
       checkboxes.hide();
       radios.show();
@@ -116,6 +136,7 @@ $(function() {
     var field = event.field;
     var count = 0;
     var questions = $(".question_fields");
+    var add_link = field.find('.add_nested_fields');
 
     questions.each(function(){
       for(var i = 0; i < 200; i ++) {
@@ -126,33 +147,36 @@ $(function() {
       count ++;
     });
 
-    field.find('.add_nested_fields').click();
-    field.find('.add_nested_fields').click();
-    field.find('.answer_fields').find('.remove_nested_fields').hide();
-  });
+    add_link.click();
+    add_link.click();
+    add_link.click();
 
-  $(document).on('nested:fieldRemoved:questions', function(event){
-    event.field.remove();
+    var answers = field.find(".answer_fields");
+    answers.first().find('.answer_checkbox').prop('checked', true);
+    answers.first().find('.answer_checkbox').prop('disabled', true);
+
+    field.find('.answer_fields').find('.remove_nested_fields').hide();
   });
 
   $(document).on('click', ".answer_checkbox", function() {
     var index = $(this).parents(".question_fields").attr('class');
     index = index.substring(index.length - 1);
     var parent = $(this).parents(".question_" + index);
-    var checkboxes = parent.find(".answer_checkbox");
-    var checkboxes_checked = parent.find(".answer_checkbox:checked");
+    var checkboxes = parent.find(".answer_checkbox:visible");
+    var checkboxes_checked = parent.find(".answer_checkbox:checked:visible");
+
+    if(checkboxes_checked.length > 1)
+      checkboxes_checked.prop('disabled', false);
+    else if(checkboxes_checked.length == 1)
+      checkboxes_checked.prop('disabled', true);
 
     if(checkboxes_checked.length == checkboxes.length - 1) {
-      var lastCheckbox = parent.find(".answer_checkbox:not(:checked)");
-      lastCheckbox.attr('disabled', true);
+      var lastCheckbox = parent.find(".answer_checkbox:not(:checked):visible");
+      lastCheckbox.prop('disabled', true);
     } else {
-      var lastCheckbox = parent.find(".answer_checkbox:not(:checked)");
+      var lastCheckbox = parent.find(".answer_checkbox:not(:checked):visible");
       lastCheckbox.attr('disabled', false);
     }
-  });
-
-  $(document).on('click', "#test-submit", function() {
-    alert('Yay!');
   });
 });
 

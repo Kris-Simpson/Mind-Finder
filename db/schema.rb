@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503190517) do
+ActiveRecord::Schema.define(:version => 20130510132231) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(:version => 20130503190517) do
   create_table "questions", :force => true do |t|
     t.string   "question"
     t.integer  "test_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "question_type_id"
+    t.integer  "min_shewn_answers"
+    t.integer  "max_shewn_answers"
   end
 
   create_table "rooms", :force => true do |t|
@@ -43,8 +45,8 @@ ActiveRecord::Schema.define(:version => 20130503190517) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
-    t.integer  "parent_id"
     t.boolean  "is_main"
+    t.string   "ancestry"
   end
 
   create_table "tests", :force => true do |t|
@@ -55,9 +57,8 @@ ActiveRecord::Schema.define(:version => 20130503190517) do
     t.integer  "room_id"
     t.integer  "max_shewn_questions"
     t.integer  "min_shewn_questions"
-    t.integer  "max_shewn_answers"
-    t.integer  "min_shewn_answers"
     t.integer  "time_for_passing"
+    t.boolean  "allowed"
   end
 
   create_table "users", :force => true do |t|

@@ -10,8 +10,6 @@ class UsersController < ApplicationController
 
     if @user.save
       UserMailer.welcome_email(@user).deliver
-      
-      @user.rooms.create(name: "Main Room", description: "Main Room for user " + @user.email, is_main: true)
 
       redirect_to root_url, :notice => t(:notice_signup_success)
     else

@@ -1,7 +1,6 @@
 class RoomsController < ApplicationController
   def index
     @rooms = current_user.rooms
-    breadcrumbs.add 'Rooms', rooms_path
   end
 
   def show
@@ -35,7 +34,7 @@ class RoomsController < ApplicationController
         format.js
       else
         format.html
-        format.js { render json: { errors: @room.errors.full_messages } }
+        format.js
       end
     end
   end
