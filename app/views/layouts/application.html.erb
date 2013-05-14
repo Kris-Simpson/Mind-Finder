@@ -32,9 +32,9 @@
 						  </div>
 						  <div class="dropdown">
 						    <ul>
-						      <%= link_to raw("<li>English</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'en' } unless I18n.locale == :en %>
-						      <%= link_to raw("<li>Русский</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'ru' } unless I18n.locale == :ru %>
-						      <%= link_to raw("<li>Українська</li>"), { :controller => 'home', :action => 'change_locale', :locale => 'uk' } unless I18n.locale == :uk %>
+						      <%= link_to raw("<li>English</li>"), { :controller => 'application', :action => 'change_locale', :locale => 'en' } unless I18n.locale == :en %>
+						      <%= link_to raw("<li>Русский</li>"), { :controller => 'application', :action => 'change_locale', :locale => 'ru' } unless I18n.locale == :ru %>
+						      <%= link_to raw("<li>Українська</li>"), { :controller => 'application', :action => 'change_locale', :locale => 'uk' } unless I18n.locale == :uk %>
 						    </ul>
 						  </div>
 						</div>			      
@@ -62,11 +62,11 @@
         There are no rooms or tests
       <% end %>
 
-      <ul id='rooms'>
+      <ul id='submenu'>
         <% Room.roots.each do |root| %>
           <li>
-            <%= link_to_unless_current root.name, root %>
-            <%= render 'submenu_pages', pages: root.children if root.children.present? %>
+            <span><%= root.name %></span>
+            <%= render partial: 'shared/submenu_pages', locals: { pages: root.children, main: root } if root.children.present? %>
           </li>
         <% end %>
       </ul>

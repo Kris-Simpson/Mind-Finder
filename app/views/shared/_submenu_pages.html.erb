@@ -1,0 +1,15 @@
+<ul>
+  <% pages.each do |page| %>
+    <li>
+      <span><%= page.name %></span>
+      <%= render partial: 'shared/submenu_pages', locals: { pages: page.children, main: page } if page.children.present? %>
+    </li>
+  <% end %>
+
+  <% tests = Test.where(room_id: main.id) %>
+  <% if tests.any? %>
+    <% tests.each do |test| %>
+      <%= link_to test.name, test %>
+    <% end %>
+  <% end %>
+</ul>

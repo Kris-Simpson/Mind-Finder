@@ -21,6 +21,14 @@ class ApplicationController < ActionController::Base
   def redirect_user
     redirect_to root_url if !current_user && params[:controller] != 'home'
   end
+
+  def change_locale
+    locale = params[:locale]
+
+    User.find(current_user.id).update_attribute(:locale, locale) if current_user
+
+    redirect_to :back
+  end
   
 private
   

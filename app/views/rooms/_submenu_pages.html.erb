@@ -1,8 +1,8 @@
-<ul>
+<ul class='rooms'>
   <% pages.each do |page| %>
     <li>
       <%= link_to_unless_current page.name, page %>
-      <%= render 'submenu_pages', pages: page.children if page.children.present? %>
+      <%= render 'shared/submenu_pages', pages: page.children if page.children.present? %>
     </li>
   <% end %>
 </ul>

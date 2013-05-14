@@ -2,6 +2,15 @@
 
 .tree ul { margin-left: 10px; }
 
+.tree li span {
+  color: #37464F;
+  padding: .1em 7px .1em 25px;
+  display:block;
+  text-decoration:none;
+  border: 1px dashed #fff;
+  background:url('<%= asset_path "tree_images/no-childrens.png" %>') 5px 50% no-repeat;
+}
+
 .tree li a {
   color: #37464F;
   padding: .1em 7px .1em 25px;
@@ -12,24 +21,36 @@
 }
 
 .tree li span {
-  color: #ABABAB;
+/*  color: #ABABAB;
   font-size: 12px;
   font-family: Ubuntu-Italic;
   padding: .1em 7px .1em 15px;
   display:block;
   cursor: default;
   border: 1px dashed #fff;
+*/}
+
+.tree li span.tree-parent { background: url('<%= asset_path "tree_images/room-open.png" %>') 5px 50% no-repeat; }
+
+.tree li span.tree-parent-collapsed { background:url('<%= asset_path "tree_images/room.png" %>') 5px 50% no-repeat; }
+
+.tree li span:hover,.tree li span.tree-parent:hover,.tree li span:focus,.tree li span.tree-parent:focus,.tree li span.tree-item-active {
+  color: #fff;
+  background-color: #008FD5;
+  border: 1px dashed #008FD5;
+  cursor: pointer;
 }
-
-.tree li a.tree-parent { background: url('<%= asset_path "tree_images/room-open.png" %>') 5px 50% no-repeat; }
-
-.tree li a.tree-parent-collapsed { background:url('<%= asset_path "tree_images/room.png" %>') 5px 50% no-repeat; }
 
 .tree li a:hover,.tree li a.tree-parent:hover,.tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active {
   color: #fff;
   background-color: #008FD5;
   border: 1px dashed #008FD5;
   cursor: pointer;
+}
+
+.tree li span:focus,.tree li span.tree-parent:focus,.tree li span.tree-item-active {
+  background-color: #006596;
+  border: 1px dashed #006596;
 }
 
 .tree li a:focus,.tree li a.tree-parent:focus,.tree li a.tree-item-active {
