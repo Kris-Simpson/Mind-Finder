@@ -15,7 +15,7 @@ MindFinder::Application.routes.draw do
   get "rooms" => "rooms#index", :as => "rooms"
   get "tests" => "tests#index", :as => "tests"
 	
-  match 'change_locale' => 'home#change_locale', :as =>'change_locale'
+  match 'change_locale' => 'application#change_locale', :as =>'change_locale'
 
   namespace :admin do
     
