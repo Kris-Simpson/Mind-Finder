@@ -180,8 +180,8 @@ $(function() {
   });
 });
 
-$(function(){
-  $('#rooms').tree();
+$(function() {
+  $('#submenu').tree();
 });
 
 $(function(){
