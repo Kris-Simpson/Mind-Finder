@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = current_user.rooms
+    @rooms = current_user.rooms.order(:created_at)
   end
 
   def show

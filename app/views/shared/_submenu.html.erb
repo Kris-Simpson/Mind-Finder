@@ -1,4 +1,4 @@
-<% Room.roots.each do |root| %>
+<% current_user.rooms.roots.each do |root| %>
   <li>
     <span><%= root.name %></span>
     <%= render partial: 'shared/submenu_pages', locals: { pages: root.children, main: root } if Test.where(room_id: root.id).any? %>

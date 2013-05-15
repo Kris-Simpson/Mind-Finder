@@ -58,7 +58,7 @@
     </div>
 
   	<div id="left">
-      <span class='empty-menu'><%= raw('There are no <em>rooms</em> or <em>tests</em>') unless Room.roots.present? %></span>
+      <span class='empty-menu'><%= raw('There are no <em>rooms</em> or <em>tests</em>') unless current_user.rooms.roots.present? %></span>
 
       <ul id='submenu'>
         <%= render 'shared/submenu' %>

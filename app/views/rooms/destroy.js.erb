@@ -9,6 +9,6 @@ setTimeout(function() {
 
 $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
 
-<% unless Room.all.present? %>
+<% unless current_user.rooms.all.present? %>
   $('#left .empty-menu').append('There are no <em>rooms</em> or <em>tests</em>');
 <% end %>
