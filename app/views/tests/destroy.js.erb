@@ -1,6 +1,10 @@
-$("#test_<%= @test.id %>").remove();
+$("#test_<%= @test.id %>").slideUp(200);
+setTimeout(function() {
+  $("#test_<%= @test.id %>").remove();
+  var tests = $('.block');
+  if(tests.length == 0) {
+    $('div#created_tests .empty-blocks').append('There are no tests').hide().slideDown();
+  }
+}, 200);
 
-var tests = $('.block');
-if(tests.length == 0) {
-  $('div#created_tests .empty-blocks').append('There are no tests');
-}
+$('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();

@@ -58,17 +58,10 @@
     </div>
 
   	<div id="left">
-      <% unless Room.roots.present? %>
-        There are no rooms or tests
-      <% end %>
+      <span class='empty-menu'><%= raw('There are no <em>rooms</em> or <em>tests</em>') unless Room.roots.present? %></span>
 
       <ul id='submenu'>
-        <% Room.roots.each do |root| %>
-          <li>
-            <span><%= root.name %></span>
-            <%= render partial: 'shared/submenu_pages', locals: { pages: root.children, main: root } if root.children.present? %>
-          </li>
-        <% end %>
+        <%= render 'shared/submenu' %>
       </ul>
     </div>
   	

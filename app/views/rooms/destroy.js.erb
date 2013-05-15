@@ -1,6 +1,14 @@
-$("#room_<%= @room.id %>").remove();
+$("#room_<%= @room.id %>").slideUp(200);
+setTimeout(function() {
+  $("#room_<%= @room.id %>").remove();
+  var rooms = $('.block');
+  if(rooms.length == 0) {
+    $('div#created_rooms .empty-blocks').append('There are no rooms').hide().slideDown();
+  }
+}, 200);
 
-var rooms = $('.block');
-if(rooms.length == 0) {
-  $('div#created_rooms .empty-blocks').append('There are no rooms');
-}
+$('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
+
+<% unless Room.all.present? %>
+  $('#left .empty-menu').append('There are no <em>rooms</em> or <em>tests</em>');
+<% end %>

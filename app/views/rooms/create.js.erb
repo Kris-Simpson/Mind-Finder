@@ -1,12 +1,22 @@
 <% if @room.valid? %>
-  $("#new_room").remove();
-  $("#new_room_link").show();
+  $("#new_room").slideUp(200);
+  $("#new_room_link").delay(600).fadeIn();
   $("#created_rooms").append("<%= j render @room %>");
+  $('.block:last').hide().delay(400).slideDown(200);
 
-  var rooms = $('.block');
-  if(rooms.length > 0) {
-    $('div#created_rooms .empty-blocks').empty();
-  }
+  setTimeout(function() {
+    $('#new_room').remove();
+    var rooms = $('.block');
+    if(rooms.length > 0) {
+      $('div#created_rooms .empty-blocks').slideUp(200).empty();
+    }
+  }, 200);
+
+  $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
+
+  <% if Room.all.present? %>
+    $('#left .empty-menu').empty();
+  <% end %>
 <% else %>
   $('#new_room').replaceWith("<%= j render('form') %>")
 <% end %>
