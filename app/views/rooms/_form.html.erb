@@ -1,7 +1,7 @@
 <%= form_for(@room, remote: true) do |f| %>
   <script>
     $(function() {
-      $("#edit_room_<%= @room.id %> a#cancel_link").click(function() {
+      $("#edit_room_<%= @room.id %> .actions #cancel_button").click(function() {
         $("#edit_room_<%= @room.id %>").slideUp(200);
         $("#room_<%= @room.id %>").delay(200).slideDown();
         setTimeout(function() {
@@ -25,7 +25,7 @@
 
   <div class="actions">
     <%= f.submit class: 'button b-blue b-medium' %>
-    <a id="cancel_link" class="link b-link-blue">Cancel</a>
+    <%= button_tag 'Cancel', type: 'button', id: 'cancel_button' %>
   </div>
 
   <div class='messages'></div>

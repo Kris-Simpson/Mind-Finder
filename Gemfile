@@ -14,6 +14,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem "letter_opener", group: :development
+gem 'quiet_assets', group: :development
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

@@ -1,3 +1,22 @@
-.room_block {
-//  border: 1px solid #000;
+$dark_brown: #37464F;
+
+#new_room {
+//  border: 1px solid $dark_brown;
+
+  label {
+    color: $dark_brown;
+  }
+
+  input {
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+
+  .actions {
+    margin-top: 10px;
+
+    #cancel_link {
+      
+    }
+  }
 }
