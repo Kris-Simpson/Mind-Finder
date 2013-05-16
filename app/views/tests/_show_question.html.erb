@@ -1,0 +1,33 @@
+<!--
+# if min_shewn_questions == nil && max_shewn_questions == nil : all_questions
+# if min_shewn_questions == some_integer && max_shewn_questions == some_integer : rand(min..max)
+# if min_shewn_questions == some_integer && max_shewn_questions == nil : rand(min..all_questions)
+# if min_shewn_questions == nil && max_shewn_questions == some_integer : rand(1..max)
+#
+# if min_shewn_answers == nil && max_shewn_answers == nil : all_answers
+# if min_shewn_answers == some_integer && max_shewn_answers == some_integer : rand(min..max)
+# if min_shewn_answers == some_integer && max_shewn_answers == nil : rand(min..all_answers)
+# if min_shewn_answers == nil && max_shewn_answers == some_integer : rand(1..max)
+-->
+
+<div id='question' style='border: 3px solid purple;'>
+  <%= question.question %>
+</div>
+        
+<div id='answers' style='border: 3px solid yellow;'>
+  <ul>
+    <% get_answers(question).each do |answer| %>
+      <li class='answer'>
+        <% if question.question_type_id == 1 %>
+          <%= check_box 'answer', 'checkbox' %> <%= answer.answer %>
+        <% else %>
+          <%= radio_button 'answer', 'radio', answer.id %> <%= answer.answer %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div id='submit_answer' style='border: 3px solid black;'>
+  <%= button_tag 'Submit question', type: 'button' %>
+</div>

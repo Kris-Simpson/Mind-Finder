@@ -9,7 +9,7 @@
         }, 200);
       });
 
-      $("#new_room a#cancel_link").click(function() {
+      $("#new_room .actions #cancel_button").click(function() {
         $("#new_room").slideUp(200);
         $("#new_room_link").delay(200).fadeIn();
         setTimeout(function() {
@@ -20,13 +20,14 @@
   </script>
 
   <%= f.label :name %><br/><%= f.text_field :name, class: 'i-blue i-medium' %> <%= @room.errors[:name].first %><br />
-  <%= f.label :description %><br/><%= f.text_field :description, class: 'i-blue i-medium' %> <%= @room.errors[:description].first %><br />
-  <%= f.label :parent_id %><br/><%= f.collection_select :parent_id, current_user.rooms.order(:name), :id, :name, include_blank: true %> <%= @room.errors[:parent_id].first %>
+  <%= f.label :description %><br/><%= f.text_area :description, rows: 6, class: 'i-blue i-medium' %> <%= @room.errors[:description].first %><br />
+
+  <% if current_user.rooms.any? %>
+    <%= f.label :parent_id %><br/><%= f.collection_select :parent_id, current_user.rooms.order(:name), :id, :name, include_blank: true %> <%= @room.errors[:parent_id].first %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit class: 'button b-blue b-medium' %>
-    <%= button_tag 'Cancel', type: 'button', id: 'cancel_button' %>
+    <%= button_tag 'Cancel', type: 'button', id: 'cancel_button', class: 'button b-warning' %>
   </div>
-
-  <div class='messages'></div>
 <% end %>

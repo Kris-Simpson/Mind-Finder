@@ -53,6 +53,15 @@
   }
 }
 
+.b-warning {
+  background-color: #D5000A;
+  color: white;
+
+  &:hover {
+    background-color: #96000A;
+  }
+}
+
 .b-link-blue {
   color: #008FD5;
 }
