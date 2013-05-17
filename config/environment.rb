@@ -9,8 +9,8 @@ MindFinder::Application.configure do
     domain: "gmail.com",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: "the.same.kris@gmail.com",
-    password: "scotch1993"
+    user_name: "kris.login.app@gmail.com",
+    password: "login.app.pass"
   }
 end
 

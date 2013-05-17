@@ -48,6 +48,39 @@ $(function() {
       $(this).animate({ "opacity" : "1" }, 200);
     }
   );
+  
+  $(document).on('click', '#minus, #plus', function() {
+    var inputField = $('#' + $(this).attr('class'));
+    var min = parseInt(inputField.attr('min'));
+    var max = parseInt(inputField.attr('max'));
+    var value = parseInt(inputField.val(), 10);
+    
+    if(isNaN(value)) { value = 0; }
+    
+    if($(this).is('#minus')) { value -= value > min ? 1 : 0; }
+    else { value += value < max ? 1 : 0; }
+        
+    inputField.val(value);
+  });
+  
+  $(document).on('blur', '.type-number', function() {
+    var value = parseInt($(this).val());
+    
+    if(isNaN(value)) { $(this).val(0); }
+    else {
+      min = parseInt($(this).attr('min'));
+      max = parseInt($(this).attr('max'));
+      
+      if(!isNaN(min) && !isNaN(max)) {
+        if(value >= min && value <= max) { $(this).val(value); } else { $(this).val(min); }
+      } else if(isNaN(min) && isNaN(max)) { $(this).val(value); }
+      else if(!isNaN(min) && isNaN(max)) {
+        if(value >= min) { $(this).val(value); } else { $(this).val(min); }
+      } else if(isNaN(min) && !isNaN(max)) {
+        if(value <= max) { $(this).val(value); } else { $(this).val(max); }
+      }
+    }
+  });
 
   $(document).on('change', ".question_type_select", function() {
     var index = $(this).parents(".question_fields").attr('class');

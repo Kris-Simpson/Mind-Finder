@@ -130,15 +130,7 @@ private
     end
 
     unless answers.select { |a| a.is_right_answer }.count == right_answers.count
-      b = []
-      b << right_answers.count
-      b << answers.select { |a| a.is_right_answer }.count
-
       right_answers.delete_if { |r_answer| answers.include?(r_answer) }
-
-      b << right_answers.count
-      b << answers.select { |a| a.is_right_answer }.count
-#      raise b.to_s
 
       right_answers.each do |r_answer|
         loop do
