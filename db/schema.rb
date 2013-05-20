@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130510132231) do
+ActiveRecord::Schema.define(:version => 20130520114214) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20130510132231) do
     t.integer  "max_shewn_questions"
     t.integer  "min_shewn_questions"
     t.integer  "time_for_passing"
-    t.boolean  "allowed"
   end
 
   create_table "users", :force => true do |t|

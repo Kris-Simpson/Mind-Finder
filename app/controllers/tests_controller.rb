@@ -7,7 +7,7 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @test }
     end
   end
@@ -15,19 +15,12 @@ class TestsController < ApplicationController
   def new
     @test = Test.new
   end
-
-  # GET /tests/1/edit
+  
   def edit
     @test = current_user.tests.find(params[:id])
   end
-
-  # POST /tests
-  # POST /tests.json
   def create
-    @test = current_user.rooms.find(params[:test][:room_id]).tests.build(params[:test])
-
-    @test.allowed = @test.questions.any? ? true : false
-    @test.save
+    @test = current_user.rooms.find(params[:test][:room_id]).tests.create(params[:test])
 
     respond_to do |format|
       if @test.valid?
@@ -40,15 +33,11 @@ class TestsController < ApplicationController
     end
   end
 
-  # PUT /tests/1
-  # PUT /tests/1.json
   def update
     @test = current_user.tests.find(params[:id])
-    @test.update_attributes(params[:test])
-    @test.update_attribute(:allowed, @test.questions.any? ? true : false)
 
     respond_to do |format|
-      if @test.valid?
+      if @test.update_attributes(params[:test])
         format.html { redirect_to tests_path, notice: 'Test was successfully updated.' }
         format.json { head :no_content }
       else
@@ -58,8 +47,6 @@ class TestsController < ApplicationController
     end
   end
 
-  # DELETE /tests/1
-  # DELETE /tests/1.json
   def destroy
     @test = current_user.tests.find(params[:id])
     @test.destroy
@@ -79,11 +66,11 @@ private
     questions = []
     num = nil
 
-    if max_q.nil? && min_q.nil?      
+    if max_q.zero? && min_q.zero?      
       num = test.questions.count - blank_questions.count
     else
-      max = max_q.nil? ? test.questions.count - blank_questions.count : max_q - blank_questions.count
-      min = min_q.nil? ? 1 : min_q
+      max = max_q.zero? ? test.questions.count - blank_questions.count : max_q - blank_questions.count
+      min = min_q.zero? ? 1 : min_q
       num = Random.rand(min..max)
     end
 

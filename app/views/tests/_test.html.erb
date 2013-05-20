@@ -6,15 +6,15 @@
     <%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure you want to delete this test?' }, class: "destroy_link", remote: true %>
   </div>
   <div id='information'>
-      Path: <span class='path'>
-              <% room = Room.find(test.room_id) %>
+    Path: <span class='path'>
+            <% room = Room.find(test.room_id) %>
 
-              <%= room.name %> /
-              <% room.ancestors.each do |page| %>
-                <%= page.name %> /
-              <% end %>
+            <%= room.name %> /
+            <% room.ancestors.each do |page| %>
+              <%= page.name %> /
+            <% end %>
           </span>
-    Allowed: <span class='<%= test.allowed ? raw("good") : raw("bad") %>'><%= test.allowed %></span>
+    Allowed: <span class='<%= test.is_allowed? ? raw("good") : raw("bad") %>'><%= test.is_allowed? %></span>
     Questions: <span class='<%= test.questions.length == 0 ? raw("bad") : raw("good") %>'><%= test.questions.length %></span>
   </div>
 </div>

@@ -49,38 +49,50 @@ $(function() {
     }
   );
   
-  $(document).on('click', '#minus, #plus', function() {
-    var inputField = $('#' + $(this).attr('class'));
-    var min = parseInt(inputField.attr('min'));
-    var max = parseInt(inputField.attr('max'));
-    var value = parseInt(inputField.val(), 10);
-    
-    if(isNaN(value)) { value = 0; }
-    
-    if($(this).is('#minus')) { value -= value > min ? 1 : 0; }
-    else { value += value < max ? 1 : 0; }
-        
-    inputField.val(value);
-  });
-  
-  $(document).on('blur', '.type-number', function() {
-    var value = parseInt($(this).val());
-    
-    if(isNaN(value)) { $(this).val(0); }
-    else {
-      min = parseInt($(this).attr('min'));
-      max = parseInt($(this).attr('max'));
-      
-      if(!isNaN(min) && !isNaN(max)) {
-        if(value >= min && value <= max) { $(this).val(value); } else { $(this).val(min); }
-      } else if(isNaN(min) && isNaN(max)) { $(this).val(value); }
-      else if(!isNaN(min) && isNaN(max)) {
-        if(value >= min) { $(this).val(value); } else { $(this).val(min); }
-      } else if(isNaN(min) && !isNaN(max)) {
-        if(value <= max) { $(this).val(value); } else { $(this).val(max); }
-      }
+  $(document).on('input', 'input[type=range]', function() {
+    $(this).parent().find('span').text($(this).val());
+    if($(this).is('.max')) {
+      $(this).parent().parent().find('.min').attr('max', $(this).val()).val(0).parent().find('span').text('0');
     }
   });
+  
+  // $(document).on('click', '#minus, #plus', function() {
+  //   var inputField = $('#' + $(this).attr('class'));
+  //   var min = parseInt(inputField.attr('min'));
+  //   var max = parseInt(inputField.attr('max'));
+  //   var value = parseInt(inputField.val(), 10);
+    
+  //   if(isNaN(value)) { value = 0; }
+    
+  //   if($(this).is('#minus')) {
+  //     if(!isNaN(min)) { value -= value > min ? 1 : 0; }
+  //     else { value--; }
+  //   } else {
+  //     if(!isNaN(max)) { value += value < max ? 1 : 0; }
+  //     else { value++; }
+  //   }
+        
+  //   inputField.val(value);
+  // });
+  
+  // $(document).on('blur', '.type-number', function() {
+  //   var value = parseInt($(this).val());
+    
+  //   if(isNaN(value)) { $(this).val(0); }
+  //   else {
+  //     min = parseInt($(this).attr('min'));
+  //     max = parseInt($(this).attr('max'));
+      
+  //     if(!isNaN(min) && !isNaN(max)) {
+  //       if(value >= min && value <= max) { $(this).val(value); } else { $(this).val(min); }
+  //     } else if(isNaN(min) && isNaN(max)) { $(this).val(value); }
+  //     else if(!isNaN(min) && isNaN(max)) {
+  //       if(value >= min) { $(this).val(value); } else { $(this).val(min); }
+  //     } else if(isNaN(min) && !isNaN(max)) {
+  //       if(value <= max) { $(this).val(value); } else { $(this).val(max); }
+  //     }
+  //   }
+  // });
 
   $(document).on('change', ".question_type_select", function() {
     var index = $(this).parents(".question_fields").attr('class');
@@ -134,6 +146,11 @@ $(function() {
       parent.find(".answer_radio:visible").first().prop('checked', true);
       return;
     }
+    
+    var ranges = parent.find('input[type=range]');
+    
+    ranges.filter('.max').attr('max', answers.length).val(0).parent().find('span').text('0');
+    ranges.filter('.min').val(0).parent().find('span').text('0');
   });
 
   $(document).on('nested:fieldAdded:answers', function(event){
@@ -142,7 +159,7 @@ $(function() {
     index = index.substring(index.length - 1);
     var parent = $(field).parents(".question_" + index);
     var value = parent.find(".question_type_select option:selected").val();
-    var answers = parent.find(".answer_fields");
+    var answers = parent.find(".answer_fields:visible");
     var checkboxes = answers.find('.answer_checkbox');
     var checkboxes_checked = answers.find('.answer_checkbox:checked');
     var radios = answers.find('.answer_radio');
@@ -163,12 +180,15 @@ $(function() {
       if(radio_checked.length == 0)
         radios.first().prop('checked', true);
     }
+    
+    parent.find('input[type=range]').filter('.max').attr('max', answers.length);
   });
 
   $(document).on('nested:fieldAdded:questions', function(event){
     var field = event.field;
     var count = 0;
     var questions = $(".question_fields");
+    var answers = $(field).find('.answer_fields');
     var add_link = field.find('.add_nested_fields');
 
     questions.each(function(){
@@ -189,6 +209,15 @@ $(function() {
     answers.first().find('.answer_checkbox').prop('disabled', true);
 
     field.find('.answer_fields').find('.remove_nested_fields').hide();
+
+    $('#test_max_shewn_questions').attr('max', questions.length);
+    $('#test_min_shewn_questions').attr('max', $('#test_max_shewn_questions').val());
+    field.find('input[type=range]').filter('.max').attr('max', answers.length);
+  });
+  
+  $(document).on('nested:fieldRemoved:questions', function(event) {
+    var questions = $(".question_fields:visible");
+    $('#test_max_shewn_questions').attr('max', questions.length).parent().find('span').text('0');
   });
 
   $(document).on('click', ".answer_checkbox", function() {

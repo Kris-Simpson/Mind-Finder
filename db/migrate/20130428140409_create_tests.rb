@@ -7,7 +7,6 @@ class CreateTests < ActiveRecord::Migration
       t.integer :min_shewn_questions, :integer
       t.integer :max_shewn_questions, :integer
       t.integer :time_for_passing
-      t.boolean :allowed
 
       t.timestamps
     end

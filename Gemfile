@@ -7,7 +7,6 @@ gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem "nested_form"
 gem 'ancestry'
-gem 'gon'
 gem "thin"
 
 group :assets do

@@ -12,6 +12,8 @@
 
   <p><%= f.link_to_add "Add Answer", :answers, class: "add_answer_link" %></p>
 
-  <div class='field'><%= f.label :min_shewn_answers %>: <%= f.text_field :min_shewn_answers %></div>
-  <div class='field'><%= f.label :max_shewn_answers %>: <%= f.text_field :max_shewn_answers %></div>
+  <div class='field'>
+    <div><%= f.label :min_shewn_answers %>: <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
+    <div><%= f.label :max_shewn_answers %>: <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
+  </div>
 </div>

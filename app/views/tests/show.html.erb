@@ -7,7 +7,7 @@
   <li><%= link_to room.name, room %> <span>/</span></li> <li class='active'><%= @test.name %></li>
 <% end %>
 
-<% if @test.questions.any? %>
+<% if @test.is_allowed? %>
   <script>
   <% @test.questions.each do |question| %>
     $(document).on('click', '#button_<%= question.id %>', function() {
