@@ -1,5 +1,5 @@
 MindFinder::Application.routes.draw do
-  resources :question_types
+  resources :passed_questions
 
 
   resources :users

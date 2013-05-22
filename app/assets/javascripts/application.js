@@ -49,62 +49,22 @@ $(function() {
     }
   );
   
-  $(document).on('click', '#minus, #plus', function() {
-    var inputField = $('#' + $(this).attr('class'));
-    var min = parseInt(inputField.attr('min'));
-    var max = parseInt(inputField.attr('max'));
-    var value = parseInt(inputField.val(), 10);
-    
-    if(isNaN(value)) { value = 0; }
-    
-    if($(this).is('#minus')) { value -= value > min ? 1 : 0; }
-    else { value += value < max ? 1 : 0; }
-        
-    inputField.val(value);
+  $(document).on('input', 'input[type=range]', function() {
+    $(this).parent().find('span').text($(this).val());
+    if($(this).is('.max')) {
+      $(this).parent().parent().find('.min').attr('max', $(this).val()).val(0).parent().find('span').text('0');
+    }
   });
   
-  $(document).on('blur', '.type-number', function() {
-    var value = parseInt($(this).val());
+  var time = parseInt($('#question_buttons p').attr('data-time'));
+  $('#question_buttons p span').everyTime('1s', function(i) {
+    $(this).text(time);
+    time--;
     
-    if(isNaN(value)) { $(this).val(0); }
-    else {
-      min = parseInt($(this).attr('min'));
-      max = parseInt($(this).attr('max'));
-      
-      if(!isNaN(min) && !isNaN(max)) {
-        if(value >= min && value <= max) { $(this).val(value); } else { $(this).val(min); }
-      } else if(isNaN(min) && isNaN(max)) { $(this).val(value); }
-      else if(!isNaN(min) && isNaN(max)) {
-        if(value >= min) { $(this).val(value); } else { $(this).val(min); }
-      } else if(isNaN(min) && !isNaN(max)) {
-        if(value <= max) { $(this).val(value); } else { $(this).val(max); }
-      }
+    if(time < 0) {
+      alert('Yay!');
+      $(this).stopTime();
     }
-  });
-
-  $(document).on('change', ".question_type_select", function() {
-    var index = $(this).parents(".question_fields").attr('class');
-    index = index.substring(index.length - 1);
-    var parent = $(this).parents(".question_" + index);
-    var value = parent.find(".question_type_select option:selected").val();
-    var answers = parent.find(".answer_fields");
-    var add_link = parent.find('.add_answer_link');
-
-    answers.remove();
-
-    if(value == 1) {
-      add_link.click();
-      add_link.click();
-      add_link.click();
-
-      answers = parent.find(".answer_fields");
-      answers.first().find('.answer_checkbox').prop('checked', true);
-      answers.first().find('.answer_checkbox').prop('disabled', true);
-    } else {
-      add_link.click();
-      add_link.click();
-    }
-    parent.find('.answer_fields').find('.remove_nested_fields').hide();
   });
 
   $(document).on('nested:fieldRemoved:answers', function(event){
@@ -112,64 +72,28 @@ $(function() {
     var index = $(field).parents(".question_fields").attr('class');
     index = index.substring(index.length - 1);
     var parent = $(field).parents(".question_" + index);
-    var value = parent.find(".question_type_select option:selected").val();
     var answers = parent.find(".answer_fields:visible");
-    var checkboxes_checked = answers.find('.answer_checkbox:checked');
-    var checkboxes_not_checked = answers.find('.answer_checkbox:not(:checked)');
-
-    if(value == 1 && answers.length == 3) {
-      answers.find('.remove_nested_fields').hide();
-
-      if(checkboxes_checked.length == 1)
-        checkboxes_checked.prop('disabled', true);
-      else if(checkboxes_checked.length == 2)
-        checkboxes_not_checked.prop('disabled', true);
-      else if(checkboxes_checked.length == 3) {
-        checkboxes_checked.last().prop('checked', false).prop('disabled', true);
-      }
-    } else if(value == 2 && answers.length == 2)
-      answers.find('.remove_nested_fields').hide();
-
-    if(value == 2 && field.find('.answer_radio').is(':checked')) {
-      parent.find(".answer_radio:visible").first().prop('checked', true);
-      return;
-    }
+    
+    var ranges = parent.find('input[type=range]');
+    
+    ranges.filter('.max').attr('max', answers.length).val(0).parent().find('span').text('0');
+    ranges.filter('.min').val(0).parent().find('span').text('0');
   });
 
   $(document).on('nested:fieldAdded:answers', function(event){
     var field = event.field;
     var index = $(field).parents(".question_fields").attr('class');
     index = index.substring(index.length - 1);
-    var parent = $(field).parents(".question_" + index);
-    var value = parent.find(".question_type_select option:selected").val();
-    var answers = parent.find(".answer_fields");
-    var checkboxes = answers.find('.answer_checkbox');
-    var checkboxes_checked = answers.find('.answer_checkbox:checked');
-    var radios = answers.find('.answer_radio');
-    var radio_checked = answers.find('.answer_radio:checked');
-
-    answers.find('.remove_nested_fields').show();
-
-    if(value == 1) {
-      checkboxes.show();
-      radios.hide();
-      if(checkboxes_checked.length > 1)
-        checkboxes.prop('disabled', false);
-    } else {
-      checkboxes.hide();
-      radios.show();
-      radios.attr('name', index);
-
-      if(radio_checked.length == 0)
-        radios.first().prop('checked', true);
-    }
+    parent = $(field).parents(".question_" + index);
+    
+    parent.find('input[type=range]').filter('.max').attr('max', $(parent).find('.answer_fields:visible').length);
   });
 
   $(document).on('nested:fieldAdded:questions', function(event){
     var field = event.field;
     var count = 0;
-    var questions = $(".question_fields");
-    var add_link = field.find('.add_nested_fields');
+    var questions = $(".question_fields:visible");
+    var answers = $(field).find('.answer_fields');
 
     questions.each(function(){
       for(var i = 0; i < 200; i ++) {
@@ -180,36 +104,12 @@ $(function() {
       count ++;
     });
 
-    add_link.click();
-    add_link.click();
-    add_link.click();
-
-    var answers = field.find(".answer_fields");
-    answers.first().find('.answer_checkbox').prop('checked', true);
-    answers.first().find('.answer_checkbox').prop('disabled', true);
-
-    field.find('.answer_fields').find('.remove_nested_fields').hide();
+    $('#test_max_shewn_questions').attr('max', questions.length);
   });
-
-  $(document).on('click', ".answer_checkbox", function() {
-    var index = $(this).parents(".question_fields").attr('class');
-    index = index.substring(index.length - 1);
-    var parent = $(this).parents(".question_" + index);
-    var checkboxes = parent.find(".answer_checkbox:visible");
-    var checkboxes_checked = parent.find(".answer_checkbox:checked:visible");
-
-    if(checkboxes_checked.length > 1)
-      checkboxes_checked.prop('disabled', false);
-    else if(checkboxes_checked.length == 1)
-      checkboxes_checked.prop('disabled', true);
-
-    if(checkboxes_checked.length == checkboxes.length - 1) {
-      var lastCheckbox = parent.find(".answer_checkbox:not(:checked):visible");
-      lastCheckbox.prop('disabled', true);
-    } else {
-      var lastCheckbox = parent.find(".answer_checkbox:not(:checked):visible");
-      lastCheckbox.attr('disabled', false);
-    }
+  
+  $(document).on('nested:fieldRemoved:questions', function(event) {
+    var questions = $(".question_fields:visible");
+    $('#test_max_shewn_questions').attr('max', questions.length).parent().find('span').text('0');
   });
 });
 

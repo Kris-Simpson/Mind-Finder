@@ -1,8 +1,7 @@
 <p class="answer_fields" style='border: 2px solid red;'>
   <%= f.label :answer %>
   <%= f.text_field :answer %>
-  <%= f.radio_button :is_right_answer, :is_right_answer, class: 'answer_radio' %>
   <%= f.check_box :is_right_answer, class: 'answer_checkbox' %>
-  <%= f.label :is_right_answer, "Right answer" %>
+  <%= f.label :is_right_answer %>
   <%= f.link_to_remove "remove" %>
 </p>
