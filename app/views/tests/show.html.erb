@@ -35,7 +35,7 @@
   </div>
 
   <div id='question_buttons' style='border: 3px solid green; float: left; width: 150px;'>
-    <p>Time elapsed: <%= @test.time_for_passing %></p>
+    <p id='<%= @test.time_for_passing unless @test.time_for_passing.blank? %>'>Time elapsed: <span></span></p>
 
     <% increment = 0 %>
     <% questions = get_questions(@test) %>
@@ -46,9 +46,11 @@
     <%= link_to 'Cancel', :tests %>
   </div>
 
+
   <div id='question_fields' style='border: 3px solid blue; overflow: hidden;'>
     <%= render 'show_question', question: questions.first %>
   </div>
+
 <% else %>
   <% content_for :headline_title do %>
     The test can not be passed

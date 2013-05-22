@@ -5,6 +5,7 @@ class TestsController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
+    @passed_question = PassedQuestion.new
 
     respond_to do |format|
       format.html
@@ -19,6 +20,7 @@ class TestsController < ApplicationController
   def edit
     @test = current_user.tests.find(params[:id])
   end
+  
   def create
     @test = current_user.rooms.find(params[:test][:room_id]).tests.create(params[:test])
 
@@ -98,11 +100,11 @@ private
     answers = []
     num = nil
 
-    if max_a.nil? && min_a.nil?
+    if max_a.zero? && min_a.zero?
       num = question.answers.count
     else
-      max = max_a.nil? ? question.answers.count : max_a
-      min = min_a.nil? ? 1 : min_a
+      max = max_a.zero? ? question.answers.count : max_a
+      min = min_a.zero? ? 1 : min_a
       num = Random.rand(min..max)
     end
 

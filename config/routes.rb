@@ -1,4 +1,7 @@
 MindFinder::Application.routes.draw do
+  resources :passed_questions
+
+
   resources :users
   resources :sessions
   resources :rooms

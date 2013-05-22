@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520114214) do
+ActiveRecord::Schema.define(:version => 20130520133901) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(:version => 20130520114214) do
     t.boolean  "is_right_answer"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+  end
+
+  create_table "passed_questions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.boolean  "passed"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "passed_tests", :force => true do |t|
