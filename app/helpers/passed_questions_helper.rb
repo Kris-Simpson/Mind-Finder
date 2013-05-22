@@ -1,0 +1,2 @@
+module PassedQuestionsHelper
+end

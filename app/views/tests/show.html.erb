@@ -7,7 +7,7 @@
   <li><%= link_to room.name, room %> <span>/</span></li> <li class='active'><%= @test.name %></li>
 <% end %>
 
-<% if @test.questions.any? %>
+<% if @test.is_allowed? %>
   <script>
   <% @test.questions.each do |question| %>
     $(document).on('click', '#button_<%= question.id %>', function() {
@@ -35,7 +35,7 @@
   </div>
 
   <div id='question_buttons' style='border: 3px solid green; float: left; width: 150px;'>
-    <p>Time elapsed: <%= @test.time_for_passing %></p>
+    <%= tag('p', data: { time: @test.time_for_passing }) %>Time elapsed: <span></span></p>
 
     <% increment = 0 %>
     <% questions = get_questions(@test) %>
@@ -46,9 +46,11 @@
     <%= link_to 'Cancel', :tests %>
   </div>
 
+
   <div id='question_fields' style='border: 3px solid blue; overflow: hidden;'>
     <%= render 'show_question', question: questions.first %>
   </div>
+
 <% else %>
   <% content_for :headline_title do %>
     The test can not be passed

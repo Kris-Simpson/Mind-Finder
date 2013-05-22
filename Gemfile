@@ -5,9 +5,9 @@ gem 'mysql2'
 gem 'pg'
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem "nested_form"
+gem 'nested_form'
 gem 'ancestry'
-gem 'gon'
+gem 'thin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -15,7 +15,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem "letter_opener", group: :development
+gem 'letter_opener', group: :development
 gem 'quiet_assets', group: :development
 
 # To use Jbuilder templates for JSON

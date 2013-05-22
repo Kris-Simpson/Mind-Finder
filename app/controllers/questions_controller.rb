@@ -1,6 +1,4 @@
 class QuestionsController < ApplicationController
-  QUESTION_TYPES = [ ['Multiple choise', 1], ['Single choise', 2] ]
-
   def index
     @questions = Question.all
 

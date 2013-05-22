@@ -1,0 +1,23 @@
+<%= form_for(@passed_question) do |f| %>
+  <div id='question' style='border: 3px solid purple;'>
+    <%= question.question %>
+  </div>
+          
+  <div id='answers' style='border: 3px solid yellow;'>
+    <ul>
+      <% get_answers(question).each do |answer| %>
+        <li class='answer'>
+          <% if question.question_type_id == 1 %>
+            <%= f.check_box :question_id %> <%= f.label answer.answer %>
+          <% else %>
+            <%= f.radio_button 'answer', 'radio', answer.id %> <%= f.label answer.answer %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

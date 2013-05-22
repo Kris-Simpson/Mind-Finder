@@ -1,6 +1,5 @@
 <div class="question_fields" style='border: 2px solid #000;'>
   <p>
-    <%= f.label :question_type %>: <%= f.select(:question_type_id, options_for_select(QuestionsController::QUESTION_TYPES), { }, { class: "question_type_select" }) %><br />
     <%= f.label :question %>
     <%= f.link_to_remove "remove" %><br />
     <%= f.text_area :question, rows: 3%>
@@ -12,6 +11,8 @@
 
   <p><%= f.link_to_add "Add Answer", :answers, class: "add_answer_link" %></p>
 
-  <div class='field'><%= f.label :min_shewn_answers %>: <%= f.text_field :min_shewn_answers %></div>
-  <div class='field'><%= f.label :max_shewn_answers %>: <%= f.text_field :max_shewn_answers %></div>
+  <div class='field'>
+    <div><%= f.label :min_shewn_answers %>: <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
+    <div><%= f.label :max_shewn_answers %>: <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
+  </div>
 </div>
