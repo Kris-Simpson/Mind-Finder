@@ -27,13 +27,10 @@
   <p><%= f.link_to_add "Add Question", :questions %></p>
 
   <div class='field'>
-    <%= f.label :min_shewn_questions %>: 
-    <%= button_tag '-', type: 'button', id: 'minus', class: 'test_min_shewn_questions' %>
-    <%= f.text_field :min_shewn_questions, value: 0, class: 'type-number', min: 0, max: 10 %>
-    <%= button_tag '+', type: 'button', id: 'plus', class: 'test_min_shewn_questions' %>
+    <div><%= f.label :min_shewn_questions %>: <%= f.range_field :min_shewn_questions, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
+    <div><%= f.label :max_shewn_questions %>: <%= f.range_field :max_shewn_questions, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
   </div>
-  <div class='field'><%= f.label :max_shewn_questions %>: <%= f.text_field :max_shewn_questions %></div>
-  <div class='field'><%= f.label :time_for_passing %>: <%= f.text_field :time_for_passing %></div>
+  <div class='field'><%= f.label :time_for_passing %>: <%= f.text_field :time_for_passing %> min</div>
 
   <div class="actions">
     <%= f.submit id: 'test-submit' %>

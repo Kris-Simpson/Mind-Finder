@@ -17,13 +17,7 @@
 <div id='answers' style='border: 3px solid yellow;'>
   <ul>
     <% get_answers(question).each do |answer| %>
-      <li class='answer'>
-        <% if question.question_type_id == 1 %>
-          <%= check_box 'answer', 'checkbox' %> <%= answer.answer %>
-        <% else %>
-          <%= radio_button 'answer', 'radio', answer.id %> <%= answer.answer %>
-        <% end %>
-      </li>
+      <li class='answer'><%= check_box 'answer', 'checkbox' %> <%= answer.answer %></li>
     <% end %>
   </ul>
 </div>
