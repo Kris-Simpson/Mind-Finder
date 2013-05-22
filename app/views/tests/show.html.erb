@@ -35,7 +35,7 @@
   </div>
 
   <div id='question_buttons' style='border: 3px solid green; float: left; width: 150px;'>
-    <p id='<%= @test.time_for_passing unless @test.time_for_passing.blank? %>'>Time elapsed: <span></span></p>
+    <%= tag('p', data: { time: @test.time_for_passing }) %>Time elapsed: <span></span></p>
 
     <% increment = 0 %>
     <% questions = get_questions(@test) %>

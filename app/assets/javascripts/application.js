@@ -56,7 +56,7 @@ $(function() {
     }
   });
   
-  var time = parseInt($('#question_buttons p span').parent().attr('id'));
+  var time = parseInt($('#question_buttons p').attr('data-time'));
   $('#question_buttons p span').everyTime('1s', function(i) {
     $(this).text(time);
     time--;

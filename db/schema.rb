@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520133901) do
+ActiveRecord::Schema.define(:version => 20130522080239) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20130520133901) do
     t.integer  "test_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.integer  "question_type_id"
     t.integer  "min_shewn_answers"
     t.integer  "max_shewn_answers"
   end

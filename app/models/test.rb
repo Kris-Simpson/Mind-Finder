@@ -17,6 +17,6 @@ class Test < ActiveRecord::Base
   validates :max_shewn_questions, numericality: { only_integer: true }, allow_nil: true
   
   def is_allowed?
-    return questions.map { |question| question.answers.any? }.any?
+    return questions.any? { |question| question.answers.any? }
   end
 end

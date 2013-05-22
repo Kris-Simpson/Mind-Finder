@@ -7,14 +7,12 @@
   </div>
   <div id='information'>
     Path: <span class='path'>
-            <% room = Room.find(test.room_id) %>
-
-            <%= room.name %> /
-            <% room.ancestors.each do |page| %>
+            <% test.room.ancestors.each do |page| %>
               <%= page.name %> /
             <% end %>
+            <%= test.room.name %> /
           </span>
-    Allowed: <span class='<%= test.is_allowed? ? raw("good") : raw("bad") %>'><%= test.is_allowed? %></span>
-    Questions: <span class='<%= test.questions.length == 0 ? raw("bad") : raw("good") %>'><%= test.questions.length %></span>
+    Allowed: <span class='<%= test.is_allowed? ? "good" : "bad" %>'><%= test.is_allowed? %></span>
+    Questions: <span class='<%= test.questions.length == 0 ? "bad" : "good" %>'><%= test.questions.length %></span>
   </div>
 </div>

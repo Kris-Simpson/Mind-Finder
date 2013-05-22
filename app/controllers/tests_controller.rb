@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   def index
-    @tests = current_user.tests
+    @tests = current_user.tests.includes(:room)
   end
 
   def show
@@ -93,7 +93,6 @@ private
   end
 
   def get_answers(question)
-    type = question.question_type_id
     max_a = question.max_shewn_answers
     min_a = question.min_shewn_answers
     right_answers = question.answers.select { |answer| answer.is_right_answer }
