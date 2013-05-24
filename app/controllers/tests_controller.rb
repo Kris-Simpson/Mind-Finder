@@ -5,7 +5,7 @@ class TestsController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
-    @passed_question = PassedQuestion.new
+    @passed_test = PassedTest.new
 
     respond_to do |format|
       format.html
@@ -57,6 +57,40 @@ class TestsController < ApplicationController
       format.html { redirect_to tests_url }
       format.js
     end
+  end
+  
+  def test_passed
+    @test = Test.find(params[:test_id])
+    @all_questions = Question.find(params[:questions][:id])
+    answers = Answer.find(params[:answers][:id]) if params[:answers]
+    be_answered = []
+    @wrong_answers = []
+    
+    unless answers.nil?
+      @all_questions.each do |question|
+        answers.each do |answer|
+          be_answered << question if question.answers.include?(answer) && !be_answered.include?(question)
+        end
+      end
+    end
+    
+    @all_questions.each do |question|
+      @wrong_answers << question unless be_answered.include?(question)
+    end
+
+    be_answered.each do |question|
+      question_wrong_answers = []
+      
+      question.answers.each do |answer|
+        question_wrong_answers << answer unless answer.is_right_answer
+      end
+      
+      answers.each do |answer|
+        @wrong_answers << question if question_wrong_answers.include?(answer)
+      end
+    end
+    
+    passed_test = PassedTest.create(user_id: params[:user_id], test_id: @test.id)
   end
 
 private

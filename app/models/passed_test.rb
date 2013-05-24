@@ -1,7 +1,7 @@
 class PassedTest < ActiveRecord::Base
-  attr_accessible :rating, :test_id, :user_id
+  attr_accessible :user_id, :test_id, :rating
   
   belongs_to :user
   
-  has_many :passed_questions
+  has_many :user_answers
 end

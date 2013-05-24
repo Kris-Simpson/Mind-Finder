@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :locale
 
   has_many :rooms
-  has_many :passed_tests
   has_many :tests, through: :rooms
+  has_many :passed_tests
+  has_many :wrong_answers, through: :passed_tests
   
-  validates_associated :rooms, :tests, :passed_tests
+  validates_associated :rooms, :tests, :passed_tests, :wrong_answers
 
   validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :password, :length => {

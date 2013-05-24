@@ -1,0 +1,23 @@
+<% content_for :breadcrumbs do %>
+  <% room = Room.find(@test.room_id) %>
+
+  <% room.ancestors.each do |page| %>
+    <li><%= link_to page.name, page %> <span>/</span><li>
+  <% end %>
+  <li><%= link_to room.name, room %> <span>/</span></li> <li class='active'><%= @test.name %></li>
+<% end %>
+
+<% content_for :headline_title do %>
+  Test passed
+<% end %>
+
+<% @all_questions.each do |question| %>
+  <div style='<%= @wrong_answers.include?(question) ? "border: 2px solid red;" : "border: 2px solid green;" %>'>
+    <p><%= question.question %></p>
+    <ul>
+      <% question.answers.each do |answer| %>
+        <li><%= answer.answer %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

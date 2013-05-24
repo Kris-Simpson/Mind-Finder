@@ -56,15 +56,21 @@ $(function() {
     }
   });
   
-  var time = parseInt($('#question_buttons p').attr('data-time'));
-  $('#question_buttons p span').everyTime('1s', function(i) {
-    $(this).text(time);
-    time--;
+  $(document).on('click', '#start_test_button', function() {
+    $(this).hide();
+    $('.question_button').attr('disabled', false);
+    $('.question_button').first().click();
     
-    if(time < 0) {
-      alert('Yay!');
-      $(this).stopTime();
-    }
+    var time = parseInt($('#question_buttons p span').text());
+    $('#question_buttons p span').everyTime('1s', function(i) {
+      $(this).text(time);
+      time--;
+      
+      if(time < 0) {
+        alert('Yay!');
+        $(this).stopTime();
+      }
+    });
   });
 
   $(document).on('nested:fieldRemoved:answers', function(event){

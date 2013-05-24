@@ -1,0 +1,9 @@
+<%= form_for(@wrong_answer) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :question_id, value: question.id %>
+  <%= f.text_field : %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<h1>Listing passed_tests</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @passed_tests.each do |passed_test| %>
+  <tr>
+    <td><%= link_to 'Show', passed_test %></td>
+    <td><%= link_to 'Edit', edit_passed_test_path(passed_test) %></td>
+    <td><%= link_to 'Destroy', passed_test, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Passed test', new_passed_test_path %>
