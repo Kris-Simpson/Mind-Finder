@@ -111,8 +111,8 @@ private
     end
 
     num.times do
-      loop do
-        question = test.questions[Random.rand(0..(test.questions.count - 1))]
+      loop do        
+        question = test.questions[Random.rand(0..test.questions.count - 1).to_i]
 
         next if question.answers.blank?
 
