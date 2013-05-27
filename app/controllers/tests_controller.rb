@@ -5,7 +5,6 @@ class TestsController < ApplicationController
 
   def show
     @test = Test.find(params[:id])
-    @passed_test = PassedTest.new
 
     respond_to do |format|
       format.html
