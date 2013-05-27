@@ -1,10 +1,16 @@
 <% content_for :breadcrumbs do %>
   <% room = Room.find(@test.room_id) %>
 
+  <% unless current_user.tests.include?(@test) %>
+    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
+    <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+  <% end %>
+
   <% room.ancestors.each do |page| %>
     <li><%= link_to page.name, page %> <span>/</span><li>
   <% end %>
-  <li><%= link_to room.name, room %> <span>/</span></li> <li class='active'><%= @test.name %></li>
+  <li><%= link_to room.name, room %> <span>/</span></li>
+  <li class='active'><%= @test.name %></li>
 <% end %>
 
 <% if @test.is_allowed? %>
@@ -38,7 +44,7 @@
   </div>
 
   <div id='question_buttons' style='border: 3px solid green; float: left; width: 150px;'>
-    <p>Time elapsed: <span><%= @test.time_for_passing %></span> min</p>
+    <p style='<%= "display: none;" if @test.time_for_passing.nil? %>'>Time elapsed: <span><%= @test.time_for_passing %></span> min</p>
 
     <% increment = 0 %>
     <% questions.each do |question| %>

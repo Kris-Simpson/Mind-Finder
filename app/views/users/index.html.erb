@@ -1,0 +1,28 @@
+<%= content_for :breadcrumbs do %>
+  <li class='active'>Profiles</li>
+<% end %>
+
+<%= content_for :headline_title do %>
+  All users profiles
+<% end %>
+
+<table border='1'>
+  <tr>
+    <th>ID</th>
+    <th>First name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Created at</th>
+  </tr>
+  <% @users.each do |user| %>
+    <% unless current_user == user %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= link_to user.email, user %></td>
+        <td><%= user.created_at %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

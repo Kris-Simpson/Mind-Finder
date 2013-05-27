@@ -76,6 +76,8 @@ $navigation_bar_width: 60px;
 
 $left_width: 160px;
 $left_margin_right: 10px;
+$headline_title_margin_left: 55px;
+$content_padding_left: 15px;
 
 #middle {
 	margin: $navigation_bar_width 5% 0 5%;
@@ -139,7 +141,7 @@ $left_margin_right: 10px;
 	  	#title {
 	  		float: left;
 	  		font-size: 20px;
-		  	margin-left: 55px;
+		  	margin-left: $headline_title_margin_left;
 		  	color: $dark_brown;
 
 		  	span {
@@ -163,8 +165,14 @@ $left_margin_right: 10px;
 		}
 
 	  #content {
-	  	padding: 10px 0 0 15px;
+	  	padding: 10px 0 0 $content_padding_left;
 	  	border-left: 1px dashed #d6d6d6;
+
+	  	.empty-blocks {
+	  		font-size: 18px;
+	  		color: $dark_brown;
+	  		margin-left: $headline_title_margin_left - $content_padding_left;
+	  	}
 
 	  	.block {
 	  		padding: 5px;

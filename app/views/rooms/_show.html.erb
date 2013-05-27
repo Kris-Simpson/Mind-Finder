@@ -1,22 +1,46 @@
-<div id="show_room_block">
-  <script>
-    $(function() {
-      $("#show_room_block a#cancel_link").click(function() {
-        $("#show_room_block").remove();
-        $("#room_<%= @room.id %>").show();
+<% if current_user.rooms.include?(@room) %>
+  <div id="show_room_block">
+    <script>
+      $(function() {
+        $("#show_room_block a#cancel_link").click(function() {
+          $("#show_room_block").remove();
+          $("#room_<%= @room.id %>").show();
+        });
       });
-    });
-  </script>
+    </script>
 
-  <p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 
-  <% if @room.tests.empty? %>
-    Empty
-  <% else %>
-    <% @room.tests.each do |test| %>
-      <%= link_to test.name, test %><br />
+    <% if @room.tests.empty? %>
+      Empty
+    <% else %>
+      <% @room.tests.each do |test| %>
+        <%= link_to test.name, test %><br />
+      <% end %>
     <% end %>
+
+    <a id="cancel_link" class="link b-link-blue">Cancel</a>
+  </div>
+<% else %>
+  <%= content_for :breadcrumbs do %>
+    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
+    <li><%= link_to @room.get_user.email, @room.get_user %> <span>/</span></li>
+    <li class='active'><%= @room.name %></li>
   <% end %>
 
-  <a id="cancel_link" class="link b-link-blue">Cancel</a>
-</div>
+  <%= content_for :headline_title do %>
+    <%= @room.name %>
+  <% end %>
+  
+  <div id="show_room_block">
+    <p id="notice"><%= notice %></p>
+
+    <% if @room.tests.empty? %>
+      Empty
+    <% else %>
+      <% @room.tests.each do |test| %>
+        <%= link_to test.name, test %><br />
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

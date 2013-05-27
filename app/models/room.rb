@@ -16,4 +16,8 @@ class Room < ActiveRecord::Base
   }
   validates :user_id, presence: true, numericality: { only_integer: true }
   validates :parent_id, numericality: { only_integer: true }, allow_nil: true
+  
+  def get_user
+    User.find(self.user_id)
+  end
 end

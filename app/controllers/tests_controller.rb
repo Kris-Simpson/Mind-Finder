@@ -112,7 +112,7 @@ private
 
     num.times do
       loop do
-        question = test.questions[Random.rand(0..test.questions.count - 1)]
+        question = test.questions[Random.rand(0..(test.questions.count - 1))]
 
         next if question.answers.blank?
 

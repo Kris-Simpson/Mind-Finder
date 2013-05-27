@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
   before_filter :user_new, :only => [:new, :index]
 
-  def new
+  def index
+    @users = User.all
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
   end
 
   def create
@@ -16,8 +22,17 @@ class UsersController < ApplicationController
       render "home/index"
     end
   end
+  
+  def show
+    @user = User.find(params[:id])
 
-  private
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
+    end
+  end
+
+private
   
   def user_new
     @user = User.new
