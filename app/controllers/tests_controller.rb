@@ -91,6 +91,26 @@ class TestsController < ApplicationController
     
     passed_test = PassedTest.create(user_id: params[:user_id], test_id: @test.id)
   end
+  
+  def user_allowed
+    new_users = params[:new_users][:id] if params[:new_users]
+    deleted_users = params[:deleted_users][:id] if params[:deleted_users]
+    test_id = params[:test_id] if params[:test_id]
+    
+    unless deleted_users.nil?
+      deleted_users.each do |user|
+        TestsAllowedUser.where(user_id: user, test_id: test_id).delete_all
+      end
+    end
+
+    unless new_users.nil?
+      new_users.each do |user|
+        allowed_user = TestsAllowedUser.create(user_id: user, test_id: test_id)
+      end
+    end
+    
+    redirect_to tests_path
+  end
 
 private
 
@@ -108,10 +128,10 @@ private
       min = min_q.zero? ? 1 : min_q
       num = Random.rand(min..max)
     end
-
+    
     num.times do
-      loop do        
-        question = test.questions[Random.rand(0..test.questions.count - 1).to_i]
+      loop do
+        question = test.questions[Random.rand(0..test.questions.count - 1)]
 
         next if question.answers.blank?
 

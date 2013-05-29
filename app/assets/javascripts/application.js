@@ -22,6 +22,8 @@ function formSwitch(form) {
 }
 
 $(function() {
+  $('html, body').height($('html, body').height() - $('footer').height() - $('#navigation_bar').height());
+  
   $("div .destroy_link").hover(
     function() {
       $(this).parent().animate({ "margin-right" : "-5px" }, 200);
@@ -125,20 +127,15 @@ $(function() {
   $('#submenu').tree();
 });
 
-$(function(){
-  $("#slides").slidesjs({
-    play: {
-      active: false,
-      effect: "fade",
-      interval: 5000,
-      auto: true,
-      swap: true,
-      pauseOnHover: false,
-      restartDelay: 2500
-    },
-    pagination: {
-      active: true,
-      effect: "fade"
-    }
+$(document).ready(function($) {
+  $('#slideshow').bjqs({
+    width: 600,
+    height: 368,
+    animtype: 'slide',
+    animduration: 1000,
+    animspeed: 5000,
+    nexttext : 'Next',
+    prevtext : 'Prev',
+    showcontrols: false
   });
 });

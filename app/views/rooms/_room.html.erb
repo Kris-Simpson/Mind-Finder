@@ -2,6 +2,7 @@
   <%= link_to room.name, room, class: "name", remote: true %>
 
   <div id='actions'>
+    <%= link_to 'Manage users', { controller: 'rooms_allowed_users', action: 'new', room: room.id } %>
     <%= link_to 'Edit', edit_room_path(room), class: "edit_link", remote: true %>
     <%= link_to 'Destroy', room, method: :delete, data: { confirm: "Are you sure you want to delete this room?\nTests that belongs to this room also be deleted!" }, class: "destroy_link", remote: true %>
   </div>

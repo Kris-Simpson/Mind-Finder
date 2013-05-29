@@ -22,25 +22,29 @@
     <a id="cancel_link" class="link b-link-blue">Cancel</a>
   </div>
 <% else %>
-  <%= content_for :breadcrumbs do %>
-    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
-    <li><%= link_to @room.get_user.email, @room.get_user %> <span>/</span></li>
-    <li class='active'><%= @room.name %></li>
-  <% end %>
-
-  <%= content_for :headline_title do %>
-    <%= @room.name %>
-  <% end %>
-  
-  <div id="show_room_block">
-    <p id="notice"><%= notice %></p>
-
-    <% if @room.tests.empty? %>
-      Empty
-    <% else %>
-      <% @room.tests.each do |test| %>
-        <%= link_to test.name, test %><br />
-      <% end %>
+    <%= content_for :breadcrumbs do %>
+      <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
+      <li><%= link_to @room.get_user.email, @room.get_user %> <span>/</span></li>
+      <li class='active'><%= @room.name %></li>
     <% end %>
-  </div>
+
+    <%= content_for :headline_title do %>
+      <%= @room.name %>
+    <% end %>
+
+  <% if @room.rooms_allowed_users.empty? || @room.rooms_allowed_users.any? { |user| user.its_a?(current_user) } %>    
+    <div id="show_room_block">
+      <p id="notice"><%= notice %></p>
+
+      <% if @room.tests.empty? %>
+        Empty
+      <% else %>
+        <% @room.tests.each do |test| %>
+          <%= link_to test.name, test %><br />
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    Sorry but you can not enter this room
+  <% end %>
 <% end %>

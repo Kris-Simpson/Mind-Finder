@@ -1,0 +1,36 @@
+<script>
+  $(document).on('click', '.user', function() {
+    if($(this).parent().is('#all-users')) {
+      $('#allowed-users-new').append('<input id="new_users_id_" class="user_' + $(this).attr('data-user-id') + '" type="hidden" value=' + $(this).attr('data-user-id') + ' name="new_users[id][]">').append($(this));
+    } else if($(this).parent().is('#allowed-users-new')) {
+      $('#all-users').append($(this));
+      $(this).parents().find('.user_' + $(this).attr('data-user-id')).remove();
+    } else if($(this).parent().is('#allowed-users-added')) {
+      $('#all-users').append($(this));
+      $('#allowed-users-added').append('<input id="deleted_users_id_" type="hidden" value=' + $(this).attr('data-user-id') + ' name="deleted_users[id][]">');
+    }
+  });
+</script>
+
+  <h1>All users</h1>
+  <div style='min-height: 50px; width: 400px; border: 1px solid #000; float: left; margin-right: 50px;' id='all-users'>
+    <% @users.each do |user| %>
+      <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.email %></p>
+    <% end %>
+  </div >
+  
+  <h1>Allowed users</h1>
+  <%= form_tag(tests_user_allowed_path, { style: 'float: left;' }) do |f| %>
+    <h4>New</h4>
+    <div id='allowed-users-new' style='border: 1px solid #000; min-height: 50px; width: 400px;'></div>
+  
+    <h4>Added</h4>
+    <div id='allowed-users-added' style='border: 1px solid #000; min-height: 50px; width: 400px; float: left;'>
+      <% @allowed_users.each do |user| %>
+        <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.email %></p>
+      <% end %>
+    </div>
+    
+    <%= hidden_field_tag 'test_id', @test_id %>
+    <%= submit_tag %>
+  <% end %>

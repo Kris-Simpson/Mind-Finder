@@ -2,6 +2,7 @@
   <%= link_to "#{test.name}", test, class: "name" %>
 
   <div id='actions'>
+    <%= link_to 'Manage users', { controller: 'tests_allowed_users', action: 'new', test: test.id } %>
     <%= link_to 'Edit', edit_test_path(test), class: "edit_link" %>
     <%= link_to 'Destroy', test, method: :delete, data: { confirm: 'Are you sure you want to delete this test?' }, class: "destroy_link", remote: true %>
   </div>

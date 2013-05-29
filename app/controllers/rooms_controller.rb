@@ -63,7 +63,28 @@ class RoomsController < ApplicationController
     end
   end
 
-  private
+  
+  def user_allowed
+    new_users = params[:new_users][:id] if params[:new_users]
+    deleted_users = params[:deleted_users][:id] if params[:deleted_users]
+    room_id = params[:room_id] if params[:room_id]
+    
+    unless deleted_users.nil?
+      deleted_users.each do |user|
+        RoomsAllowedUser.where(user_id: user, room_id: room_id).delete_all
+      end
+    end
+
+    unless new_users.nil?
+      new_users.each do |user|
+        allowed_user = RoomsAllowedUser.create(user_id: user, room_id: room_id)
+      end
+    end
+    
+    redirect_to rooms_path
+  end
+
+private
 
   def get_rooms
     rooms = []
@@ -85,9 +106,5 @@ class RoomsController < ApplicationController
     return children_rooms.length + parent_rooms.length
   end
 
-  def get_tests
-    @tests = nil
-  end
-
-  helper_method :get_rooms, :get_tests
+  helper_method :get_rooms
 end

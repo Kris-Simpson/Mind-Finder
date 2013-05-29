@@ -4,6 +4,7 @@ class Test < ActiveRecord::Base
   belongs_to :room
 
   has_many :questions, dependent: :destroy
+  has_many :tests_allowed_users, dependent: :destroy
 
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
 
@@ -11,7 +12,7 @@ class Test < ActiveRecord::Base
     :in => 3..25
   }
   validates :description, :length => {
-    :in => 0...100
+    in: 0...100,
   }
   validates :min_shewn_questions, numericality: { only_integer: true }, allow_nil: true
   validates :max_shewn_questions, numericality: { only_integer: true }, allow_nil: true

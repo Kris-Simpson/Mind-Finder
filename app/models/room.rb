@@ -7,6 +7,7 @@ class Room < ActiveRecord::Base
   belongs_to :parent, class_name: "Room"
   has_many :children, class_name: "Room", :foreign_key => "parent_id", dependent: :destroy
   has_many :tests, dependent: :destroy
+  has_many :rooms_allowed_users, dependent: :destroy
 
   validates :name, :presence => true, :length => {
     :in => 3..15

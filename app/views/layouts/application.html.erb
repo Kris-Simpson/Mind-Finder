@@ -40,15 +40,15 @@
 	  </div>
   </header>
 
-  <div id="middle">
-  	<% if params[:controller] == "home" && params[:action] == "index" %>
-
-    <div id="content">
+  <% if params[:controller] == "home" && params[:action] == "index" %>
+  
+    <div id="middle" style='overflow: auto; margin: 60px auto 0; width: 970px;'>
       <%= yield %>
     </div>
-
-    <% else %>
-
+  
+  <% else %>
+  
+  <div id='middle'>
     <div id="breadcrumbs">
       <ul><%= yield :breadcrumbs %></ul>
     </div>
@@ -83,8 +83,20 @@
     <% end %>
   </div>
 
-	<footer>
-		<!-- #TODO: footer -->
+	<footer style='color: #fff;
+                 font-size: 12px;
+                 '>
+<!-- 		<div style='padding: 40px 30px;
+                background-color: #37464F;
+                '>
+      asd
+    </div>
+    
+    <div style='padding: 25px 30px;
+                background-color: #212A30;
+                '>
+      asd
+    </div> -->
 	</footer>
 </body>
 </html>

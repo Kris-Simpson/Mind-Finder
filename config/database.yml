@@ -13,8 +13,8 @@ development:
   encoding: utf8
   database: mind-finder_development
   pool: 5
-  username: root
-  password: pass
+  username: mind-finder
+  password: djdouble1993
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,13 +24,13 @@ test:
   encoding: utf8
   database: mind-finder_test
   pool: 5
-  username: root
-  password: pass
+  username: mind-finder
+  password: djdouble1993
 
 production:
   adapter: mysql2
   encoding: utf8
   database: mind-finder_production
   pool: 5
-  username: root
-  password: pass
+  username: mind-finder
+  password: djdouble1993

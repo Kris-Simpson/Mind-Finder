@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523084407) do
+ActiveRecord::Schema.define(:version => 20130529145103) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -19,14 +19,6 @@ ActiveRecord::Schema.define(:version => 20130523084407) do
     t.boolean  "is_right_answer"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-  end
-
-  create_table "passed_questions", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.boolean  "passed"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "passed_tests", :force => true do |t|
@@ -56,6 +48,13 @@ ActiveRecord::Schema.define(:version => 20130523084407) do
     t.string   "ancestry"
   end
 
+  create_table "rooms_allowed_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "room_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "tests", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -67,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20130523084407) do
     t.integer  "time_for_passing"
   end
 
-  create_table "user_answers", :force => true do |t|
+  create_table "tests_allowed_users", :force => true do |t|
     t.integer  "user_id"
     t.integer  "test_id"
     t.datetime "created_at", :null => false
@@ -87,13 +86,6 @@ ActiveRecord::Schema.define(:version => 20130523084407) do
     t.datetime "updated_at",               :null => false
     t.string   "locale",                   :null => false
     t.string   "auth_token",               :null => false
-  end
-
-  create_table "wrong_answers", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
 end

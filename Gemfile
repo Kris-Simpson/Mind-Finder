@@ -15,8 +15,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'letter_opener', group: :development
-gem 'quiet_assets', group: :development
+group :development do
+  gem 'letter_opener'
+  gem 'quiet_assets'
+  gem 'pry'
+end
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

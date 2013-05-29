@@ -1,0 +1,2 @@
+module RoomsAllowedUsersHelper
+end
