@@ -2,7 +2,7 @@
   <p>
     <%= f.label :question %>
     <%= f.link_to_remove "remove" %><br />
-    <%= f.text_area :question, rows: 3%>
+    <%= f.text_area :question, rows: 3 %>
   </p>
 
   <%= f.fields_for :answers do |builder| %>
@@ -15,4 +15,9 @@
     <div><%= f.label :min_shewn_answers %>: <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
     <div><%= f.label :max_shewn_answers %>: <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
   </div>
+  
+  <p>
+    <%= f.label :explanation %>:<br />
+    <%= f.text_area :explanation, rows: 3 %>
+  </p>
 </div>

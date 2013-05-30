@@ -22,6 +22,7 @@ class TestsController < ApplicationController
   
   def create
     @test = current_user.rooms.find(params[:test][:room_id]).tests.create(params[:test])
+    @test.rating_round = 0 if params[:test][:rating_round].blank?
 
     respond_to do |format|
       if @test.valid?
@@ -39,6 +40,7 @@ class TestsController < ApplicationController
 
     respond_to do |format|
       if @test.update_attributes(params[:test])
+        @test.update_attribute(:rating_round, 0) if params[:test][:rating_round].blank?
         format.html { redirect_to tests_path, notice: 'Test was successfully updated.' }
         format.json { head :no_content }
       else
@@ -61,13 +63,13 @@ class TestsController < ApplicationController
   def test_passed
     @test = Test.find(params[:test_id])
     @all_questions = Question.find(params[:questions][:id])
-    answers = Answer.find(params[:answers][:id]) if params[:answers]
+    @answers = Answer.find(params[:answers][:id]) if params[:answers]
     be_answered = []
     @wrong_answers = []
-    
-    unless answers.nil?
+
+    unless @answers.nil?
       @all_questions.each do |question|
-        answers.each do |answer|
+        @answers.each do |answer|
           be_answered << question if question.answers.include?(answer) && !be_answered.include?(question)
         end
       end
@@ -77,19 +79,27 @@ class TestsController < ApplicationController
       @wrong_answers << question unless be_answered.include?(question)
     end
 
-    be_answered.each do |question|
-      question_wrong_answers = []
-      
-      question.answers.each do |answer|
-        question_wrong_answers << answer unless answer.is_right_answer
-      end
-      
-      answers.each do |answer|
-        @wrong_answers << question if question_wrong_answers.include?(answer)
+    unless be_answered.nil?
+      be_answered.each do |question|
+        question_wrong_answers = []
+        
+        question.answers.each do |answer|
+          question_wrong_answers << answer unless answer.is_right_answer
+        end
+        
+        @answers.each do |answer|
+          @wrong_answers << question if question_wrong_answers.include?(answer)
+        end
       end
     end
     
-    passed_test = PassedTest.create(user_id: params[:user_id], test_id: @test.id)
+    @rating = calculate_rating(@test.max_rating, @all_questions.count, be_answered.blank? ? nil : be_answered.count - (@wrong_answers.nil? ? 0 : @wrong_answers.count))
+    passed_test = PassedTest.where(user_id: params[:user_id], test_id: @test.id)
+    if passed_test.blank?
+      PassedTest.create(user_id: params[:user_id], test_id: @test.id, rating: @rating)
+    else
+      passed_test.update_all(rating: @rating)
+    end
   end
   
   def user_allowed
@@ -113,6 +123,14 @@ class TestsController < ApplicationController
   end
 
 private
+
+  def calculate_rating(max_rating, questions_count, answered_count) 
+    if answered_count.nil?
+      return 0
+    else
+      return Float(max_rating) / questions_count * answered_count
+    end
+  end
 
   def get_questions(test)
     max_q = test.max_shewn_questions

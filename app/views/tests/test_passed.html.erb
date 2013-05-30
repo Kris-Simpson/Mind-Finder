@@ -8,7 +8,7 @@
 <% end %>
 
 <% content_for :headline_title do %>
-  Test passed
+  Test passed with rating: <%= "%.#{@test.rating_round}f" % @rating %>
 <% end %>
 
 <% @all_questions.each do |question| %>
@@ -16,8 +16,11 @@
     <p><%= question.question %></p>
     <ul>
       <% question.answers.each do |answer| %>
-        <li><%= answer.answer %></li>
+        <li><%= check_box_tag 'answer' , 1, @answers.nil? ? false : @answers.include?(answer), disabled: true %> <%= answer.answer %></li>
       <% end %>
     </ul>
+    <p><%= question.explanation if @wrong_answers.include?(question) %></p>
   </div>
 <% end %>
+
+<%= link_to 'Back to tests', tests_path %>

@@ -6,16 +6,24 @@
   Passed tests
 <% end %>
 
-<table>
+<table border='1'>
   <tr>
-    <th>ID</th>
-    <th></th>
-    <th></th>
+    <th>Test ID</th>
+    <th>Test name</th>
+    <th>Rating</th>
+    <th>Max rating</th>
+    <th>Created by</th>
+    <th>Last passing</th>
   </tr>
 
-<% @passed_tests.each do |passed_test| %>
-  <tr>
-    <td><%= passed_test.test_id %></td>
-  </tr>
-<% end %>
+  <% @passed_tests.each do |passed_test| %>
+    <tr>
+      <td><%= passed_test.test_id %></td>
+      <td><%= passed_test.get_test.name %></td>
+      <td><%= "%.#{passed_test.get_test.rating_round}f" % passed_test.rating %></td>
+      <td><%= passed_test.get_test.max_rating %></td>
+      <td><%= passed_test.get_test.get_room.get_user.email %></td>
+      <td><%= passed_test.created_at %></td>
+    </tr>
+  <% end %>
 </table>
