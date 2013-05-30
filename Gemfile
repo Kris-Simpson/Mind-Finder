@@ -8,6 +8,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'nested_form'
 gem 'ancestry'
 gem 'thin'
+gem 'will_paginate'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -1,0 +1,31 @@
+<script>
+  $(function() {
+    $('.pagination a').attr('data-remote', 'true');
+  });
+</script>
+
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table border='1'>
+  <tr>
+    <th><%= sortable 'id', 'ID' %></th>
+    <th><%= sortable 'first_name', 'First Name' %></th>
+    <th><%= sortable 'last_name', 'Last Name' %></th>
+    <th><%= sortable 'email' %></th>
+    <th><%= sortable 'created_at', 'Created at' %></th>
+  </tr>
+  <% @users.each do |user| %>
+    <% unless current_user == user %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= link_to user.email, user %></td>
+        <td><%= user.created_at %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= will_paginate @users %>

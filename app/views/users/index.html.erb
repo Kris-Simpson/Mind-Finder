@@ -6,23 +6,11 @@
   All users profiles
 <% end %>
 
-<table border='1'>
-  <tr>
-    <th>ID</th>
-    <th>First name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Created at</th>
-  </tr>
-  <% @users.each do |user| %>
-    <% unless current_user == user %>
-      <tr>
-        <td><%= user.id %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= link_to user.email, user %></td>
-        <td><%= user.created_at %></td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
+<%= form_tag users_path, method: 'get', remote: true do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag 'Search', name: nil %>
+  </p>
+  
+  <div id='users'><%= render 'users' %></div>
+<% end %>

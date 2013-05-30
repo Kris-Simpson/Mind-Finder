@@ -20,7 +20,7 @@
     <tr>
       <td><%= passed_test.test_id %></td>
       <td><%= passed_test.get_test.name %></td>
-      <td><%= "%.#{passed_test.get_test.rating_round}f" % passed_test.rating %></td>
+      <td><%= passed_test.rating == 0 ? 0 : "%.#{passed_test.get_test.rating_round}f" % passed_test.rating %></td>
       <td><%= passed_test.get_test.max_rating %></td>
       <td><%= passed_test.get_test.get_room.get_user.email %></td>
       <td><%= passed_test.created_at %></td>

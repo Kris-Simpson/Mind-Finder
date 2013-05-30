@@ -3,8 +3,6 @@ class PassedTest < ActiveRecord::Base
   
   belongs_to :user
   
-  has_many :user_answers
-  
   def get_test
     Test.find(self.test_id)
   end

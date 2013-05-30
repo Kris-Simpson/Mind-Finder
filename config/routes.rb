@@ -1,7 +1,4 @@
 MindFinder::Application.routes.draw do
-  resources :rooms_allowed_users
-
-
   resources :users
   resources :sessions
   resources :rooms
@@ -9,7 +6,8 @@ MindFinder::Application.routes.draw do
   resources :questions
   resources :answers
   resources :passed_tests
-  resources :allowed_users
+  resources :tests_allowed_users
+  resources :rooms_allowed_users
   
   get "index" => "home#index", :as => "index"
   get "logout" => "sessions#destroy", :as => "logout"
@@ -32,5 +30,5 @@ MindFinder::Application.routes.draw do
 
   end
 
-  root :to => "home#index"
+  root to: "home#index"
 end

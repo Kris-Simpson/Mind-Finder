@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
   before_filter :user_new, :only => [:new, :index]
+  
+  helper_method :sort_column, :sort_direction
 
   def index
-    @users = User.all
+    @users = User.search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 15, page: params[:page])
 
     respond_to do |format|
       format.html
-      format.json { render json: @users }
+      format.js
     end
   end
 
@@ -36,5 +38,13 @@ private
   
   def user_new
     @user = User.new
+  end
+  
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'id'
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
   end
 end

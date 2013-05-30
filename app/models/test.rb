@@ -20,7 +20,7 @@ class Test < ActiveRecord::Base
   validates :max_shewn_questions, numericality: { only_integer: true }, allow_nil: true
   
   def is_allowed?
-    return questions.any? { |question| question.answers.any? }
+    return questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }
   end
   
   def get_room

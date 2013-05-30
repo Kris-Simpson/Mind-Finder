@@ -132,10 +132,10 @@ private
     end
   end
 
-  def get_questions(test)
+  def get_questions(test) #get random valid questions
     max_q = test.max_shewn_questions
     min_q = test.min_shewn_questions
-    blank_questions = test.questions.select { |question| question.answers.blank? }
+    blank_questions = test.questions.select { |question| question.answers.blank? } #questions without answers
     questions = []
     num = nil
 
@@ -163,7 +163,7 @@ private
     questions
   end
 
-  def get_answers(question)
+  def get_answers(question) #get random valid answers
     max_a = question.max_shewn_answers
     min_a = question.min_shewn_answers
     right_answers = question.answers.select { |answer| answer.is_right_answer }
