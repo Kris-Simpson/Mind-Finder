@@ -1,0 +1,44 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+.main {
+  margin-top: 50px;
+}
+
+.page-header {
+  margin-top: 0;
+  
+  h1, h3 {
+    margin-top: 0;
+  }
+}
+
+input[type='email'], input[type='password'], input[type='text'] {
+  &:focus {
+    -webkit-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+    -moz-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+    box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
+  }
+}
+
+.table-link tr td {
+  &:hover {    
+    a {
+      -webkit-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+      -moz-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+      box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+      text-decoration: none;
+    }
+  }
+  
+  a {
+    display: block;
+    height: 100%;
+    padding: 0;
+  }
+}

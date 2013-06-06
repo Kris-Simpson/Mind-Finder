@@ -5,6 +5,7 @@ class Test < ActiveRecord::Base
 
   has_many :questions, dependent: :destroy
   has_many :tests_allowed_users, dependent: :destroy
+  has_many :who_passeds, dependent: :destroy
 
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
 
@@ -18,6 +19,14 @@ class Test < ActiveRecord::Base
   validates :rating_round, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }, allow_nil: true
   validates :min_shewn_questions, numericality: { only_integer: true }, allow_nil: true
   validates :max_shewn_questions, numericality: { only_integer: true }, allow_nil: true
+  
+  def self.search(search)
+    if search
+      where('tests.name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
   
   def is_allowed?
     return questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }

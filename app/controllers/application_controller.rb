@@ -3,8 +3,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_locale
- 
+  before_filter :set_locale, :check_user
+
+  def check_user
+    redirect_to root_url unless current_user
+  end
+
   def set_locale
     if current_user
       I18n.locale = current_user.locale
@@ -52,11 +56,7 @@ private
   def current_uri
     @current_uri = request.env['PATH_INFO']
   end
-
-  def question_type(type_id)
-    type_id
-  end
   
-  helper_method :current_user, :get_full_locale, :current_uri, :question_type
+  helper_method :current_user, :get_full_locale, :current_uri
   
 end

@@ -1,14 +1,15 @@
 class RoomsAllowedUsersController < ApplicationController
   def new
-    @room_id = params[:room]
+    room_id = params[:room]
+    @room = Room.find(room_id)
     @allowed_users = []
     @users = []
     
-    RoomsAllowedUser.where(room_id: @room_id).each do |user|
+    RoomsAllowedUser.where(room_id: room_id).each do |user|
       @allowed_users << User.find(user.user_id)
     end
     
-    User.all.each do |user|
+    User.where(email_confirm: true).each do |user|
       @users << user unless @allowed_users.include?(user)
     end
     

@@ -16,12 +16,12 @@
 
   <fieldset>
     <legend style='margin-left: 15px;'>Main options</legend>
-    <%= f.label :name %>: <%= f.text_field :name %><br />
+    <%= f.label :name %>: <%= f.text_field :name, autofocus: true %><br />
     <%= f.label :description %>: <%= f.text_field :description %><br />
     <%= f.label :room_id %>: <%= f.select(:room_id, options_from_collection_for_select(current_user.rooms.all, :id, :name)) %><br />
-    <%= f.label :max_rating %>: <%= f.text_field :max_rating %><br />
+    <%= f.label :max_rating %>: <%= f.text_field :max_rating, value: 100 %><br />
     <%= f.label :rating_round %>: <%= f.text_field :rating_round %><br />
-    <%= f.label :allow_repass %>: <%= f.check_box :allow_repass %>
+    <%= f.label :allow_repass %>: <%= f.check_box :allow_repass, checked: true %>
   </fieldset>
 
 
@@ -33,11 +33,21 @@
 
   <fieldset>
     <legend style='margin-left: 15px;'>Secondary options</legend>
+    <div class="input-append bootstrap-timepicker">
+      <%= f.label :time_for_passing %>:
+      <% if @test.time_for_passing.nil? %>
+        <%= f.text_field :time_for_passing, class: 'timepicker input-small' %>
+      <% else %>
+        <%= f.text_field :time_for_passing, value: @test.time_for_passing.strftime("%H:%M:%S"), class: 'timepicker input-small' %>
+      <% end %>
+      <span class="add-on">
+        <i class="icon-time"></i>
+      </span>
+    </div>
     <div class='field'>
       <div><%= f.label :min_shewn_questions %>: <%= f.range_field :min_shewn_questions, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
       <div><%= f.label :max_shewn_questions %>: <%= f.range_field :max_shewn_questions, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
     </div>
-    <div class='field'><%= f.label :time_for_passing %>: <%= f.text_field :time_for_passing %> min</div>
   </fieldset>
 
   <div class="actions">

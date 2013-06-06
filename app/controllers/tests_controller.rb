@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   def index
-    @tests = current_user.tests.includes(:room)
+    @tests = current_user.tests.includes(:room).search(params[:search]).order(:created_at).paginate(per_page: 5, page: params[:page])
   end
 
   def show
@@ -36,6 +36,7 @@ class TestsController < ApplicationController
   end
 
   def update
+    binding.pry
     @test = current_user.tests.find(params[:id])
 
     respond_to do |format|
@@ -95,10 +96,13 @@ class TestsController < ApplicationController
     
     @rating = calculate_rating(@test.max_rating, @all_questions.count, be_answered.blank? ? nil : be_answered.count - (@wrong_answers.nil? ? 0 : @wrong_answers.count))
     passed_test = PassedTest.where(user_id: params[:user_id], test_id: @test.id)
+    who_passed = WhoPassed.new(test_id: @test.id, user_id: params[:user_id], rating: @rating)
     if passed_test.blank?
       PassedTest.create(user_id: params[:user_id], test_id: @test.id, rating: @rating)
+      who_passed.save
     else
       passed_test.update_all(rating: @rating)
+      who_passed.save
     end
   end
   
@@ -124,18 +128,16 @@ class TestsController < ApplicationController
 
 private
 
-  def calculate_rating(max_rating, questions_count, answered_count) 
-    if answered_count.nil?
-      return 0
-    else
-      return Float(max_rating) / questions_count * answered_count
-    end
+  def calculate_rating(max_rating, questions_count, answered_count)
+    binding.pry
+    answered_count.nil? ? 0 : Float(max_rating) / questions_count * answered_count
   end
 
   def get_questions(test) #get random valid questions
     max_q = test.max_shewn_questions
     min_q = test.min_shewn_questions
-    blank_questions = test.questions.select { |question| question.answers.blank? } #questions without answers
+
+    blank_questions = test.questions.select { |question| !question.answers.any? { |answer| answer.is_right_answer } } #questions without right answers
     questions = []
     num = nil
 
@@ -150,8 +152,9 @@ private
     num.times do
       loop do
         question = test.questions[Random.rand(0..test.questions.count - 1)]
-
+        
         next if question.answers.blank?
+        next unless question.answers.any? { |answer| answer.is_right_answer }
 
         unless questions.include?(question)
           questions << question

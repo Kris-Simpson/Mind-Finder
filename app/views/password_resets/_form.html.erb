@@ -1,0 +1,16 @@
+<%= form_for @user, url: password_reset_path(params[:id]), remote: true do |f| %>
+  <fieldset>
+    <legend>Reset password</legend>
+    
+    <% if @user.errors.any? %>
+      <div class='alert alert-error'>
+        Password <%= @user.errors[:password].first %>
+      </div>
+    <% end %>
+    
+    <p><%= f.password_field :password, placeholder: 'New password', class: 'input-large' %></p>
+    <p><%= f.password_field :password_confirmation, placeholder: 'Confirm password', class: 'input-large' %></p>
+    
+    <p><%= f.submit 'Update password', class: 'btn btn-success' %></p>
+  </fieldset>
+<% end %>

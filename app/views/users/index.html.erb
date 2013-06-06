@@ -6,11 +6,15 @@
   All users profiles
 <% end %>
 
-<%= form_tag users_path, method: 'get', remote: true do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag 'Search', name: nil %>
-  </p>
-  
-  <div id='users'><%= render 'users' %></div>
+<% if @users.any? %>
+  <%= form_tag users_path, method: 'get', remote: true do %>
+    <p>
+      <%= text_field_tag :search, params[:search], autofocus: true %>
+      <%= submit_tag 'Search', name: nil %>
+    </p>
+    
+    <div id='users'><%= render 'users' %></div>
+  <% end %>
+<% else %>
+  <span class='empty-blocks'>There are no users yet</span>
 <% end %>

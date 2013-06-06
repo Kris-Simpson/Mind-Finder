@@ -1,4 +1,5 @@
-  <div id="slideshow" style='float: left;'>
+<div class='row'>
+  <div id="slideshow" class='span4'>
     <ul class="bjqs">
       <li>
         <%= image_tag "slide-show_images/pic-1.jpg" %>
@@ -22,18 +23,9 @@
     </ul>
   </div>
 
-  <div class="tabbed_area">
-
-    <%= render :partial => "users/sign_in_form" %>
+  <div class="span3 tabbed_area">
+    <%= render "users/sign_in_form" %>
     
-    <%= render :partial => "users/sign_up_form" %>
-    
-    <div class="alert">
-      <span><%= flash[:alert] %></span>
-      
-      <%= yield :errors %>
-    </div>
-    <div class="notice">
-        <%= flash[:notice] %>
-    </div>
+    <%= content_tag('div', flash[:notice], class: 'alert alert-success') if flash[:notice] %>
   </div>
+</div>

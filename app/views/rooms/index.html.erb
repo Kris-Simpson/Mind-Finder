@@ -4,12 +4,25 @@
   <li class='active'>My rooms</li>
 <% end %>
 
-<div id="created_rooms">
-  <%= render @rooms %>
-
-  <span class='empty-blocks'><%= raw('There are no rooms') unless @rooms.any? %></span>
+<div class='row-fluid'>
+  <div class='span6'>
+    <% if @rooms.any? %>
+      <%= form_tag rooms_path, method: 'get', class: 'form-search', remote: true do %>
+        <p>
+          <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, class: 'search-query input-large' %>
+          <%= submit_tag 'Search', name: nil, class: 'btn' %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class='span3 offset3'>
+    <%= link_to 'New room', new_room_path, id: "new_room_link", class: 'btn btn-primary btn-block', remote: true, style: 'float: right;' %>
+  </div>
 </div>
 
-<br />
-
-<%= link_to raw('<input class="b-blue b-medium" type="button" value="New Room">'), new_room_path, id: "new_room_link", class: 'button-link', remote: true %>
+<div id="created_rooms">
+  <span class='<%= "sorry" unless @rooms.any? %>'><%= raw('There are no rooms') unless @rooms.any? %></span>
+  
+  <%= render 'rooms' %>
+</div>

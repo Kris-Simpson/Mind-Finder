@@ -2,12 +2,12 @@
   $("#new_room").slideUp(200);
   $("#new_room_link").delay(600).fadeIn();
   $("#created_rooms").append("<%= j render @room %>");
+
   $('.block:last').hide().delay(400).slideDown(200);
 
   setTimeout(function() {
     $('#new_room').remove();
-    var rooms = $('.block');
-    if(rooms.length > 0) {
+    if($('.block').length > 0) {
       $('div#created_rooms .empty-blocks').slideUp(200).empty();
     }
   }, 200);

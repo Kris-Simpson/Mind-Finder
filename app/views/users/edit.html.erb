@@ -1,0 +1,22 @@
+<% content_for :breadcrumbs do %>
+  <li class='active'>Edit profile</li>
+<% end %>
+
+<% content_for :headline_title do %>
+  Edit profile
+<% end %>
+
+<% if flash[:notice] %>
+  <div class='alert alert-success'>
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<%= render 'form' %>
+
+<% if current_user %>
+  <%= link_to 'Back', :back %>
+<% else %>
+  <div class='alert alert-info'>After <strong>updating your profile</strong>, you may login to the site.</div>
+<% end %>

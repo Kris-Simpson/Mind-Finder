@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130530123003) do
+ActiveRecord::Schema.define(:version => 20130604141918) do
 
   create_table "answers", :force => true do |t|
     t.string   "answer"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20130530123003) do
     t.integer  "room_id"
     t.integer  "max_shewn_questions"
     t.integer  "min_shewn_questions"
-    t.integer  "time_for_passing"
+    t.time     "time_for_passing"
     t.integer  "max_rating"
     t.boolean  "allow_repass"
     t.integer  "rating_round"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(:version => 20130530123003) do
     t.datetime "updated_at",               :null => false
     t.string   "locale",                   :null => false
     t.string   "auth_token",               :null => false
+    t.boolean  "email_confirm"
+    t.datetime "password_reset_sent_at"
+  end
+
+  create_table "who_passeds", :force => true do |t|
+    t.integer  "test_id"
+    t.integer  "user_id"
+    t.float    "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

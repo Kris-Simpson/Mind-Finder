@@ -1,12 +1,12 @@
 <%= content_for :breadcrumbs do %>
   <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
-  <li class='active'><%= @user.email %></li>
+  <li class='active'><%= @user.get_full_name %></li>
 <% end %>
 
 <%= content_for :headline_title do %>
   Profile: <span><%= @user.email %></span>
 <% end %>
 
-<% @user.rooms.each do |room| %>
-  <%= link_to room.name, room %><br />
-<% end %>
+  <% @user.rooms.each do |room| %>
+    <%= link_to room.name, room %><br />
+  <% end %>

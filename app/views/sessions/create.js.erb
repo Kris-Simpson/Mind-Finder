@@ -1,0 +1,5 @@
+<% if @success %>
+  window.location = '<%= rooms_path %>'
+<% else %>
+  $('#sign_in_form').replaceWith('<%= j render "users/sign_in_form" %>');
+<% end %>

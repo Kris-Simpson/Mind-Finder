@@ -1,80 +1,69 @@
-$input: #808080;
+// $input: #808080;
 
-.tabbed_area {
-  float: right;
-  width: 350px;
-  margin-top: 75px;
+// .tabbed_area {
+//   float: right;
+//   width: 350px;
+//   margin-top: 75px;
 
-  p {
-    margin-bottom: 10px;
-  }
+//   p {
+//     margin-bottom: 10px;
+//   }
   
-  #sign_up_form { display: none; }
+//   #sign_up_form { display: none; }
   
-  .title_text {
-    font: {
-      size: 24px;
-      family: Ubuntu-Bold;
-    }
+//   .title_text {
+//     font: {
+//       size: 24px;
+//       family: Ubuntu-Bold;
+//     }
     
-    color: #333;
-  }
+//     color: #333;
+//   }
 
-  .context_text {
-    font-size: 14px;
-    color: #808080;
-  }
+//   .context_text {
+//     font-size: 14px;
+//     color: #808080;
+//   }
 
-  span {
-    color: #0096FF;
-    font: {
-      family: Ubuntu-Bold;
-      size: 16px;
-    }
+//   span {
+//     color: #0096FF;
+//     font: {
+//       family: Ubuntu-Bold;
+//       size: 16px;
+//     }
     
-    &:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
+//     &:hover {
+//       text-decoration: underline;
+//       cursor: pointer;
+//     }
+//   }
   
-  i {
-    color: #333;
-    margin: 0 7px;
-  }
+//   i {
+//     color: #333;
+//     margin: 0 7px;
+//   }
   
-  a {
-    @extend span;
+//   a {
+//     @extend span;
     
-    font: {
-      family: Ubuntu-Regular;
-      size: 14px;
-    }
-  }
+//     font: {
+//       family: Ubuntu-Regular;
+//       size: 14px;
+//     }
+//   }
   
-  .alert {
-    margin-top: 7px;
-    padding-top: 6px;
-    color: #333;
+//   .alert {
+//     color: #b10c0c;
+//   }
+  
+//   .notice {
+//     font-family: Ubuntu-Bold;
+//     color: #00A200;
+//   }
+  
+//   .warning {
+//     @extend .notice;
     
-    span {
-      color: #b10c0c;
-      cursor: default;
-      
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-  
-  .notice {
-    font-family: Ubuntu-Bold;
-    color: #00A200;
-  }
-  
-  .warning {
-    @extend .notice;
-    
-    color: #fbc010;
-  }
-}
+//     color: #fbc010;
+//   }
+// }

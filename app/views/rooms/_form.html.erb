@@ -1,11 +1,11 @@
 <%= form_for(@room, remote: true) do |f| %>
   <script>
     $(function() {
-      $("#edit_room_<%= @room.id %> .actions #cancel_button").click(function() {
+      $("#edit_room_<%= @room.id %> .actions .cancel_button").click(function() {
         $("#edit_room_<%= @room.id %>").slideUp(200);
-        $("#room_<%= @room.id %>").delay(200).slideDown();
+        $("#room_<%= @room.id %> td").delay(200).show();
         setTimeout(function() {
-          $('#edit_room_<%= @room.id %>').remove();
+          $('#edit_room_<%= @room.id %>').parent().remove();
         }, 200);
       });
 
@@ -19,7 +19,7 @@
     });
   </script>
 
-  <%= f.label :name %><br/><%= f.text_field :name, class: 'i-blue i-medium' %> <%= @room.errors[:name].first %><br />
+  <%= f.label :name %><br/><%= f.text_field :name, autofocus: true, class: 'i-blue i-medium' %> <%= @room.errors[:name].first %><br />
   <%= f.label :description %><br/><%= f.text_area :description, rows: 6, class: 'i-blue i-medium' %> <%= @room.errors[:description].first %><br />
 
   <% if current_user.rooms.any? %>
@@ -28,6 +28,6 @@
 
   <div class="actions">
     <%= f.submit class: 'button b-blue b-medium' %>
-    <%= button_tag 'Cancel', type: 'button', id: 'cancel_button', class: 'button b-warning' %>
+    <%= link_to 'Cancel', ApplicationHelper::JS_NOOP, class: 'cancel_button' %>
   </div>
 <% end %>

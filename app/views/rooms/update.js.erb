@@ -1,9 +1,8 @@
 <% if @room.valid? %>
   $("#edit_room_<%= @room.id %>").slideUp(200);
-  $("#room_<%= @room.id %>").remove();
-  $("#created_rooms").append("<%= j render @room %>");
+  $("#room_<%= @room.id %>").hide().after("<%= j render @room %>").remove();
   $('#room_<%= @room.id %>').hide().delay(200).slideDown(200);
-
+  
   setTimeout(function() {
     $("#edit_room_<%= @room.id %>").remove();
   }, 200);

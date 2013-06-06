@@ -1,11 +1,24 @@
-<%= content_for :breadcrumbs do %>
+<% content_for :breadcrumbs do %>
+  <% room = Room.find(@test.room_id) %>
+
+  <% room.ancestors.each do |page| %>
+    <li><%= link_to page.name, rooms_path %> <span>/</span><li>
+  <% end %>
+  <li><%= link_to room.name, rooms_path %> <span>/</span></li>
+  <li><%= link_to @test.name, @test %> <span>/</span></li>
+  <li class='active'>Manage users</li>
+<% end %>
+
+<% if current_user.tests.include?(@test) %>
+  <%= content_for :headline_title do %>
+    Manage users
+  <% end %>
+
+  <%= render 'form' %>
+<% else %>
+  <%= content_for :headline_title do %>
+    This is not your test
+  <% end %>
   
+  Sorry but you can not manage users for test that not belongs to you<br />
 <% end %>
-
-<%= content_for :headline_title do %>
-  Add new users to the test
-<% end %>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', tests_path %>

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.13'
 gem 'mysql2'
 gem 'pg'
 gem 'jquery-rails'
@@ -9,6 +9,9 @@ gem 'nested_form'
 gem 'ancestry'
 gem 'thin'
 gem 'will_paginate'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-timepicker-rails'
+gem 'bootstrap-modal-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

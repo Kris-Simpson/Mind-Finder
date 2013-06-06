@@ -1,11 +1,15 @@
 <%= content_for :breadcrumbs do %>
-  
+  <% if @room.ancestors.any? %>
+    <% @room.ancestors.each do |page| %>
+      <li><%= link_to page.name, rooms_path %> <span>/</span><li>
+    <% end %>
+  <% end %>
+  <li><%= link_to @room.name, rooms_path %> <span>/</span></li>
+  <li class='active'>Manage users</li>
 <% end %>
 
 <%= content_for :headline_title do %>
-  Add new users to the room
+  Manage users
 <% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', rooms_path %>

@@ -1,13 +1,17 @@
-<div id="sign_in_form">
-  <p class="title_text"><%=t :login_form_title %></p>
-  <p class="context_text"><%=t :login_form_context %></p>
-        
-  <%= form_tag sessions_path do %>
-    <p><%= email_field_tag :email, params[:email], placeholder: t(:field_email), autofocus: true, class: "i-blue i-large" %></p>
-    <p><%= password_field_tag :password, params[:password], placeholder: t(:field_password), class: 'i-blue i-large' %></p>
+<div id="sign_in_form">    
+  <%= form_tag sessions_path, remote: true do %>
+    <legend>Sign In please</legend>
+  
+    <%= content_tag('p', flash[:alert], class: 'alert') if flash[:alert] %>
 
-    <p><%= submit_tag t(:login_form_submit), class: "button b-blue b-big" %></p>
-  <% end %>
-         
-  <span id="sign_up" onclick="formSwitch('sign_up_form')"><%=t :login_form_signup_link %></span> <i>&mdash;</i> <a><%=t :login_form_forgot_pass %></a>
+    <%= email_field_tag :email, params[:email], placeholder: t(:field_email), autofocus: true, class: 'input-block-level' %>
+    <%= password_field_tag :password, params[:password], placeholder: t(:field_password), class: 'input-block-level' %>
+
+    <p>
+      <%= submit_tag t(:login_form_submit), class: "btn" %> <i>&mdash;</i> 
+      <%= link_to t(:login_form_signup_link), new_user_path, class: 'btn btn-primary', remote: true %>
+    </p>
+      
+    <%= link_to t(:login_form_forgot_pass), reset_password_path %>
+  <% end %>  
 </div>

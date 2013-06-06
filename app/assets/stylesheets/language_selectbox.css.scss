@@ -1,61 +1,61 @@
-.selectbox {
-  display: inline-block;
-  position: relative;
-	cursor: pointer;
+// .selectbox {
+//   display: inline-block;
+//   position: relative;
+// 	cursor: pointer;
 
-	.select {
-    position: relative;
-	  width: 80px;
-	  padding-right: 5px;
-	  color: #ABABAB;
-	  font-size: 12px;
-	  text-transform: uppercase;
+// 	.select {
+//     position: relative;
+// 	  width: 80px;
+// 	  padding-right: 5px;
+// 	  color: #ABABAB;
+// 	  font-size: 12px;
+// 	  text-transform: uppercase;
 	  
-	  &:hover {
-      color: #37464F;
+// 	  &:hover {
+//       color: #37464F;
       
-      .arrow {
-	      opacity: 1;
-	      filter: alpha(opacity=100);
-      }
-    }
-  }
+//       .arrow {
+// 	      opacity: 1;
+// 	      filter: alpha(opacity=100);
+//       }
+//     }
+//   }
 
-  .arrow {
-	  position: absolute;
-	  top: 6px;
-	  right: 0;
-	  border-left: 5px solid transparent;
-	  border-right: 5px solid transparent;
-	  border-top: 5px solid #37464F;
-	  opacity: 0.3;
-	  filter: alpha(opacity=30);
-  }
+//   .arrow {
+// 	  position: absolute;
+// 	  top: 6px;
+// 	  right: 0;
+// 	  border-left: 5px solid transparent;
+// 	  border-right: 5px solid transparent;
+// 	  border-top: 5px solid #37464F;
+// 	  opacity: 0.3;
+// 	  filter: alpha(opacity=30);
+//   }
   
-  .dropdown {
-    position: absolute;
-    display: none;
-	  top: 37px;
-	  left: -25px;
-	  width: 150px;
-	  background: #37464F;
+//   .dropdown {
+//     position: absolute;
+//     display: none;
+// 	  top: 37px;
+// 	  left: -25px;
+// 	  width: 150px;
+// 	  background: #37464F;
 
-    @media all and (-webkit-min-device-pixel-ratio:0) {
-      top: 36px;
-    }
+//     @media all and (-webkit-min-device-pixel-ratio:0) {
+//       top: 36px;
+//     }
 
-    a {
-      display: block;
-      padding: 15px 0;    
+//     a {
+//       display: block;
+//       padding: 15px 0;    
 
-      li {
-        color: #fff;
-        font-size: 10px;
-      }
+//       li {
+//         color: #fff;
+//         font-size: 10px;
+//       }
 
-      &:hover {
-        background: #006596;
-      }
-    }
-  }
-}
+//       &:hover {
+//         background: #006596;
+//       }
+//     }
+//   }
+// }

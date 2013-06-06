@@ -18,15 +18,15 @@ class TestsAllowedUsersController < ApplicationController
   end
 
   def new
-    @test_id = params[:test]
+    @test = Test.find(params[:test])
     @allowed_users = []
     @users = []
     
-    TestsAllowedUser.where(test_id: @test_id).each do |user|
+    TestsAllowedUser.where(test_id: @test.id).each do |user|
       @allowed_users << User.find(user.user_id)
     end
     
-    User.all.each do |user|
+    User.where(email_confirm: true).each do |user|
       @users << user unless @allowed_users.include?(user)
     end
     

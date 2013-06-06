@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = current_user.rooms.order(:created_at)
+    @rooms = current_user.rooms.search(params[:search]).order(:created_at).paginate(per_page: 3, page: params[:page])
   end
 
   def show
@@ -48,7 +48,7 @@ class RoomsController < ApplicationController
         format.js
       else
         format.html { render action: "edit" }
-        format.js { render json: @room.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end

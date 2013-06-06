@@ -12,25 +12,40 @@
   });
 </script>
 
-  <h1>All users</h1>
-  <div style='min-height: 50px; width: 400px; border: 1px solid #000; float: left; margin-right: 50px;' id='all-users'>
+  <div style='border: 1px solid #000; overflow: auto;'>
+    <div style='border: 1px solid #000; width: 40%; float: left; margin-right: 70px;'><h2>All users</h2></div>
+    <div style='border: 1px solid #000; float: left;'><h2>Allowed users</h2></div>
+  </div>
+
+  <div style='min-height: 50px; width: 40%; border: 1px solid #000; float: left;' id='all-users'>
     <% @users.each do |user| %>
-      <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.email %></p>
+      <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></p>
     <% end %>
   </div >
+
+  <%= form_tag(rooms_user_allowed_path, { style: 'float: left; width: 40%;' }) do |f| %>
+    <h4 style='margin-left: 70px;'>New</h4>
+    <div style='border: 1px solid #000;'>
+      <%= image_tag("arrows.png", style: 'margin-top: 22px; float: left;') %>
+      <div id='allowed-users-new' style='border: 1px solid #000; min-height: 88px; width: 100%; margin-left: 70px;'></div>
+    </div><br />
   
-  <h1>Allowed users</h1>
-  <%= form_tag(rooms_user_allowed_path, { style: 'float: left;' }) do |f| %>
-    <h4>New</h4>
-    <div id='allowed-users-new' style='border: 1px solid #000; min-height: 50px; width: 400px;'></div>
-  
-    <h4>Added</h4>
-    <div id='allowed-users-added' style='border: 1px solid #000; min-height: 50px; width: 400px; float: left;'>
-      <% @allowed_users.each do |user| %>
-        <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.email %></p>
-      <% end %>
+    <h4 style='margin-left: 70px;'>Added</h4>
+    <div style='border: 1px solid #000;'>
+      <%= image_tag("arrows.png", style: 'margin-top: 22px; float: left;') %>
+      <div id='allowed-users-added' style='border: 1px solid #000; min-height: 88px; width: 100%; margin-left: 70px;'>
+        <% @allowed_users.each do |user| %>
+          <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></p>
+        <% end %>
+      </div>
     </div>
     
-    <%= hidden_field_tag 'room_id', @room_id %>
-    <%= submit_tag %>
+    <%= hidden_field_tag 'room_id', @room.id %>
+    
+    <br />
+    
+    <p style='border: 1px solid #000; margin-left: 70px;'>
+      <%= submit_tag %>
+      <%= link_to 'Back', rooms_path %>
+    </p>
   <% end %>

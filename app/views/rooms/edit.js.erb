@@ -1,2 +1,1 @@
-$("#room_<%= @room.id %>").slideUp(200).after("<%= j render('form') %>");
-$('#edit_room_<%= @room.id %>').hide().delay(200).slideDown(200);
+$("#room_<%= @room.id %> td").hide().parent().append('<td colspan=5></td>').find('td:visible').append('<%= j render "form" %>');

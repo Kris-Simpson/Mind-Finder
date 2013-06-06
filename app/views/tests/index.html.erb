@@ -1,21 +1,28 @@
-<% content_for :headline_title do %>
-  My tests
-<% end %>
+<% content_for :headline_title do %>My tests<% end %>
 
 <% content_for :breadcrumbs do %>
   <li class="active">My Tests</li>
 <% end %>
 
-<div id="created_tests">
-  <%= render(@tests) %>
+<% if @tests.any? %>
+  <%= form_tag tests_path, method: 'get', remote: true, class: 'form-search' do %>
+    <p>
+      <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, class: 'input-large search-query' %>
+      <%= submit_tag 'Search', name: nil, class: 'btn' %>
+    </p>
+  <% end %>
+<% end %>
 
-  <span class='empty-blocks'><%= raw('There are no tests') unless @tests.any? %></span>
+<div id="created_tests">
+  <span class='<%= "sorry" unless @tests.any? %>'><%= raw('There are no tests') unless @tests.any? %></span>
+  
+  <%= render 'tests' %>
 </div>
 
 <br />
 
 <% if current_user.rooms.all.any? %>
-  <%= link_to raw('<input class="b-blue b-medium" type="button" value="New Test">'), new_test_path, class: 'button-link' %>
+  <%= link_to 'New test', new_test_path, class: 'btn btn-primary btn-large' %>
 <% else %>
-  <%= link_to raw('<input class="b-white b-medium" type="button" value="New Test" disabled>'), new_test_path, class: 'button-link' %>
+  <%= link_to 'New Test', ApplicationHelper::JS_NOOP, title: 'You can\'t create any tests before you not created any rooms', class: 'btn btn-primary btn-large disabled', disabled: true %>
 <% end %>

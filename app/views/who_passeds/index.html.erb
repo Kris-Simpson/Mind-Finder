@@ -1,0 +1,38 @@
+<% content_for :breadcrumbs do %>
+  <% room = Room.find(@test.room_id) %>
+
+  <% unless current_user.tests.include?(@test) %>
+    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
+    <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+  <% end %>
+
+  <% room.ancestors.each do |page| %>
+    <li><%= link_to page.name, rooms_path %> <span>/</span><li>
+  <% end %>
+  <li><%= link_to room.name, rooms_path %> <span>/</span></li>
+  <li><%= link_to @test.name, @test %> <span>/</span></li>
+  <li class='active'>Who passed</li>
+<% end %>
+
+<% content_for :headline_title do %>
+  Who passed test
+<% end %>
+
+<p>Test: <%= @test.name %></p>
+
+<table border=1>
+  <tr>
+    <th>User</th>
+    <th>Rating</th>
+    <th>Passed at</th>
+  </tr>
+  <% @test.who_passeds.each do |who| %>
+    <tr>
+      <td><%= who.get_user ? who.get_user.get_full_name : 'That user has been deleted' %></td>
+      <td><%= who.rating %></td>
+      <td><%= who.created_at %></td>
+    </td>
+  <% end %>
+</table>
+
+<%= link_to 'Back to tests', tests_path %>

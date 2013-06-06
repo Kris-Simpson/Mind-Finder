@@ -5,5 +5,7 @@ class PassedTest < ActiveRecord::Base
   
   def get_test
     Test.find(self.test_id)
+  rescue
+    nil
   end
 end

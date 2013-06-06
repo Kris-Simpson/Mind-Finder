@@ -20,7 +20,7 @@
         The test can not be passed
       <% end %>
 
-      Sorry but according to the settings you can not pass the test more than once<br />
+      <span class='sorry'>Sorry but according to the settings you can not pass the test more than once</span><br />
 
       <%= link_to 'Back', :back %>
     <% else %>
@@ -84,7 +84,7 @@
                 <ul>
                   <%= hidden_field_tag 'questions[id][]', question.id %>
                   <% get_answers(question).each do |answer| %>
-                    <li class='answer'><%= check_box_tag 'answers[id][]', answer.id %> <%= answer.answer %></li>
+                    <li class='answer'><%= check_box_tag 'answers[id][]', answer.id %> <%= label_tag 'answer[id][]', answer.answer %></li>
                   <% end %>
                 </ul>
               </div>
@@ -106,7 +106,7 @@
       The test can not be passed
     <% end %>
 
-    Sorry but you are not allowed to passing this test<br />
+    <span class='sorry'>Sorry but you are not allowed to passing this test</span><br />
 
     <%= link_to 'Back', :back %>
   <% end %>
@@ -115,6 +115,6 @@
     The test can not be passed
   <% end %>
 
-  Sorry but test can not be passed because there are no questions<br />
+  <span class='sorry'>Sorry but test can not be passed because there are no questions</span><br />
   <%= link_to 'Back', :back %>
 <% end %>

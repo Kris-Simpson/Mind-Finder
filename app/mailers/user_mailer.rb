@@ -1,9 +1,13 @@
 class UserMailer < ActionMailer::Base
-  default from: "support@mind-finder.herokuapp.com"
+  default from: "support@mind-finder.com"
   
-  def welcome_email(user)
+  def email_confirmation(user)
     @user = user
-    @url  = "http://mind-finder.herokuapp.com"
-    mail(:to => user.email, :subject => "Welcome to My Awesome Site")
+    mail(to: user.email, subject: 'Email Confirmation')
+  end
+  
+  def password_reset(user)
+    @user = user
+    mail(to: user.email, subject: 'Password Reset')
   end
 end

@@ -23,7 +23,7 @@ en:
   alert_pass_must_have_at_least: "Password must have at least %{count} words"
   alert_pass_must_have_at_most: "Password must have at most %{count} words"
   
-  notice_signup_success: "Thanks for signing up! Please check your email, we sent you a message. "
+  notice_signup_success: "Thanks for signing up! Please check your email, we sent you a message."
   
   field_email: "Email Address"
   field_password: "Password"

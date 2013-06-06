@@ -1,4 +1,6 @@
 module ApplicationHelper
+  JS_NOOP = 'javascript:void(0);'
+  
   def sortable(column, title = nil)
     title ||= column.titleize
     css_class = column == sort_column ? "current #{sort_direction}" : nil

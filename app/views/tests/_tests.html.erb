@@ -1,0 +1,9 @@
+<script type="text/javascript">
+$(function() {
+  $('.pagination a').attr('data-remote', true);
+});
+</script>
+
+<%= render @tests %>
+
+<%= will_paginate @tests %>

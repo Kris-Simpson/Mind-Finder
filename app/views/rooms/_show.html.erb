@@ -1,10 +1,10 @@
 <% if current_user.rooms.include?(@room) %>
-  <div id="show_room_block">
+  <div id="show_room_block_<%= id %>">
     <script>
       $(function() {
-        $("#show_room_block a#cancel_link").click(function() {
-          $("#show_room_block").remove();
-          $("#room_<%= @room.id %>").show();
+        $("#show_room_block_<%= id %> .cancel_link").click(function() {
+          $("#show_room_block_<%= id %>").parent().remove();
+          $("#room_<%= @room.id %> td").show();
         });
       });
     </script>
@@ -19,7 +19,7 @@
       <% end %>
     <% end %>
 
-    <a id="cancel_link" class="link b-link-blue">Cancel</a>
+    <%= link_to 'Cancel', ApplicationHelper::JS_NOOP, class: 'cancel_link' %>
   </div>
 <% else %>
     <%= content_for :breadcrumbs do %>

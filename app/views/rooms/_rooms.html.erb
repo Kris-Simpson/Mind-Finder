@@ -1,0 +1,31 @@
+<script type="text/javascript">
+$(function() {
+  var padding = $('.table-link tr td').css('paddingTop');
+  $('.table-link tr td a').css({ 'padding' : padding, 'width' : function() {
+      return $('.table-link tr td a').width() - padding;
+    }
+  }).parent().css({ 'padding' : 0 });
+  
+  changePagination();
+});
+</script>
+
+<table class='table table-striped table-hover table-bordered table-link'>
+  <thead>
+    <tr>
+      <th style='text-align: center;'>Name</th>
+      <th style='text-align: center;'>Information</th>
+      <th style='text-align: center;' colspan=3>Actions</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+      <%= render @rooms %>
+  </tbody>
+</table>
+<div id='delete_room' class='modal hide fade'>
+  <%= render 'delete_room_modal' %>
+</div>
+
+<%= page_entries_info @rooms %>
+<%= will_paginate @rooms, previous_label: '&laquo;', next_label: '&raquo;' %>

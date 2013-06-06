@@ -1,77 +1,77 @@
-/* Author: Kris Simpson; */
-/* ##################### */
-/* Button types: button, button-link, link; */
-/* Colors: b-blue, b-link-blue; */
-/* Sizes: b-big; */
+// /* Author: Kris Simpson; */
+// /* ##################### */
+// /* Button types: button, button-link, link; */
+// /* Colors: b-blue, b-link-blue; */
+// /* Sizes: b-big; */
 
-/* Buttons */
+// /* Buttons */
 
-.button {
-  text-transform: uppercase;
-  font-size: 18px;
-  text-align: center;
-  font-family: Ubuntu-Bold;
-  padding: 4px;
-  border: 0;
+// .button {
+//   text-transform: uppercase;
+//   font-size: 18px;
+//   text-align: center;
+//   font-family: Ubuntu-Bold;
+//   padding: 4px;
+//   border: 0;
   
-  &:hover {
-    cursor: pointer;
-  }
-}
+//   &:hover {
+//     cursor: pointer;
+//   }
+// }
 
-.button-link {
-  text-decoration: none;
+// .button-link {
+//   text-decoration: none;
 
-  input {
-    @extend .button;
-  }
-}
+//   input {
+//     @extend .button;
+//   }
+// }
 
-.link {
-  text-decoration: none;
+// .link {
+//   text-decoration: none;
           
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-}
+//   &:hover {
+//     text-decoration: underline;
+//     cursor: pointer;
+//   }
+// }
 
-/* Colors */
+// /* Colors */
 
-.b-blue {
-  background-color: #008FD5;
-  color: white;
+// .b-blue {
+//   background-color: #008FD5;
+//   color: white;
 
-  &:hover {
-    background-color: #006596;
-  }
-}
+//   &:hover {
+//     background-color: #006596;
+//   }
+// }
 
-.b-white {
-  &:hover {
-    background-color: #F0F0F0;
-  }
-}
+// .b-white {
+//   &:hover {
+//     background-color: #F0F0F0;
+//   }
+// }
 
-.b-warning {
-  background-color: #D5000A;
-  color: white;
+// .b-warning {
+//   background-color: #D5000A;
+//   color: white;
 
-  &:hover {
-    background-color: #96000A;
-  }
-}
+//   &:hover {
+//     background-color: #96000A;
+//   }
+// }
 
-.b-link-blue {
-  color: #008FD5;
-}
+// .b-link-blue {
+//   color: #008FD5;
+// }
 
-/* Sizes */
+// /* Sizes */
 
-.b-big {
-  width: 100%;
-}
+// .b-big {
+//   width: 100%;
+// }
 
-.b-medium {
-  width: 250px;
-}
+// .b-medium {
+//   width: 250px;
+// }
