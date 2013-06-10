@@ -6,6 +6,14 @@
   =require twitter-bootstrap-static/fontawesome
   */
 
+a {
+  outline: none;
+  
+  &:focus {
+    text-decoration: none;
+  }
+}
+
 .main {
   margin-top: 50px;
 }
@@ -18,7 +26,7 @@
   }
 }
 
-input[type='email'], input[type='password'], input[type='text'] {
+input[type='email'], input[type='password'], input[type='text'], textarea {  
   &:focus {
     -webkit-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
     -moz-box-shadow:0 0 2px rgba(0, 143, 213, 0.5);
@@ -26,19 +34,65 @@ input[type='email'], input[type='password'], input[type='text'] {
   }
 }
 
-.table-link tr td {
-  &:hover {    
+.table-link tr {
+  th {
+    text-align: center;
+  }
+  
+  td {
+    &:hover {    
+      a {
+        -webkit-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+        -moz-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+        box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
+        text-decoration: none;
+      }
+    }
+    
     a {
-      -webkit-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
-      -moz-box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
-      box-shadow: 1px 1px 3px rgba(167, 167, 167, 0.5) inset;
-      text-decoration: none;
+      outline: none;
+      display: block;
+      height: 100%;
+      padding: 0;
+      
+      &.destroy_link {
+        color: #B20303;
+      }
+    }
+  }
+}
+
+.popover {
+  max-width: 400px;
+}
+
+#room_modal_manage, #test_modal_manage {
+  width: 900px;
+  margin-left: -450px;
+  
+  &.fade {
+    &.in {
+      top: 5%;
     }
   }
   
-  a {
-    display: block;
-    height: 100%;
-    padding: 0;
+  .modal-body {
+    max-height: 450px;
   }
+  
+  .table {
+    td {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.text-good {
+  color: #0088CC;
+}
+
+.text-bad {
+  color: #B20303;
 }

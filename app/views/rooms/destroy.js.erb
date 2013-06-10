@@ -1,14 +1,16 @@
-$("#room_<%= @room.id %>").slideUp(200);
-setTimeout(function() {
-  $("#room_<%= @room.id %>").remove();
-  var rooms = $('.block');
-  if(rooms.length == 0) {
-    $('div#created_rooms .empty-blocks').append('There are no rooms').hide().slideDown();
-  }
-}, 200);
+$("#room_<%= @room.id %>").remove();
 
 $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
 
-<% unless current_user.rooms.all.present? %>
-  $('#left .empty-menu').append('There are no <em>rooms</em> or <em>tests</em>');
+<% if current_user.rooms.any? %>
+  $('#created_rooms').empty().append('<%= j render "shared/content_table", content: current_user.rooms.page(params[:page]), model_name: "rooms" %>');
+  
+  $('.information').popover();
+<% else %>
+  $('.form-search').slideUp(200);
+  $('.row-fluid .span6 h4').slideDown(200);
+  
+  $('#created_rooms').slideUp(400).delay(400).empty();
+
+  $('#left-side .page-header').after('<p style="padding-top: 12px; text-align: center;">There are no <i><b>rooms</b></i> or <i><b>tests</b></i></p>');
 <% end %>

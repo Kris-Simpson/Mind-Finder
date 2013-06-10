@@ -1,16 +1,29 @@
 <tr id='room_<%= room.id %>'>
-  <td width='25%'><%= link_to room.name, room, class: 'name', remote: true %></td>
   <td>
-    <b>Path:</b>
-    <% room = Room.find(room.id) %>
-    
-    <% unless room.ancestors.any? %> <small><i>root directory</i></small> <% end %>
-    
-    <% room.ancestors.each do |page| %>
-      <small><%= page.name %> / </small>
-    <% end %>
+  <% if room.tests.any? %>
+    <%= link_to room.name, room, remote: true, data: { toggle: "modal", target: '#room_modal_show', backdrop: false } %>
+  <% else %>
+    <%= room.name %>
+  <% end %>
   </td>
-  <td width='15%'><%= link_to 'Manage users', { controller: 'rooms_allowed_users', action: 'new', room: room.id } %></td>
-  <td width='10%'><%= link_to 'Edit', edit_room_path(room), class: "edit_link", remote: true %></td>
-  <td width='10%'><%= link_to 'Destroy', ApplicationHelper::JS_NOOP, data: { url: room_path(room.id), toggle: "modal", target: '#delete_room' }, class: 'destroy_link' %></td>
+  
+  <td width='5%'>
+    <% content = '' %>
+    <% room = Room.find(room.id) %>
+    <% content = raw('Root directory') unless room.ancestors.any? %>
+    <% room.ancestors.each do |page| %>
+      <% content += raw("#{page.name} / ") %>
+    <% end %>
+    
+    <%= link_to raw('<b>Path</b>'), ApplicationHelper::JS_NOOP, data: { placement: 'left', title: 'Path', content: "#{content}", trigger: 'hover' }, class: 'information' %>
+  </td>
+  
+  <td width='10%'><b>Tests:</b> <%= room.tests.count %></td>
+  <td width='10%'><b>Users:</b> <%= room.allowed_users %></td>
+  
+  <td width='15%'><%= link_to raw('<i class="icon-user"></i> Manage users'), { controller: 'rooms_allowed_users', action: 'new', room: room.id }, remote: true, data: { toggle: "modal", target: '#room_modal_manage', backdrop: false } %></td>
+  
+  <td width='10%'><%= link_to raw('<i class="icon-edit"></i> Edit'), edit_room_path(room), remote: true, data: { toggle: "modal", target: '#room_modal_edit', backdrop: 'static', keyboard: false } %></td>
+  
+  <td width='10%'><%= link_to raw('<i class="icon-trash"></i> Destroy'), ApplicationHelper::JS_NOOP, data: { url: room_path(room.id), toggle: "modal", target: '#delete_room', backdrop: 'static', keyboard: false }, class: 'destroy_link' %></td>
 </tr>

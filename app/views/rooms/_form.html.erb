@@ -1,33 +1,38 @@
-<%= form_for(@room, remote: true) do |f| %>
-  <script>
-    $(function() {
-      $("#edit_room_<%= @room.id %> .actions .cancel_button").click(function() {
-        $("#edit_room_<%= @room.id %>").slideUp(200);
-        $("#room_<%= @room.id %> td").delay(200).show();
-        setTimeout(function() {
-          $('#edit_room_<%= @room.id %>').parent().remove();
-        }, 200);
-      });
+<%= form_for @room, remote: true, html: { class: 'form-horizontal', style: 'margin-bottom: 0;' } do |f| %>
+  <div class="modal-header">
+    <h3><%= title %></h3>
+  </div>
 
-      $("#new_room .actions #cancel_button").click(function() {
-        $("#new_room").slideUp(200);
-        $("#new_room_link").delay(200).fadeIn();
-        setTimeout(function() {
-          $('#new_room').remove();
-        }, 200);
-      });
-    });
-  </script>
+  <div class="modal-body"> 
+    <div class="control-group">
+      <%= content_tag('p', 'Name ' + @room.errors[:name].first, class: 'alert alert-error') if @room.errors[:name].any? %>
+      <%= f.label :name, class: 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, autofocus: true, placeholder: 'Name' %>
+      </div>
+    </div>
+    
+    <div class='control-group'>
+      <%= content_tag('p', 'Description ' + @room.errors[:description].first, class: 'alert alert-error') if @room.errors[:description].any? %>
+      <%= f.label :description, class: 'control-label' %>
+      <div class='controls'>
+        <%= f.text_area :description, rows: 4, placeholder: 'Description' %>
+      </div>
+    </div>
 
-  <%= f.label :name %><br/><%= f.text_field :name, autofocus: true, class: 'i-blue i-medium' %> <%= @room.errors[:name].first %><br />
-  <%= f.label :description %><br/><%= f.text_area :description, rows: 6, class: 'i-blue i-medium' %> <%= @room.errors[:description].first %><br />
-
-  <% if current_user.rooms.any? %>
-    <%= f.label :parent_id %><br/><%= f.collection_select :parent_id, current_user.rooms.order(:name), :id, :name, include_blank: true %> <%= @room.errors[:parent_id].first %>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit class: 'button b-blue b-medium' %>
-    <%= link_to 'Cancel', ApplicationHelper::JS_NOOP, class: 'cancel_button' %>
+    <% if current_user.rooms.any? %>
+    <div class='control-group'>
+      <%= content_tag('p', @room.errors[:parent_id].first, class: 'alert alert-error') if @room.errors[:parent_id].any? %>
+      <%= f.label :parent_id, class: 'control-label' %>
+      <div class='controls'>
+        <%= f.collection_select :parent_id, current_user.rooms.order(:name), :id, :name, include_blank: true %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+    
+  <div class="modal-footer">
+    <%= f.submit class: 'btn btn-success' %>
+    <button class="btn cancel-button" data-dismiss="modal" aria-hidden="true">Cancel</button>
   </div>
 <% end %>

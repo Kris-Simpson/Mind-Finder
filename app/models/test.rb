@@ -1,4 +1,6 @@
 class Test < ActiveRecord::Base
+  self.per_page = 5
+  
   attr_accessible :room_id, :description, :name, :questions_attributes, :min_shewn_questions, :max_shewn_questions, :time_for_passing, :allowed, :max_rating, :allow_repass, :rating_round
 
   belongs_to :room
@@ -9,12 +11,10 @@ class Test < ActiveRecord::Base
 
   accepts_nested_attributes_for :questions, reject_if: lambda { |a| a[:question].blank? }, allow_destroy: true
 
-  validates :name, :presence => true, :length => {
-    :in => 3..25
-  }
-  validates :description, :length => {
-    in: 0...100,
-  }
+  validates_associated :questions
+
+  validates :name, presence: true, length: { in: 3..25 }
+  validates :description, length: { in: 0..100 }
   validates :max_rating, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 5 }
   validates :rating_round, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }, allow_nil: true
   validates :min_shewn_questions, numericality: { only_integer: true }, allow_nil: true
@@ -30,6 +30,32 @@ class Test < ActiveRecord::Base
   
   def is_allowed?
     return questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }
+  end
+  
+  def why_not_allowed?
+    if self.is_allowed?
+      'Test is allowed.'
+    else
+      no_q   = 'Because your test without questions.'
+      no_a   = 'Because the questions in your test without answers.'
+      no_r_a = 'Because the questions in your test does not have the right answers.'
+      
+      unless questions.any?
+        return no_q
+      end
+      
+      unless questions.any? { |question| question.answers.any? }
+        return no_a
+      end
+      
+      unless questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }
+        return no_r_a
+      end
+    end
+  end
+  
+  def allowed_users
+    return tests_allowed_users.count == 0 ? 'all' : tests_allowed_users.count
   end
   
   def get_room

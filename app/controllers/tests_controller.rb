@@ -1,6 +1,6 @@
 class TestsController < ApplicationController
   def index
-    @tests = current_user.tests.includes(:room).search(params[:search]).order(:created_at).paginate(per_page: 5, page: params[:page])
+    @tests = current_user.tests.includes(:room).search(params[:search]).order(:created_at).page(params[:page])
   end
 
   def show
@@ -17,26 +17,27 @@ class TestsController < ApplicationController
   end
   
   def edit
-    @test = current_user.tests.find(params[:id])
+    @test = Test.find(params[:id])
+    @success = current_user.tests.include?(@test)
   end
   
   def create
     @test = current_user.rooms.find(params[:test][:room_id]).tests.create(params[:test])
     @test.rating_round = 0 if params[:test][:rating_round].blank?
+    @test.time_for_passing = nil if params[:test][:time_for_passing] == '00:00:00'
 
     respond_to do |format|
       if @test.valid?
         format.html { redirect_to tests_path, notice: 'Test was successfully created.' }
-        format.json { render json: @test, status: :created, location: @test }
+        format.js
       else
         format.html { render action: "new" }
-        format.json { render json: @test.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
 
   def update
-    binding.pry
     @test = current_user.tests.find(params[:id])
 
     respond_to do |format|
@@ -123,7 +124,10 @@ class TestsController < ApplicationController
       end
     end
     
-    redirect_to tests_path
+    respond_to do |format|
+      format.html { redirect_to tests_path }
+      format.js
+    end
   end
 
 private

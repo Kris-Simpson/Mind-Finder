@@ -1,2 +1,1 @@
-$("#new_room_link").fadeOut(200).after("<%= j render('form') %>");
-$('#new_room').hide().delay(200).slideDown();
+$("#room_modal_new").append("<%= j render 'form', title: 'New room' %>");

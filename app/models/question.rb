@@ -8,9 +8,9 @@ class Question < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers, reject_if: lambda { |a| a[:answer].blank? }, allow_destroy: true
 
-  validates :question, presence: true, :length => {
-    :in => 6...100
-  }
+  validates_associated :answers
+
+  validates :question, presence: true, length: { in: 6..100 }
   validates :explanation, length: { in: 0...100 }
   validates :min_shewn_answers, numericality: { only_integer: true }, allow_nil: true
   validates :max_shewn_answers, numericality: { only_integer: true }, allow_nil: true

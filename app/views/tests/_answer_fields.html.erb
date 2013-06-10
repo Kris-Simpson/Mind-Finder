@@ -1,7 +1,22 @@
-<p class="answer_fields" style='border: 2px solid red;'>
-  <%= f.label :answer %>
-  <%= f.text_field :answer %>
-  <%= f.check_box :is_right_answer, class: 'answer_checkbox' %>
-  <%= f.label :is_right_answer %>
-  <%= f.link_to_remove "remove" %>
-</p>
+<div class="answer_fields" style='border-bottom: 1px solid #e5e5e5; padding-bottom: 5px; margin-bottom: 15px;'>
+  <div class='row-fluid'>
+    <div class='span2'>
+      <%= f.label :answer %>
+    </div>
+    
+    <div class='span4'>
+      <div class='checkbox'>
+        <%= f.check_box :is_right_answer, class: 'answer_checkbox' %>
+        <%= f.label :is_right_answer %>
+      </div>
+    </div>
+    
+    <div class='span6'>
+      <%= f.link_to_remove "remove", style: 'float: right;' %>
+    </div>
+  </div>
+  
+  <div class='row-fluid'>
+    <%= f.text_field :answer, class: 'input-block-level' %>
+  </div>
+</div>

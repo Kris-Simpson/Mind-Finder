@@ -1,28 +1,36 @@
 <% content_for :headline_title do %>My tests<% end %>
 
 <% content_for :breadcrumbs do %>
-  <li class="active">My Tests</li>
+  <li class='active'>My tests</li>
 <% end %>
 
-<% if @tests.any? %>
-  <%= form_tag tests_path, method: 'get', remote: true, class: 'form-search' do %>
-    <p>
-      <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, class: 'input-large search-query' %>
-      <%= submit_tag 'Search', name: nil, class: 'btn' %>
-    </p>
-  <% end %>
-<% end %>
-
-<div id="created_tests">
-  <span class='<%= "sorry" unless @tests.any? %>'><%= raw('There are no tests') unless @tests.any? %></span>
+<div class='row-fluid'>
+  <div class='span6'>
+    <%= form_tag tests_path, method: 'get', class: 'form-search', style: @tests.any? ? "" : "display: none;", remote: true do %>
+      <div>
+        <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, autocomplete: 'off', class: 'search-query input-xlarge' %>
+        <%= submit_tag 'Search', name: nil, class: 'btn' %>
+      </div>
+    <% end %>
+      
+    <%= content_tag('h4', 'There are no tests, yet', style: @tests.any? ? "display: none;" : "") %>
+  </div>
   
-  <%= render 'tests' %>
+  <div class='span3 offset3'>
+    <% if current_user.rooms.any? %>
+      <%= link_to 'New test', new_test_path, class: 'btn btn-primary btn-block', style: 'float: right;' %>
+    <% else %>
+      <%= link_to 'New test', ApplicationHelper::JS_NOOP, title: 'You can\'t create any tests before you not created any rooms', class: 'btn btn-primary btn-large disabled', disabled: true %>
+    <% end %>
+  </div>
 </div>
 
-<br />
+<div id='test_modal_manage' class='modal hide fade'></div>
 
-<% if current_user.rooms.all.any? %>
-  <%= link_to 'New test', new_test_path, class: 'btn btn-primary btn-large' %>
-<% else %>
-  <%= link_to 'New Test', ApplicationHelper::JS_NOOP, title: 'You can\'t create any tests before you not created any rooms', class: 'btn btn-primary btn-large disabled', disabled: true %>
-<% end %>
+<div id='delete_test' class='modal hide fade'>
+  <%= render 'delete_test_modal' %>
+</div>
+
+<div id="created_tests">  
+  <%= render 'shared/content_table', content: @tests, model_name: 'tests' %>
+</div>

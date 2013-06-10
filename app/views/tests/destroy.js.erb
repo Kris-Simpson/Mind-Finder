@@ -1,10 +1,12 @@
-$("#test_<%= @test.id %>").slideUp(200);
-setTimeout(function() {
-  $("#test_<%= @test.id %>").remove();
-  var tests = $('.block');
-  if(tests.length == 0) {
-    $('div#created_tests .empty-blocks').append('There are no tests').hide().slideDown();
-  }
-}, 200);
-
 $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
+
+<% if current_user.tests.any? %>
+  $('#created_tests').empty().append('<%= j render "shared/content_table", content: current_user.tests.page(params[:page]), model_name: "tests" %>');
+  
+  $('.information').popover();
+<% else %>
+  $('.form-search').slideUp(200);
+  $('.row-fluid .span6 h4').slideDown(200);
+  
+  $('#created_tests').slideUp(400).delay(400).empty();
+<% end %>

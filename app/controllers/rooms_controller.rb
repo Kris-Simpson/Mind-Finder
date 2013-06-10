@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = current_user.rooms.search(params[:search]).order(:created_at).paginate(per_page: 3, page: params[:page])
+    @rooms = current_user.rooms.search(params[:search]).order(:created_at).page(params[:page])
   end
 
   def show
@@ -17,7 +17,8 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = current_user.rooms.find(params[:id])
+    @room = Room.find(params[:id])
+    @success = current_user.rooms.include?(@room)
 
     respond_to do |format|
       format.html { redirect_to rooms_url }
@@ -81,7 +82,10 @@ class RoomsController < ApplicationController
       end
     end
     
-    redirect_to rooms_path
+    respond_to do |format|
+      format.html { redirect_to rooms_path }
+      format.js
+    end
   end
 
 private

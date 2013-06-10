@@ -1,23 +1,33 @@
-<div class="question_fields" style='border: 2px solid #000;'>
-  <p>
-    <%= f.label :question %>
-    <%= f.link_to_remove "remove" %><br />
-    <%= f.text_area :question, rows: 3 %>
-  </p>
+<div class="question_fields span11 offset1" style='border-bottom: 1px solid #e5e5e5; padding-bottom: 15px;'>
+  <div class='row-fluid'>
+    <div class='span6'>
+      <fieldset>
+        <legend>Question <%= f.link_to_remove "remove", style: 'float: right;' %></legend>
+        
+        <%= f.label :question %>
+        <%= f.text_area :question, rows: 3, class: 'input-block-level' %>
+        
+        <%= f.label :explanation %>
+        <%= f.text_area :explanation, rows: 3, class: 'input-block-level' %>
+        
+        <%= f.label :min_shewn_answers %>
+        <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span>
+        
+        <%= f.label :max_shewn_answers %>
+        <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span>
+      </fieldset>
+    </div>
+    
+    <div class='span6'>
+      <fieldset>
+        <legend>Answers</legend>
+        
+        <%= f.fields_for :answers do |builder| %>
+          <%= render "answer_fields", f: builder %>
+        <% end %>
 
-  <%= f.fields_for :answers do |builder| %>
-    <%= render "answer_fields", f: builder %>
-  <% end %>
-
-  <p><%= f.link_to_add "Add Answer", :answers, class: "add_answer_link" %></p>
-
-  <div class='field'>
-    <div><%= f.label :min_shewn_answers %>: <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span></div>
-    <div><%= f.label :max_shewn_answers %>: <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span></div>
+        <%= f.link_to_add "Add Answer", :answers, class: "add_answer_link btn" %>
+      </fieldset>
+    </div>
   </div>
-  
-  <p>
-    <%= f.label :explanation %>:<br />
-    <%= f.text_area :explanation, rows: 3 %>
-  </p>
 </div>

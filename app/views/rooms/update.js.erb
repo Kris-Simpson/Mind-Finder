@@ -1,13 +1,11 @@
 <% if @room.valid? %>
-  $("#edit_room_<%= @room.id %>").slideUp(200);
-  $("#room_<%= @room.id %>").hide().after("<%= j render @room %>").remove();
-  $('#room_<%= @room.id %>').hide().delay(200).slideDown(200);
+  $('.cancel-button').click();
   
-  setTimeout(function() {
-    $("#edit_room_<%= @room.id %>").remove();
-  }, 200);
-
   $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
+  
+  $('#created_rooms').empty().append('<%= j render "shared/content_table", content: current_user.rooms.page(params[:page]), model_name: "rooms" %>').css({'display' : 'block'});
+  
+  $('.information').popover();
 <% else %>
-  $('#edit_room_<%= @room.id %>').replaceWith("<%= j render('form') %>");
+  $('#edit_room_<%= @room.id %>').replaceWith("<%= j render 'form', title: 'Edit room' %>");
 <% end %>

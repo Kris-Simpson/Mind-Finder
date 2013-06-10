@@ -1,22 +1,4 @@
 class TestsAllowedUsersController < ApplicationController
-  def index
-    @allowed_users = TestsAllowedUser.all
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @allowed_users }
-    end
-  end
-
-  def show
-    @allowed_user = TestsAllowedUser.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @allowed_user }
-    end
-  end
-
   def new
     @test = Test.find(params[:test])
     @allowed_users = []
@@ -34,53 +16,7 @@ class TestsAllowedUsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @allowed_user }
-    end
-  end
-
-  def edit
-    @allowed_user = TestsAllowedUser.find(params[:id])
-  end
-
-  def create
-    users = params[]
-    
-    raise users.inspect
-    
-    @allowed_user = TestsAllowedUser.new(params[:allowed_user])
-
-    respond_to do |format|
-      if @allowed_user.save
-        format.html { redirect_to @allowed_user, notice: 'Allowed user was successfully created.' }
-        format.json { render json: @allowed_user, status: :created, location: @allowed_user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @allowed_user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    @allowed_user = TestsAllowedUser.find(params[:id])
-
-    respond_to do |format|
-      if @allowed_user.update_attributes(params[:allowed_user])
-        format.html { redirect_to @allowed_user, notice: 'Allowed user was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @allowed_user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @allowed_user = TestsAllowedUser.find(params[:id])
-    @allowed_user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to allowed_users_url }
-      format.json { head :no_content }
+      format.js
     end
   end
 end

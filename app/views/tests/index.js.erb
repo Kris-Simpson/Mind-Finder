@@ -1,1 +1,1 @@
-$('#created_tests').html('<%= j render "tests" %>');
+$('#created_tests').html('<%= j render "shared/content_table", content: @tests, model_name: "tests" %>');

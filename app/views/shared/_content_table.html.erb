@@ -1,0 +1,25 @@
+<% if content.any? %>
+  <script type="text/javascript">
+    $(function() {
+      tablePadding();
+      changePagination();
+    });
+  </script>
+
+  <table class='table table-striped table-hover table-bordered table-link'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th colspan='<%= model_name == "tests" ? "4" : "3" %>'><i class='icon-info-sign'></i> Information</th>
+        <th colspan=3><i class='icon-wrench'></i> Actions</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <%= render content %>
+    </tbody>
+  </table>
+
+  <%= page_entries_info content, model: model_name %>
+  <%= will_paginate content, previous_label: '&laquo;', next_label: '&raquo;' %>
+<% end %>

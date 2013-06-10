@@ -1,0 +1,5 @@
+<% if @test.valid? %>
+  window.location = '<%= tests_url %>'
+<% else %>
+  $('#new_test').replaceWith('<%= j render "form" %>');
+<% end %>

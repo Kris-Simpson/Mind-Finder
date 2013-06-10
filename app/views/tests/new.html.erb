@@ -1,7 +1,10 @@
+<% content_for :breadcrumbs do %>
+  <li><%= link_to 'My Tests', tests_path %> <span>/</span></li>
+  <li class="active">New test</li>
+<% end %>
+
 <% content_for :headline_title do %>
   New test
 <% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Cancel', tests_path %>

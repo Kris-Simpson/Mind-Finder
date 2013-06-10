@@ -1,51 +1,64 @@
-<script>
-  $(document).on('click', '.user', function() {
-    if($(this).parent().is('#all-users')) {
-      $('#allowed-users-new').append('<input id="new_users_id_" class="user_' + $(this).attr('data-user-id') + '" type="hidden" value=' + $(this).attr('data-user-id') + ' name="new_users[id][]">').append($(this));
-    } else if($(this).parent().is('#allowed-users-new')) {
-      $('#all-users').append($(this));
-      $(this).parents().find('.user_' + $(this).attr('data-user-id')).remove();
-    } else if($(this).parent().is('#allowed-users-added')) {
-      $('#all-users').append($(this));
-      $('#allowed-users-added').append('<input id="deleted_users_id_" type="hidden" value=' + $(this).attr('data-user-id') + ' name="deleted_users[id][]">');
-    }
-  });
-</script>
+<div class='modal-header'>
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3>Manage users for <%= @test.name %></h3>
+</div>
 
-  <div style='border: 1px solid #000; overflow: auto;'>
-    <div style='border: 1px solid #000; width: 40%; float: left; margin-right: 70px;'><h2>All users</h2></div>
-    <div style='border: 1px solid #000; float: left;'><h2>Allowed users</h2></div>
-  </div>
+<%= form_tag tests_user_allowed_path, { style: 'margin-bottom: 0;', remote: true } do |f| %>
 
-  <div style='min-height: 50px; width: 40%; border: 1px solid #000; float: left;' id='all-users'>
-    <% @users.each do |user| %>
-      <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></p>
-    <% end %>
-  </div >
+<%= hidden_field_tag 'test_id', @test.id %>
 
-  <%= form_tag(tests_user_allowed_path, { style: 'float: left; width: 40%;' }) do |f| %>
-    <h4 style='margin-left: 70px;'>New</h4>
-    <div style='border: 1px solid #000;'>
-      <%= image_tag("arrows.png", style: 'margin-top: 22px; float: left;') %>
-      <div id='allowed-users-new' style='border: 1px solid #000; min-height: 88px; width: 100%; margin-left: 70px;'></div>
-    </div><br />
-  
-    <h4 style='margin-left: 70px;'>Added</h4>
-    <div style='border: 1px solid #000;'>
-      <%= image_tag("arrows.png", style: 'margin-top: 22px; float: left;') %>
-      <div id='allowed-users-added' style='border: 1px solid #000; min-height: 88px; width: 100%; margin-left: 70px;'>
-        <% @allowed_users.each do |user| %>
-          <p style='cursor: pointer;' class='user' data-user-id='<%= user.id %>'><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></p>
-        <% end %>
+  <div class='modal-body'>
+    <div class='row-fluid' style='width: 95%; margin: 0 auto;'>
+      <div class='span4'>
+        <fieldset>
+          <legend>All</legend>
+          
+          <table class='table table-bordered table-hover table-striped' style='<%= "display: none;" unless @users.any? %>'>
+            <tbody id='all-users'>
+              <% @users.each do |user| %>
+                <tr class='user' data-user-id='<%= user.id %>'>
+                  <td><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+      
+      <div class='span4'>
+        <fieldset>
+          <legend>New</legend>
+          
+          <table class='table table-bordered table-hover' style='display: none;'>
+            <tbody id='allowed-users-new'>
+              
+            </tbody>
+          </table>
+        </fieldset>
+      </div>
+      
+      <div class='span4'>
+        <fieldset>
+          <legend>Added</legend>
+          
+          
+          <table class='table table-bordered table-hover table-striped' style='<%= "display: none;" unless @allowed_users.any? %>'>
+            <tbody id='allowed-users-added'>
+              <% @allowed_users.each do |user| %>
+                <tr class='user' data-user-id='<%= user.id %>'>
+                  <td><%= user.first_name.blank? ? user.email : user.get_full_name + ' (' + user.email + ')' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </fieldset>
       </div>
     </div>
-    
-    <%= hidden_field_tag 'test_id', @test.id %>
-    
-    <br />
-    
-    <p style='border: 1px solid #000; margin-left: 70px;'>
-      <%= submit_tag %>
-      <%= link_to 'Back', tests_path %>
-    </p>
-  <% end %>
+  </div>
+
+  <div class='modal-footer'>
+    <%= submit_tag 'Save users', class: 'btn btn-success' %>
+    <button class="btn cancel-button" data-dismiss="modal" aria-hidden="true">Cancel</button>
+  </div>
+
+<% end %>

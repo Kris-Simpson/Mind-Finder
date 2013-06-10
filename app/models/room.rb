@@ -1,4 +1,6 @@
 class Room < ActiveRecord::Base
+  self.per_page = 5
+  
   attr_accessible :name, :description, :parent_id, :is_main
 
   has_ancestry
@@ -24,6 +26,10 @@ class Room < ActiveRecord::Base
     else
       scoped
     end
+  end
+  
+  def allowed_users
+    return rooms_allowed_users.count == 0 ? 'all' : rooms_allowed_users.count
   end
   
   def get_user

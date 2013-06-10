@@ -4,25 +4,34 @@
   <li class='active'>My rooms</li>
 <% end %>
 
+<% arr = ['test', 'test2', 'test3', 'Test', 'Testing'] %>
+
 <div class='row-fluid'>
   <div class='span6'>
-    <% if @rooms.any? %>
-      <%= form_tag rooms_path, method: 'get', class: 'form-search', remote: true do %>
-        <p>
-          <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, class: 'search-query input-large' %>
-          <%= submit_tag 'Search', name: nil, class: 'btn' %>
-        </p>
-      <% end %>
+    <%= form_tag rooms_path, method: 'get', class: 'form-search', style: @rooms.any? ? "" : "display: none;", remote: true do %>
+      <div>
+        <%= text_field_tag :search, params[:search], placeholder: 'Search here...', autofocus: true, autocomplete: 'off', class: 'search-query input-xlarge' %>
+        <%= submit_tag 'Search', name: nil, class: 'btn' %>
+      </div>
     <% end %>
+      
+    <%= content_tag('h4', 'There are no rooms, yet', style: @rooms.any? ? "display: none;" : "") %>
   </div>
   
   <div class='span3 offset3'>
-    <%= link_to 'New room', new_room_path, id: "new_room_link", class: 'btn btn-primary btn-block', remote: true, style: 'float: right;' %>
+    <%= link_to 'New room', new_room_path, id: "new_room_link", class: 'btn btn-primary btn-block', remote: true, style: 'float: right;', data: { toggle: "modal", target: '#room_modal_new', backdrop: 'static', keyboard: false } %>
   </div>
 </div>
 
-<div id="created_rooms">
-  <span class='<%= "sorry" unless @rooms.any? %>'><%= raw('There are no rooms') unless @rooms.any? %></span>
-  
-  <%= render 'rooms' %>
+<div id='room_modal_new' class='modal hide fade'></div>
+<div id='room_modal_edit' class='modal hide fade'></div>
+<div id='room_modal_show' class='modal hide fade'></div>
+<div id='room_modal_manage' class='modal hide fade'></div>
+
+<div id='delete_room' class='modal hide fade'>
+  <%= render 'delete_room_modal' %>
+</div>
+
+<div id="created_rooms">  
+  <%= render 'shared/content_table', content: @rooms, model_name: 'rooms' %>
 </div>

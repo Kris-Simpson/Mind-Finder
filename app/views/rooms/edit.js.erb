@@ -1,1 +1,3 @@
-$("#room_<%= @room.id %> td").hide().parent().append('<td colspan=5></td>').find('td:visible').append('<%= j render "form" %>');
+<% if @success %>
+  $("#room_modal_edit").append("<%= j render 'form', title: 'Edit room' %>");
+<% end %>

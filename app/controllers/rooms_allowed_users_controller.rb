@@ -17,7 +17,7 @@ class RoomsAllowedUsersController < ApplicationController
     
     respond_to do |format|
       format.html
-      format.json { render json: @allowed_user }
+      format.js
     end
   end
 end

@@ -1,1 +1,1 @@
-$("#room_<%= @room.id %> td").hide().parent().append('<td colspan=5></td>').find('td:visible').append("<%= j render 'show', id: @room.id %>");
+$("#room_modal_show").append("<%= j render 'show' %>");

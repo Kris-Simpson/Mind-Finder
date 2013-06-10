@@ -21,7 +21,7 @@ uk:
   
   login_form_title: "Авторизуйтеся на сайті!"
   login_form_context: "Ввійдіть будь-ласка, це безпечно :)"
-  login_form_submit: "Ввійти"
+  login_form_submit: "Увійти"
   login_form_signup_link: "Потрібна реєстрація?"
   login_form_forgot_pass: "Забули свій пароль?"
   

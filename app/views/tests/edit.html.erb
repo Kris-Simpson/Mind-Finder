@@ -1,7 +1,21 @@
-<% content_for :headline_title do %>
-  Editing test
+<% if @success %>
+  <% content_for :headline_title do %>
+    Editing test
+  <% end %>
+
+  <%= render 'form' %>
+
+  <%= link_to 'Cancel', tests_path %>
+<% else %>
+  <% content_for :breadcrumbs do %>
+    <li class='active'>Not my test /</li>
+  <% end %>
+
+  <% content_for :headline_title do %>
+    Can't edit test
+  <% end %>
+
+  <div class='alert alert-error'>This test does not belong to you! You can not edit it!</div>
+
+  <%= link_to 'Back', :back %>
 <% end %>
-
-<%= render 'form' %>
-
-<%= link_to 'Cancel', tests_path %>

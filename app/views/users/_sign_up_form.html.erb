@@ -16,9 +16,9 @@
       <%= f.password_field :password_confirmation, placeholder: t(:field_password_confirm), class: 'input-block-level' %>
 
       <p>
-        <%= f.submit value: t(:signup_form_submit), class: "btn", remote: true %>
+        <%= f.submit value: t(:signup_form_submit), class: "btn btn-success", remote: true %>
         <%=t :signup_form_or %>
-        <%= link_to t(:signup_form_login_link), new_session_path, class: 'btn btn-primary', remote: true %>
+        <%= link_to t(:login_form_submit), new_session_path, class: 'btn btn-primary', remote: true %>
       </p>
     </fieldset>
   <% end %>

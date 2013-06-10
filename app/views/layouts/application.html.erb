@@ -16,7 +16,32 @@
           <%= link_to 'Mind Finder', current_user ? rooms_path : index_path, class: 'brand' %>
             <ul class="nav pull-right">
               <% if current_user %>
-                             
+                
+                <li class='dropdown <%= "active" if params[:controller] == "rooms" %>'>
+                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+                    Rooms
+                    <b class='caret'></b>
+                  </a>
+                  
+                  <ul class='dropdown-menu'>
+                    <!-- <li class='<%#= "active" if params[:controller] == "rooms" && params[:action] == "new" %>'><%#= link_to 'New room', new_room_path %></li> -->
+                    <li class='<%= "active" if params[:controller] == "rooms" && params[:action] != "show" %>'><%= render 'shared/rooms' %></li>
+                  </ul>
+                </li>
+                
+                <li class='dropdown <%= "active" if params[:controller] == "tests" || params[:controller] == "passed_tests" %>'>
+                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
+                    Tests
+                    <b class='caret'></b>
+                  </a>
+                  
+                  <ul class='dropdown-menu'>
+                    <li class='<%= "active" if params[:controller] == "tests" && params[:action] == "new" %>'><%= link_to 'New test', new_test_path %></li>
+                    <li class='<%= "active" if params[:controller] == "tests" && params[:action] != "new" %>'><%= render 'shared/tests' %></li>
+                    <li class='<%= "active" if params[:controller] == "passed_tests" %>'><%= link_to 'Passed tests', passed_tests_path %></li>
+                  </ul>
+                </li>
+                
                 <li class='dropdown <%= "active" if params[:controller] == "users" %>'>
                   <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
                     Profiles
@@ -26,20 +51,6 @@
                   <ul class='dropdown-menu'>
                     <li class='<%= "active" if params[:controller] == "users" && params[:action] == "index" %>'><%= link_to 'All profiles', users_path %></li>
                     <li class='<%= "active" if params[:controller] == "users" && params[:action] == "edit" %>'><%= link_to 'My profile', edit_user_path(current_user) %></li>
-                  </ul>
-                </li>
-                
-                <li class='<%= "active" if (params[:controller] == "rooms" && params[:action] != "show") || params[:controller] == "rooms_allowed_users" %> '><%= render 'shared/rooms' %></li>
-                
-                <li class='dropdown <%= "active" if params[:controller] == "tests" || params[:controller] == "passed_tests" %>'>
-                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-                    Tests
-                    <b class='caret'></b>
-                  </a>
-                  
-                  <ul class='dropdown-menu'>
-                    <li class='<%= "active" if params[:controller] == "tests" %>'><%= render 'shared/tests' %></li>
-                    <li class='<%= "active" if params[:controller] == "passed_tests" %>'><%= link_to 'Passed tests', passed_tests_path %></li>
                   </ul>
                 </li>
                 
@@ -79,45 +90,6 @@
   
 <% else %>
   
-<!--   <div class='main' style='width: 90%; margin: 50px auto 0;'>
-    <div class='span12' style='border: 1px solid #000;'>
-      <ul class="breadcrumb">
-        <%= yield :breadcrumbs %>
-      </ul>
-    </div>
-
-    <div class='container' style='border: 1px solid #000;'>
-      <div class='row'>
-      	<div class="span3">
-          <span class='empty-menu'><%= raw('There are no <em>rooms</em> or <em>tests</em>') unless current_user.rooms.roots.present? %></span>
-
-          <ul id='submenu'>
-            <%= render 'shared/submenu' %>
-          </ul>
-        </div>
-      	
-      	<div class="span9">
-          <div class='row' style='border: 1px solid #000;'>
-        		<div class='span4'>
-        			<h1><%= yield :headline_title %></h1>
-        		</div>
-
-        		<% if current_user %>
-      			<div class='span4'>
-      			  <%=t :logged_in_title %> <span><%= current_user.get_full_name %></span><br />
-      			  <%= link_to t(:logged_in_log_out_link), logout_path, class: "link b-link-blue" %>
-      			</div>
-      			<% end %>
-          </div>
-
-          <div id="content">
-            <%= yield %>
-          </div>
-      	</div>
-      </div>
-    </div>
-  </div> -->
-  
     <div class="container-fluid" style='width: 90%; margin: 60px auto 0;'>
       <div class="row-fluid">
         <ul class="breadcrumb">
@@ -130,7 +102,7 @@
             <h3 style='text-align: center;'>Folder Tree</h3>
           </div>
           
-          <%= raw('There are no <em>rooms</em> or <em>tests</em>') unless current_user.rooms.roots.present? %>
+          <%= content_tag('p', raw('There are no <i><b>rooms</b></i> or <i><b>tests</b></i>'), style: 'padding-top: 12px; text-align: center;') unless current_user.rooms.roots.present? %>
 
           <ul id='submenu'><%= render 'shared/submenu' %></ul>
         </div>
@@ -156,9 +128,5 @@
     </div>
   
 <% end %>
-
-	<footer>
-    <!-- &copy; Kris_Simpson, 2013 -->
-	</footer>
 </body>
 </html>
