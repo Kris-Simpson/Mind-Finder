@@ -1,11 +1,15 @@
 <% if @success %>
+  <% content_for :breadcrumbs do %>
+    <li><%= link_to 'My tests', tests_path %> <span>/</span></li>
+    <li><%= link_to @test.name, @test %> <span>/</span></li>
+    <li class='active'>Edit</li>
+  <% end %>
+
   <% content_for :headline_title do %>
-    Editing test
+    Editing <%= @test.name %>
   <% end %>
 
   <%= render 'form' %>
-
-  <%= link_to 'Cancel', tests_path %>
 <% else %>
   <% content_for :breadcrumbs do %>
     <li class='active'>Not my test /</li>

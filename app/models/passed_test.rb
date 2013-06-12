@@ -1,5 +1,5 @@
 class PassedTest < ActiveRecord::Base
-  attr_accessible :user_id, :test_id, :rating
+  attr_accessible :user_id, :test_id, :rating, :updated_at
   
   belongs_to :user
   

@@ -45,10 +45,10 @@
         </div>
 
         <%= f.label :min_shewn_questions %>
-        <%= f.range_field :min_shewn_questions, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span>
+        <%= f.select(:min_shewn_questions, options_for_select([['5 questions', 5], ['10 questions', 10], ['15 questions', 15], ['20 questions', 20], ['30 questions', 30], ['40 questions', 40], ['all questions', 0]], @test.min_shewn_questions || 0)) %>
         
         <%= f.label :max_shewn_questions %>
-        <%= f.range_field :max_shewn_questions, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span>
+        <%= f.select(:max_shewn_questions, options_for_select([['5 questions', 5], ['10 questions', 10], ['15 questions', 15], ['20 questions', 20], ['30 questions', 30], ['40 questions', 40], ['all questions', 0]], @test.max_shewn_questions || 0)) %>
         
         <label class='checkbox' style='margin-top: 5px;'>
           <%= f.check_box :allow_repass, checked: true %>
@@ -62,7 +62,7 @@
         <legend>Evaluation options</legend>
         
         <%= f.label :max_rating, 'Max rating*' %>
-        <%= f.text_field :max_rating, value: 100, class: 'input-block-level' %>
+        <%= f.select(:max_rating, options_for_select([['5 points', 5], ['10 points', 10], ['12 points', 12], ['25 points', 25], ['50 points', 50], ['75 points', 75], ['100 points', 100]], @test.max_rating || 100)) %>
         
         <%= f.label :rating_round %>
         <%= f.text_field :rating_round, class: 'input-block-level' %>
@@ -80,6 +80,6 @@
   
   <%= f.link_to_add "Add Question", :questions, class: 'btn btn-primary', style: 'margin-top: 15px;' %>
 
-  <%= f.submit 'Create new test', class: 'btn btn-success btn-large', style: 'position: fixed; left: 11%; bottom: 60px;' %>
+  <%= f.submit class: 'btn btn-success btn-large', style: 'position: fixed; left: 11%; bottom: 60px;' %>
   <%= link_to 'Cancel', tests_path, class: 'btn btn-small', style: 'position: fixed; left: 11%; bottom: 20px;' %>
 <% end %>

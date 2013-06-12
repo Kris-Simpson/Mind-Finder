@@ -20,7 +20,7 @@
     <% if current_user.rooms.any? %>
       <%= link_to 'New test', new_test_path, class: 'btn btn-primary btn-block', style: 'float: right;' %>
     <% else %>
-      <%= link_to 'New test', ApplicationHelper::JS_NOOP, title: 'You can\'t create any tests before you not created any rooms', class: 'btn btn-primary btn-large disabled', disabled: true %>
+      <%= link_to 'New test', ApplicationHelper::JS_NOOP, title: 'You can\'t create any tests before you not created any rooms', class: 'btn btn-primary btn-block disabled', disabled: true, data: { toggle: 'tooltip' } %>
     <% end %>
   </div>
 </div>

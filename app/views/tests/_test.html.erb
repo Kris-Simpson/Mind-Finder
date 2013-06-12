@@ -15,13 +15,13 @@
     <% if test.is_allowed? %>
       <b>Allowed:</b> <%= content_tag('span', test.is_allowed?, class: 'text-good') %></span>
     <% else %>
-      <%= link_to raw('<b style="color: #333;">Allowed:</b> <span class="text-bad">false</span>'), ApplicationHelper::JS_NOOP, data: { placement: 'left', title: 'Why not allowed?', content: "#{test.why_not_allowed?}", trigger: 'hover' }, class: 'information' %>
+      <%= link_to raw('<b style="color: #333;">Allowed:</b> <span class="text-bad">false</span>'), ApplicationHelper::JS_NOOP, data: { placement: 'left', title: 'Why not allowed?', content: "Because #{test.why_not_allowed?}", trigger: 'hover' }, class: 'information' %>
     <% end %>
   </td>
   
-  <td width='12%'><b>Questions:</b> <%= test.questions.count %></td>
+  <td width='13%'><b>Questions:</b> <%= test.questions.count %></td>
   
-  <td></td>
+  <td width='10%'><b>Users:</b> <%= test.allowed_users %></td>
   
   <td width='15%'><%= link_to raw('<i class="icon-user"></i> Manage users'), { controller: 'tests_allowed_users', action: 'new', test: test.id }, data: { toggle: "modal", target: '#test_modal_manage', backdrop: false, remote: true } %></td>
   <td width='10%'><%= link_to raw('<i class="icon-edit"></i> Edit'), edit_test_path(test) %></td>

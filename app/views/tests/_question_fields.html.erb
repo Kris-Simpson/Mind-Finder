@@ -10,11 +10,11 @@
         <%= f.label :explanation %>
         <%= f.text_area :explanation, rows: 3, class: 'input-block-level' %>
         
-        <%= f.label :min_shewn_answers %>
-        <%= f.range_field :min_shewn_answers, class: 'min', value: 0, min: 0, max: 0 %> <span>0</span>
+        <%= f.label :min_shewn_answers %>        
+        <%= f.select(:min_shewn_answers, options_for_select([['2 answers', 2], ['3 answers', 3], ['4 answers', 4], ['5 answers', 5], ['10 answers', 10], ['all answers', 0]], f.object.min_shewn_answers || 0)) %>
         
         <%= f.label :max_shewn_answers %>
-        <%= f.range_field :max_shewn_answers, class: 'max', value: 0, min: 0, max: 0 %> <span>0</span>
+        <%= f.select(:max_shewn_answers, options_for_select([['2 answers', 2], ['3 answers', 3], ['4 answers', 4], ['5 answers', 5], ['10 answers', 10], ['all answers', 0]], f.object.max_shewn_answers || 0)) %>
       </fieldset>
     </div>
     

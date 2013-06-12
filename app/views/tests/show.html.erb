@@ -1,120 +1,143 @@
-<% content_for :breadcrumbs do %>
-  <% room = Room.find(@test.room_id) %>
+<% if @test %>
+  <% content_for :breadcrumbs do %>
+    <% room = Room.find(@test.room_id) %>
 
-  <% unless current_user.tests.include?(@test) %>
-    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
-    <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+    <% unless current_user.tests.include?(@test) %>
+      <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
+      <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+    <% end %>
+
+    <% room.ancestors.each do |page| %>
+      <li><%= link_to page.name, page %> <span>/</span><li>
+    <% end %>
+    <li><%= link_to room.name, room %> <span>/</span></li>
+    <li class='active'><%= @test.name %></li>
   <% end %>
 
-  <% room.ancestors.each do |page| %>
-    <li><%= link_to page.name, page %> <span>/</span><li>
-  <% end %>
-  <li><%= link_to room.name, room %> <span>/</span></li>
-  <li class='active'><%= @test.name %></li>
-<% end %>
+  <% if @test.is_allowed? %>
+    <% if current_user.tests.include?(@test) || @test.tests_allowed_users.empty? || @test.tests_allowed_users.any? { |user| user.its_a?(current_user) } %>
+      <% if !@test.allow_repass && current_user.passed_tests.any? { |passed_test| passed_test.test_id == @test.id } %>
+        <% content_for :headline_title do %>
+          The test can not be passed
+        <% end %>
 
-<% if @test.is_allowed? %>
-  <% if current_user.tests.include?(@test) || @test.tests_allowed_users.empty? || @test.tests_allowed_users.any? { |user| user.its_a?(current_user) } %>
-    <% if !@test.allow_repass && current_user.passed_tests.any? { |passed_test| passed_test.test_id == @test.id } %>
+        <span class='alert alert-error'>Sorry, but according to the settings you can not pass the test more than once.</span>
+
+        <br /><br />
+
+        <%= link_to 'Back', :back %>
+      <% else %>
+        
+        <% questions = get_questions(@test) %>
+        
+        <script>
+        <% questions.each do |question| %>
+          $(document).on('click', '#button_<%= question.id %>', function() {
+            $('.questions').hide();
+            $('#question_<%= question.id %>').show();
+          });
+        <% end %>
+        
+          $(function() {
+            $('.question_button').attr('disabled', true);
+            $('input[type=checkbox]').attr('checked', false);
+          });
+        </script>
+        
+        <% content_for :headline_title do %>
+          Passing the test
+        <% end %>
+      
+        <div class='row-fluid'>
+          <div class='span6'>
+            <p><b>Owner:</b> <%= @test.get_room.get_user.get_full_name %></p>
+            <p><b>Name:</b> <%= @test.name %></p>
+            <p><b>Max rating:</b> <span class='text-good'><%= @test.max_rating %> points</span></p>
+
+          </div>
+          
+          <% unless @test.description.blank? %>
+            <div class='span6'>
+              <b>Description:</b> <%= @test.description %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class='row-fluid'>
+          <div class='span3' style='text-align: center; border-right: 1px solid #eee; border-top: 1px solid #eee; border-radius: 10px; padding-top: 10px;'>
+            <p style='<%= "display: none;" if @test.time_for_passing.nil? %> text-align: center;'><b>Time remaining:</b> <span id='time'><%= @test.time_for_passing.strftime('%H:%M:%S') if @test.time_for_passing %></span></p>
+            
+            <% questions.each_with_index do |question, index| %>
+              <p style='text-align: center;'><%= button_tag "Question #{index + 1}", type: "button", id: "button_#{question.id}", class: 'question_button btn btn-primary' %></p>
+            <% end %>
+
+            <%= link_to 'Cancel', tests_path, class: 'btn btn-mini', data: { confirm: 'Are you sure you want to finish this test?' } %>
+          </div>
+          
+          <div class='span9'>
+            <%= form_tag(test_passed_path) do %>
+              <%= hidden_field_tag 'user_id', current_user.id %>
+              <%= hidden_field_tag 'test_id', @test.id %>
+            
+              <%= button_tag 'Start test', type: 'button', id: 'start_test_button', class: 'btn btn-success btn-large' %>
+              
+              <% questions.each_with_index do |question, index| %>
+                <%= field_set_tag raw("<b>Question #{index + 1}:</b> #{question.question}"), id: "question_#{question.id}", class: 'questions', style: 'display: none;' do %>
+                    <%= hidden_field_tag 'questions[id][]', question.id %>
+                    <% get_answers(question).each do |answer| %>
+                      <label class="checkbox">
+                        <%= check_box_tag 'answers[id][]', answer.id %> <%= label_tag 'answer[id][]', answer.answer %>
+                      </label>
+                    <% end %>
+                    
+                    <br />  
+
+                    <% if question.id == questions.last.id %>
+                      <%= submit_tag 'End test', id: 'end_button', class: 'btn btn-warning', data: { confirm: 'Are you sure you want to finish this test?' } %>
+                    <% else %>
+                      <%= button_tag "Next question", type: "button", id: "button_#{questions[index + 1].id}", class: 'btn' %>
+                    <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      <% end %>
+    <% else %>    
       <% content_for :headline_title do %>
         The test can not be passed
       <% end %>
 
-      <span class='sorry'>Sorry but according to the settings you can not pass the test more than once</span><br />
+      <span class='alert alert-error'>Sorry, but you are not allowed to passing this test.</span>
+
+      <br /><br />
 
       <%= link_to 'Back', :back %>
-    <% else %>
-      <% questions = get_questions(@test) %>
-      
-      <script>
-      <% questions.each do |question| %>
-        $(document).on('click', '#button_<%= question.id %>', function() {
-          $('.questions').hide();
-          $('#question_<%= question.id %>').show();
-        });
-      <% end %>
-      </script>
-
-      <% content_for :headline_title do %>
-        Passing the test
-      <% end %>
-
-      <div class='information' style='border: 3px solid red;'>
-        <p>
-          <b>Name:</b> <%= @test.name %>
-        </p>
-        <p>
-          <b>Max rating:</b> <%= @test.max_rating %>
-        </p>
-
-        <% unless @test.description.blank? %>
-          <p>
-            <b>Description:</b>
-            <%= @test.description %>
-          </p>
-        <% end %>
-      </div>
-
-      <div id='question_buttons' style='border: 3px solid green; float: left; width: 150px;'>
-        <p style='<%= "display: none;" if @test.time_for_passing.nil? %>'>Time elapsed: <span><%= @test.time_for_passing %></span> min</p>
-
-        <% increment = 0 %>
-        <% questions.each do |question| %>
-          <%= button_tag "Question #{increment += 1}", type: "button", disabled: true, id: "button_#{question.id}", class: 'question_button' %><br />
-        <% end %>
-
-        <%= link_to 'Cancel', :tests %>
-      </div>
-
-      <div id='question_fields' style='border: 3px solid blue; overflow: hidden;'>
-        <%= form_tag(test_passed_path) do %>
-        
-          <%= hidden_field_tag 'user_id', current_user.id %>
-          <%= hidden_field_tag 'test_id', @test.id %>
-        
-          <%= button_tag 'Start test', type: 'button', id: 'start_test_button' %>
-          
-          <% questions.each_with_index do |question, index| %>
-            <div id='question_<%= question.id %>' class='questions' style='display: none;'>
-              <div id='question' style='border: 3px solid purple;'>
-                <%= question.question %>
-              </div>
-                      
-              <div id='answers' style='border: 3px solid yellow;'>
-                <ul>
-                  <%= hidden_field_tag 'questions[id][]', question.id %>
-                  <% get_answers(question).each do |answer| %>
-                    <li class='answer'><%= check_box_tag 'answers[id][]', answer.id %> <%= label_tag 'answer[id][]', answer.answer %></li>
-                  <% end %>
-                </ul>
-              </div>
-
-              <div id='submit_answer' style='border: 3px solid black;'>
-                <% if question.id == questions.last.id %>
-                  <%= submit_tag 'End test' %>
-                <% else %>
-                  <%= button_tag "Next question", type: "button", id: "button_#{questions[index + 1].id}" %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
     <% end %>
-  <% else %>    
+  <% else %>
     <% content_for :headline_title do %>
       The test can not be passed
     <% end %>
 
-    <span class='sorry'>Sorry but you are not allowed to passing this test</span><br />
-
+    <span class='alert alert-error'>Sorry, but <%= @test.why_not_allowed? %></span>
+    
+    <br /><br />
+    
     <%= link_to 'Back', :back %>
   <% end %>
 <% else %>
-  <% content_for :headline_title do %>
-    The test can not be passed
+  <% content_for :breadcrumbs do %>
+    <li class='active'>Some deleted test</li>
   <% end %>
-
-  <span class='sorry'>Sorry but test can not be passed because there are no questions</span><br />
+  
+  <% content_for :headline_title do %>
+    Test has been deleted
+  <% end %>
+  
+  <span class='alert alert-warning'>Sorry, but the test you are looking for has been deleted.</span>
+  
+  <br /><br />
+  
   <%= link_to 'Back', :back %>
 <% end %>

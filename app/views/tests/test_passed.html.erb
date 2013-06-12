@@ -1,3 +1,20 @@
+<script type="text/javascript">
+  $(function() {
+    $('.question_fieldset legend').each(function() {
+      if($(this).height() > 40) {
+        var span = 3;
+        
+        do {
+          span ++;
+          $(this).parent().parent().removeClass('span' + (span - 1)).addClass('span' + span);
+          
+          if(span == 9) { break; }
+        } while($(this).height() > 40)
+      }
+    });
+  });
+</script>
+
 <% content_for :breadcrumbs do %>
   <% room = Room.find(@test.room_id) %>
 
@@ -11,16 +28,28 @@
   Test passed with rating: <%= @rating == 0 ? 0 : "%.#{@test.rating_round}f" % @rating %>
 <% end %>
 
+
 <% @all_questions.each do |question| %>
-  <div style='<%= @wrong_answers.include?(question) ? "border: 2px solid red;" : "border: 2px solid green;" %>'>
-    <p><%= question.question %></p>
-    <ul>
-      <% question.answers.each do |answer| %>
-        <li><%= check_box_tag 'answer' , 1, @answers.nil? ? false : @answers.include?(answer), disabled: true %> <%= answer.answer %></li>
+  <div class='row-fluid' style='border-bottom: 1px solid #e5e5e5; margin-bottom: 10px; padding-bottom: 10px;'>
+    <div class='span3'>
+      <%= field_set_tag raw("<span class='label label-#{@wrong_answers.include?(question) ? 'important' : 'success'}'>#{@wrong_answers.include?(question) ? 'Wrong' : 'Correct'}</span> #{question.question}"), class: 'question_fieldset' do %>
+        <% question.answers.each do |answer| %>
+          <label class="checkbox", style='margin-left: 10px;'>
+            <%= check_box_tag 'answer' , 1, @answers.nil? ? false : @answers.include?(answer), disabled: true %> <%= answer.answer %>
+          </label>
+        <% end %> 
       <% end %>
-    </ul>
-    <p><%= question.explanation if @wrong_answers.include?(question) %></p>
+    </div>
+    
+    <% if @wrong_answers.include?(question) && !question.explanation.blank? %>
+      <div class='span3'>
+        <%= field_set_tag 'Explanation' do %>
+          <%= question.explanation %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>
+
 
 <%= link_to 'Back to tests', tests_path %>

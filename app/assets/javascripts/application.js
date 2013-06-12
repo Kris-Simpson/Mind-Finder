@@ -104,25 +104,25 @@ $(function() {
   });
   
   
-  var time = parseFloat($('#question_buttons p span').text());
-  if(!isNaN(time)) { $('#question_buttons p span').text(time * 60); }
+  var time = new Date('1/1/1900 ' + $('#time').text());
   $(document).on('click', '#start_test_button', function() {
     $(this).hide();
     $('.question_button').attr('disabled', false);
     $('.question_button').first().click();
-    
-    if(!isNaN(time)) {
-      time *= 60;
-      $('#question_buttons p span').everyTime('1s', function(i) {
-        $(this).text(time);
-        time--;
+
+    $('#time').everyTime('1s', function(i) {
+      time = new Date(time - 1000);
+      var hours = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
+      var minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
+      var seconds = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+      
+      $(this).text(hours + ':' + minutes + ':' + seconds);
         
-        if(time < 0) {
-          alert('Yay!');
-          $(this).stopTime();
-        }
-      });
-    }
+      if(hours == 0 && minutes == 0 && seconds == 0) {
+        $('#end_button').click();
+        $(this).stopTime();
+      }
+    });
   });
 
   $(document).on('nested:fieldRemoved:answers', function(event){
@@ -217,6 +217,7 @@ $(function() {
   });
   
   $('.information').popover();
+  $('.btn').tooltip();
 });
 
 $(function() {

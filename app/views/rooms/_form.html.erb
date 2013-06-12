@@ -1,3 +1,15 @@
+<script type="text/javascript">
+  $(function() {
+    $('option').each(function() {
+      <% if title == 'Edit room' %>
+        if($(this).val() == '<%= @room.id %>') {
+          $(this).remove();
+        }
+      <% end %>
+    });
+  });
+</script>
+
 <%= form_for @room, remote: true, html: { class: 'form-horizontal', style: 'margin-bottom: 0;' } do |f| %>
   <div class="modal-header">
     <h3><%= title %></h3>

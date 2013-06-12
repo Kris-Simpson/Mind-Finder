@@ -7,32 +7,38 @@
 <% end %>
 
 <% if @passed_tests.any? %>
-  <table border='1'>
-    <tr>
-      <th>Test ID</th>
-      <th>Test name</th>
-      <th>Rating</th>
-      <th>Max rating</th>
-      <th>Created by</th>
-      <th>Last passing</th>
-    </tr>
-
-    <% @passed_tests.each do |passed_test| %>
+  <table class='table table-striped table-bordered'>
+    <thead>
       <tr>
-        <td><%= passed_test.test_id %></td>
-        
-        <% if passed_test.get_test %>
-          <td><%= passed_test.get_test.name %></td>
-          <td><%= passed_test.rating == 0 ? 0 : "%.#{passed_test.get_test.rating_round}f" % passed_test.rating %></td>
-          <td><%= passed_test.get_test.max_rating %></td>
-          <td><%= passed_test.get_test.get_room.get_user.email %></td>
-        <% else %>
-          <td colspan='4' align='center'>Test has been deleted</td>
-        <% end %>
-        <td><%= passed_test.created_at %></td>
+        <th>Test ID</th>
+        <th>Test name</th>
+        <th>Rating</th>
+        <th>Max rating</th>
+        <th>Owner</th>
+        <th>Last passing</th>
       </tr>
-    <% end %>
+    </thead>
+
+    <tbody>
+      <% @passed_tests.each do |passed_test| %>
+        <tr>
+          <td width='8%'><%= passed_test.test_id %></td>
+          
+          <% if passed_test.get_test %>
+            <td><%= passed_test.get_test.name %></td>
+            <td width='5%'><%= passed_test.rating == 0 ? 0 : "%.#{passed_test.get_test.rating_round}f" % passed_test.rating %></td>
+            <td width='10%'><%= passed_test.get_test.max_rating %></td>
+            <td width='25%'><%= passed_test.get_test.get_room.get_user.get_full_name %></td>
+          <% else %>
+            <td colspan='4' style='text-align: center;'>Test has been deleted</td>
+          <% end %>
+          <td width='21%'><%= passed_test.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% else %>
-  <span class='empty-blocks'>You have not passed any test yet</span>
+  <span class='alert alert-info'>You have not passed any test, yet.</span><br /><br />
 <% end %>
+
+<%= link_to 'Back to tests', tests_path %>

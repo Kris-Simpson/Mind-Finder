@@ -1,10 +1,15 @@
 class TestsController < ApplicationController
   def index
     @tests = current_user.tests.includes(:room).search(params[:search]).order(:created_at).page(params[:page])
+    
+    # respond_to do |format|
+    #   format.html
+    #   format.csv { render text: @tests.to_csv }  
+    # end
   end
 
   def show
-    @test = Test.find(params[:id])
+    @test = Test.find_by_id(params[:id])
 
     respond_to do |format|
       format.html
@@ -43,11 +48,12 @@ class TestsController < ApplicationController
     respond_to do |format|
       if @test.update_attributes(params[:test])
         @test.update_attribute(:rating_round, 0) if params[:test][:rating_round].blank?
+        @test.update_attribute(:time_for_passing, nil) if params[:test][:time_for_passing] == '00:00:00'
         format.html { redirect_to tests_path, notice: 'Test was successfully updated.' }
-        format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
-        format.json { render json: @test.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -99,7 +105,7 @@ class TestsController < ApplicationController
     passed_test = PassedTest.where(user_id: params[:user_id], test_id: @test.id)
     who_passed = WhoPassed.new(test_id: @test.id, user_id: params[:user_id], rating: @rating)
     if passed_test.blank?
-      PassedTest.create(user_id: params[:user_id], test_id: @test.id, rating: @rating)
+      PassedTest.create(user_id: params[:user_id], test_id: @test.id, rating: @rating, updated_at: Time.zone.now)
       who_passed.save
     else
       passed_test.update_all(rating: @rating)
@@ -133,46 +139,45 @@ class TestsController < ApplicationController
 private
 
   def calculate_rating(max_rating, questions_count, answered_count)
-    binding.pry
     answered_count.nil? ? 0 : Float(max_rating) / questions_count * answered_count
   end
 
   def get_questions(test) #get random valid questions
-    max_q = test.max_shewn_questions
-    min_q = test.min_shewn_questions
+    max_q = test.max_shewn_questions #max questions
+    min_q = test.min_shewn_questions > max_q ? max_q : test.min_shewn_questions #min questions, can not be more than max questions
 
     blank_questions = test.questions.select { |question| !question.answers.any? { |answer| answer.is_right_answer } } #questions without right answers
-    questions = []
+    valid_questions = []
     num = nil
 
+    #getting the Random num of questions
     if max_q.zero? && min_q.zero?      
       num = test.questions.count - blank_questions.count
     else
-      max = max_q.zero? ? test.questions.count - blank_questions.count : max_q - blank_questions.count
-      min = min_q.zero? ? 1 : min_q
+      max = max_q.zero? ? test.questions.count - blank_questions.count : (max_q > test.questions.count ? test.questions.count : max_q) - blank_questions.count
+      min = min_q.zero? ? 1 : (min_q > test.questions.count ? test.questions.count : min_q)
       num = Random.rand(min..max)
     end
     
     num.times do
       loop do
         question = test.questions[Random.rand(0..test.questions.count - 1)]
-        
-        next if question.answers.blank?
-        next unless question.answers.any? { |answer| answer.is_right_answer }
 
-        unless questions.include?(question)
-          questions << question
+        next if blank_questions.include?(question)
+
+        unless valid_questions.include?(question)
+          valid_questions << question
           break
         end
       end
     end
-
-    questions
+    
+    valid_questions
   end
 
   def get_answers(question) #get random valid answers
-    max_a = question.max_shewn_answers
-    min_a = question.min_shewn_answers
+    max_a = question.max_shewn_answers #max answers
+    min_a = question.min_shewn_answers > max_a ? max_a : question.min_shewn_answers #min answers
     right_answers = question.answers.select { |answer| answer.is_right_answer }
     answers = []
     num = nil
@@ -180,8 +185,8 @@ private
     if max_a.zero? && min_a.zero?
       num = question.answers.count
     else
-      max = max_a.zero? ? question.answers.count : max_a
-      min = min_a.zero? ? 1 : min_a
+      max = max_a.zero? ? question.answers.count : (max_a > question.answers.count ? question.answers.count : max_a)
+      min = min_a.zero? ? 1 : (min_a > question.answers.count ? question.answers.count : min_a)
       num = Random.rand(min..max)
     end
 

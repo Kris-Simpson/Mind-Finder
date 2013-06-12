@@ -28,17 +28,22 @@ class Test < ActiveRecord::Base
     end
   end
   
+  # def self.to_csv
+  #   CSV.generate do |csv|
+  #     csv << column_names
+  #   end
+  # end
+  
   def is_allowed?
-    return questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }
+    return questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } && question.answers.any? { |answer| !answer.is_right_answer } }
   end
   
   def why_not_allowed?
-    if self.is_allowed?
-      'Test is allowed.'
-    else
-      no_q   = 'Because your test without questions.'
-      no_a   = 'Because the questions in your test without answers.'
-      no_r_a = 'Because the questions in your test does not have the right answers.'
+    unless self.is_allowed?
+      no_q   = 'this test without questions.'
+      no_a   = 'the questions in this test without answers.'
+      no_r_a = 'the questions in this test does not have the right answers.'
+      no_w_a = 'the questions in this test does not have the wrong answers.'
       
       unless questions.any?
         return no_q
@@ -50,6 +55,10 @@ class Test < ActiveRecord::Base
       
       unless questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } }
         return no_r_a
+      end
+      
+      unless questions.any? { |question| question.answers.any? { |answer| answer.is_right_answer } && question.answers.any? { |answer| !answer.is_right_answer } }
+        return no_w_a
       end
     end
   end
