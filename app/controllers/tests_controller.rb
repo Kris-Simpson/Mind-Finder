@@ -1,11 +1,8 @@
+require 'csv'
+
 class TestsController < ApplicationController
   def index
     @tests = current_user.tests.includes(:room).search(params[:search]).order(:created_at).page(params[:page])
-    
-    # respond_to do |format|
-    #   format.html
-    #   format.csv { render text: @tests.to_csv }  
-    # end
   end
 
   def show
@@ -13,6 +10,7 @@ class TestsController < ApplicationController
 
     respond_to do |format|
       format.html
+      # format.csv { send_data @test.to_csv }
       format.json { render json: @test }
     end
   end

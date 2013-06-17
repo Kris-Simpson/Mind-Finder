@@ -38,6 +38,13 @@ input[type='email'], input[type='password'], input[type='text'], textarea {
   th {
     text-align: center;
   }
+  
+  td {
+    &.cell-center {
+      text-align: center;
+      font-size: 18px;
+    }
+  }
 }
 
 .table-link tr {  

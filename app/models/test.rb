@@ -28,9 +28,13 @@ class Test < ActiveRecord::Base
     end
   end
   
-  # def self.to_csv
-  #   CSV.generate do |csv|
+  # def to_csv(options = {})
+  #   CSV.generate(options) do |csv|
   #     csv << column_names
+  #     csv << self.attributes.values_at(*column_names)
+  #     # all.each do |test|
+  #     #   csv << test.attributes.values_at(*column_names)
+  #     # end
   #   end
   # end
   

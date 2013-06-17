@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Workbook 
+  xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Description</Data></Cell>
+        <Cell><Data ss:Type="String">Created at</Data></Cell>
+        <Cell><Data ss:Type="String">Updated at</Data></Cell>
+        <Cell><Data ss:Type="String">Room id</Data></Cell>
+        <Cell><Data ss:Type="String">Max shown questions</Data></Cell>
+        <Cell><Data ss:Type="String">Min shown questions</Data></Cell>
+        <Cell><Data ss:Type="String">Time for passing</Data></Cell>
+        <Cell><Data ss:Type="String">Max rating</Data></Cell>
+        <Cell><Data ss:Type="String">Allow repass</Data></Cell>
+        <Cell><Data ss:Type="String">Rating round</Data></Cell>
+      </Row>
+    <% @tests.each do |test| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= test.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= test.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= test.description %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= test.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= test.updated_at %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= test.room_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= test.max_shewn_questions %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= test.min_shewn_questions %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= test.time_for_passing %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= test.max_rating %></Data></Cell>
+        <Cell><Data ss:Type="Boolean"><%= test.allow_repass %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= test.rating_round %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

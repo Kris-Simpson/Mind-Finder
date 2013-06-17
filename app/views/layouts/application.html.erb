@@ -16,42 +16,33 @@
           <%= link_to 'Mind Finder', current_user ? rooms_path : index_path, class: 'brand' %>
             <ul class="nav pull-right">
               <% if current_user %>
-                
-                <li class='dropdown <%= "active" if params[:controller] == "rooms" %>'>
-                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-                    Rooms
-                    <b class='caret'></b>
-                  </a>
-                  
-                  <ul class='dropdown-menu'>
-                    <!-- <li class='<%#= "active" if params[:controller] == "rooms" && params[:action] == "new" %>'><%#= link_to 'New room', new_room_path %></li> -->
-                    <li class='<%= "active" if params[:controller] == "rooms" && params[:action] != "show" %>'><%= render 'shared/rooms' %></li>
-                  </ul>
+
+                <!-- <li class='<%#= "active" if params[:controller] == "rooms" && params[:action] == "new" %>'>
+                  <%#= link_to 'New room', new_room_path %>
+                </li> -->
+                <li class='<%= "active" if params[:controller] == "rooms" %>'>
+                  <%= render 'shared/rooms' %>
+                </li>
+
+                <%= tag('li', class: 'divider-vertical') %>
+
+                <li class='<%= "active" if params[:controller] == "tests" && params[:action] != "new" && params[:action] != "edit" %>'>
+                  <%= render 'shared/tests' %>
+                </li>
+                <li class='<%= "active" if params[:controller] == "tests" && params[:action] == "new" %>'>
+                  <%= link_to 'New test', new_test_path %>
+                </li>
+                <li class='<%= "active" if params[:controller] == "passed_tests" %>'>
+                  <%= link_to 'Passed tests', passed_tests_path %>
                 </li>
                 
-                <li class='dropdown <%= "active" if params[:controller] == "tests" || params[:controller] == "passed_tests" %>'>
-                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-                    Tests
-                    <b class='caret'></b>
-                  </a>
-                  
-                  <ul class='dropdown-menu'>
-                    <li class='<%= "active" if params[:controller] == "tests" && params[:action] == "new" %>'><%= link_to 'New test', new_test_path %></li>
-                    <li class='<%= "active" if params[:controller] == "tests" && params[:action] != "new" %>'><%= render 'shared/tests' %></li>
-                    <li class='<%= "active" if params[:controller] == "passed_tests" %>'><%= link_to 'Passed tests', passed_tests_path %></li>
-                  </ul>
-                </li>
+                <%= tag('li', class: 'divider-vertical') %>
                 
-                <li class='dropdown <%= "active" if params[:controller] == "users" %>'>
-                  <a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-                    Profiles
-                    <b class='caret'></b>
-                  </a>
-                  
-                  <ul class='dropdown-menu'>
-                    <li class='<%= "active" if params[:controller] == "users" && params[:action] == "index" %>'><%= link_to 'All profiles', users_path %></li>
-                    <li class='<%= "active" if params[:controller] == "users" && params[:action] == "edit" %>'><%= link_to 'My profile', edit_user_path(current_user) %></li>
-                  </ul>
+                <li class='<%= "active" if params[:controller] == "users" && params[:action] == "index" %>'>
+                  <%= link_to 'All profiles', users_path %>
+                </li>
+                <li class='<%= "active" if params[:controller] == "users" && params[:action] == "edit" %>'>
+                  <%= link_to 'My profile', edit_user_path(current_user) %>
                 </li>
                 
               <% else %>

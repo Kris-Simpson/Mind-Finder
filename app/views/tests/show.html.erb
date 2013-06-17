@@ -4,7 +4,7 @@
 
     <% unless current_user.tests.include?(@test) %>
       <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
-      <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+      <li><%= link_to room.get_user.get_full_name_with_email, room.get_user %> <span>/</span></li>
     <% end %>
 
     <% room.ancestors.each do |page| %>

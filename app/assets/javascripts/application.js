@@ -217,7 +217,7 @@ $(function() {
   });
   
   $('.information').popover();
-  $('.btn').tooltip();
+  $('.btn, .action').tooltip();
 });
 
 $(function() {

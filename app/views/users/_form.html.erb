@@ -1,32 +1,32 @@
-<%= form_for(@user, remote: true) do |f| %>
-  <fieldset>
-    <legend>Main information</legend>
+<% if current_user %>
 
-    <% if @user.errors.any? %>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+  <div class='row-fluid'>
+    <div class='span4'>
+      <%= field_set_tag 'Change name' do %>
+        <%= render 'name_form' %>
+      <% end %>
+    </div>
+  </div>
 
-    <%= f.text_field :first_name, placeholder: 'First name', class: 'input-large' %> <%= @user.errors[:first_name].first %><br />
-    <%= f.text_field :last_name, placeholder: 'Last name', class: 'input-large' %> <%= @user.errors[:last_name].first %><br />
-    
-    <% if current_user %>
-      <p><%= f.label :email %><br/><%= f.text_field :email, class: 'i-blue i-medium' %> <%= @user.errors[:email].first %></p>
-    <% else %>
+<% else %>
+
+  <%= form_for(@user, remote: true) do |f| %>
+    <%= field_set_tag 'Main information' do %>
+      <% if @user.errors.any? %>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= f.text_field :first_name, placeholder: 'First name', class: 'input-large' %> <%= @user.errors[:first_name].first %><br />
+      <%= f.text_field :last_name, placeholder: 'Last name', class: 'input-large' %> <%= @user.errors[:last_name].first %><br />
+      
       <span class="input-large uneditable-input"><%= @user.email %></span>
     <% end %>
-  </fieldset>
-  
-  <% if current_user %>
-    <fieldset>
-      <legend style='margin-left: 15px;'>Change password</legend>
-      <p><%= f.label :password %><br/><%= f.password_field :password, class: 'i-blue i-medium' %> <%= @user.errors[:password].first %></p>
-      <p><%= f.label :password_confirmation %><br/><%= f.password_field :password_confirmation, class: 'i-blue i-medium' %></p>
-    </fieldset>
+
+    <p><%= f.submit 'Update profile', class: 'btn btn-success' %></p>
   <% end %>
 
-  <p><%= f.submit 'Update profile', class: 'btn btn-success' %></p>
 <% end %>

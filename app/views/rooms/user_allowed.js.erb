@@ -3,3 +3,4 @@ $('.cancel-button').click();
 $('#created_rooms').empty().append('<%= j render "shared/content_table", content: current_user.rooms.page(params[:page]), model_name: "rooms" %>');
 
 $('.information').popover();
+$('.btn, .action').tooltip();

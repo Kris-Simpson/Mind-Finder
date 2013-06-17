@@ -21,9 +21,9 @@
   <td width='10%'><b>Tests:</b> <%= room.tests.count %></td>
   <td width='10%'><b>Users:</b> <%= room.allowed_users %></td>
   
-  <td width='15%'><%= link_to raw('<i class="icon-user"></i> Manage users'), { controller: 'rooms_allowed_users', action: 'new', room: room.id }, remote: true, data: { toggle: "modal", target: '#room_modal_manage', backdrop: false } %></td>
+  <td width='5%' class='cell-center'><%= link_to raw('<i class="icon-user"></i>'), { controller: 'rooms_allowed_users', action: 'new', room: room.id }, title: 'Manage users for this room', remote: true, data: { toggle: "modal", target: '#room_modal_manage', backdrop: false }, class: 'action' %></td>
   
-  <td width='10%'><%= link_to raw('<i class="icon-edit"></i> Edit'), edit_room_path(room), remote: true, data: { toggle: "modal", target: '#room_modal_edit', backdrop: 'static', keyboard: false } %></td>
+  <td width='5%' class='cell-center'><%= link_to raw('<i class="icon-edit"></i>'), edit_room_path(room), title: 'Edit this room', remote: true, data: { toggle: "modal", target: '#room_modal_edit', backdrop: 'static', keyboard: false }, class: 'action' %></td>
   
-  <td width='10%'><%= link_to raw('<i class="icon-trash"></i> Destroy'), ApplicationHelper::JS_NOOP, data: { url: room_path(room.id), toggle: "modal", target: '#delete_room', backdrop: 'static', keyboard: false }, class: 'destroy_link' %></td>
+  <td width='5%' class='cell-center'><%= link_to raw('<i class="icon-trash"></i>'), ApplicationHelper::JS_NOOP, title: 'Destroy this room', data: { url: room_path(room.id), toggle: "modal", target: '#delete_room', backdrop: 'static', keyboard: false }, class: 'destroy_link action' %></td>
 </tr>
