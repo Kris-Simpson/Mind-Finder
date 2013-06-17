@@ -29,7 +29,17 @@ class Room < ActiveRecord::Base
   end
   
   def allowed_users
-    return rooms_allowed_users.count == 0 ? 'all' : rooms_allowed_users.count
+    rooms_allowed_users.count == 0 ? 'all' : rooms_allowed_users.count
+  end
+  
+  def allowed?(user)
+    return true if rooms_allowed_users.blank?
+    
+    rooms_allowed_users.each do |u|
+      return true if u.user_id == user.id
+    end
+    
+    false
   end
   
   def get_user

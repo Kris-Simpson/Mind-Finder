@@ -6,6 +6,7 @@ $('#submenu').empty().append("<%= j render 'shared/submenu' %>").tree();
   $('#created_rooms').empty().append('<%= j render "shared/content_table", content: current_user.rooms.page(params[:page]), model_name: "rooms" %>');
   
   $('.information').popover();
+  $('.btn, .action').tooltip();
 <% else %>
   $('.form-search').slideUp(200);
   $('.row-fluid .span6 h4').slideDown(200);
