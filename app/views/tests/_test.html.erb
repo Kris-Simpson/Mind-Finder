@@ -23,7 +23,19 @@
   
   <td width='10%'><b>Users:</b> <%= test.allowed_users %></td>
   
-  <td width='15%'><%= link_to raw('<i class="icon-user"></i> Manage users'), { controller: 'tests_allowed_users', action: 'new', test: test.id }, data: { toggle: "modal", target: '#test_modal_manage', backdrop: false, remote: true } %></td>
-  <td width='10%'><%= link_to raw('<i class="icon-edit"></i> Edit'), edit_test_path(test) %></td>
-  <td width='10%'><%= link_to raw('<i class="icon-trash"></i> Destroy'), ApplicationHelper::JS_NOOP, data: { url: test_path(test.id), toggle: "modal", target: '#delete_test', backdrop: 'static', keyboard: false }, class: 'destroy_link' %></td>
+  <td width='15%'>
+    <%= link_to raw("<b style='color: #333;'>Passed:</b> #{test.who_passeds.count} times"), who_passeds_path(test: test.id) %>
+  </td>
+  
+  <td width='5%' class='cell-center'>
+    <%= link_to raw('<i class="icon-user"></i>'), { controller: 'tests_allowed_users', action: 'new', test: test.id }, title: 'Manage users for this test', data: { toggle: "modal", target: '#test_modal_manage', backdrop: false, remote: true }, class: 'action' %>
+  </td>
+  
+  <td width='5%' class='cell-center'>
+    <%= link_to raw('<i class="icon-edit"></i>'), edit_test_path(test), title: 'Edit this test', class: 'action' %>
+  </td>
+  
+  <td width='5%' class='cell-center'>
+    <%= link_to raw('<i class="icon-trash"></i>'), ApplicationHelper::JS_NOOP, title: 'Destroy this test', data: { url: test_path(test.id), toggle: "modal", target: '#delete_test', backdrop: 'static', keyboard: false }, class: 'destroy_link action' %>
+  </td>
 </tr>

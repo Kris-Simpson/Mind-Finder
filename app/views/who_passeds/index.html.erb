@@ -1,38 +1,66 @@
-<% content_for :breadcrumbs do %>
-  <% room = Room.find(@test.room_id) %>
+<% if @test %>
+  
+  <% content_for :breadcrumbs do %>
+    <% room = Room.find(@test.room_id) %>
 
-  <% unless current_user.tests.include?(@test) %>
-    <li><%= link_to 'Profiles', users_path %> <span>/</span></li>
-    <li><%= link_to room.get_user.email, room.get_user %> <span>/</span></li>
+    <% room.ancestors.each do |page| %>
+      <li><%= link_to page.name, rooms_path %> <span>/</span><li>
+    <% end %>
+      
+    <li><%= link_to room.name, rooms_path %> <span>/</span></li>
+    <li><%= link_to @test.name, @test %> <span>/</span></li>
+    <li class='active'>Who passed</li>
   <% end %>
 
-  <% room.ancestors.each do |page| %>
-    <li><%= link_to page.name, rooms_path %> <span>/</span><li>
+  <% content_for :headline_title do %>
+    Test passed: <%= @test.who_passeds.count %> times
   <% end %>
-  <li><%= link_to room.name, rooms_path %> <span>/</span></li>
-  <li><%= link_to @test.name, @test %> <span>/</span></li>
-  <li class='active'>Who passed</li>
+
+  <% if @test.who_passeds.count > 0 %>
+
+    <div class='row-fluid'>
+      <h4>Test: <%= @test.name %></h4>
+
+      <table class='table table-striped table-bordered'>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Max rating</th>
+            <th>Passed at</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @test.who_passeds.each do |who| %>
+            <tr>
+              <td><%= who.get_user.get_full_name_with_email %></td>
+              <td width='10%' class='cell-center'><%= who.rating == 0 ? 0 : "%.#{who.get_test.rating_round}f" % who.rating %></td>
+              <td width='10%' class='cell-center'><%= who.get_test.max_rating %></td>
+              <td width='25%' style='text-align: center;'><%= who.updated_at %></td>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+  <% else %>
+    
+    <h4>Nobody has passed this test</h4>
+    
+  <% end %>
+<% else %>
+  
+  <% content_for :breadcrumbs do %>
+    <li class='active'>Who passed</li>
+  <% end %>
+  
+  <% content_for :headline_title do %>
+    Who passed this test
+  <% end %>
+  
+  <div class='alert alert-error'>You can not see who passed this test.</div>
+  
 <% end %>
-
-<% content_for :headline_title do %>
-  Who passed test
-<% end %>
-
-<p>Test: <%= @test.name %></p>
-
-<table border=1>
-  <tr>
-    <th>User</th>
-    <th>Rating</th>
-    <th>Passed at</th>
-  </tr>
-  <% @test.who_passeds.each do |who| %>
-    <tr>
-      <td><%= who.get_user ? who.get_user.get_full_name : 'That user has been deleted' %></td>
-      <td><%= who.rating %></td>
-      <td><%= who.created_at %></td>
-    </td>
-  <% end %>
-</table>
 
 <%= link_to 'Back to tests', tests_path %>

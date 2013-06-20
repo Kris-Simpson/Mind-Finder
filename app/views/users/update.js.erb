@@ -1,5 +1,1 @@
-<% if @success %>
-  window.location = '<%= root_url %>'
-<% else %>
-  $('#edit_user_<%= @user.id %>').replaceWith("<%= j render('form') %>");
-<% end %>
+$('#edit_user_<%= @user.id %>').empty().append("<%= j render 'name_form' %>");

@@ -54,4 +54,8 @@ class User < ActiveRecord::Base
   def get_full_name
     self.first_name.blank? || self.last_name.blank? ? self.email : self.first_name.capitalize + ' ' + self.last_name.capitalize
   end
+  
+  def get_full_name_with_email
+    self.first_name.blank? || self.last_name.blank? ? self.email : self.first_name.capitalize + ' ' + self.last_name.capitalize + ' (' + self.email + ')'
+  end
 end

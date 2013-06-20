@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @users = User.where('email_confirm = ?', true).search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 15, page: params[:page])
+    @users = User.where('email_confirm = ?', true).search(params[:search]).order(sort_column + ' ' + sort_direction).paginate(per_page: 5, page: params[:page])
 
     respond_to do |format|
       format.html
@@ -53,6 +53,9 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @success
         @user.activate unless @user.activated?
+
+        flash[:success] = 'Your name successfully updated!'
+
         format.html { redirect_to root_url }
         format.js
       else

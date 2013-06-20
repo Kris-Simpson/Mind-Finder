@@ -5,7 +5,9 @@ class WhoPassed < ActiveRecord::Base
   
   def get_user
     User.find(self.user_id)
-  rescue
-    nil
+  end
+  
+  def get_test
+    Test.find(self.test_id)
   end
 end

@@ -1,0 +1,19 @@
+        <%= content_tag('div', flash[:success], class: 'alert alert-success') if flash[:success] %>
+  
+        <% if @user.errors.any? %>
+          <div class='alert alert-error'>
+            <% @user.errors.full_messages.each do |message| %>
+              <%= message %><br />
+            <% end %>
+          </div>
+        <% end %>
+  
+        <%= form_for @user, remote: true do |f| %>        
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: 'input-large' %> <%= @user.errors[:first_name].first %>
+          
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: 'input-large' %> <%= @user.errors[:last_name].first %>
+          
+          <p><%= f.submit 'Update name', class: 'btn btn-success' %></p>
+        <% end %>
